@@ -6,7 +6,7 @@ namespace Info.Blockchain.Api.Data
 {
     public class QueryString
     {
-        private readonly Dictionary<string, string> _queryString;
+        private readonly IDictionary<string, string> _queryString;
 
         public QueryString()
         {

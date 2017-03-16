@@ -13,13 +13,12 @@ namespace Info.Blockchain.Api.Wallet
 	/// at https://blockchain.info/api/blockchain_wallet_api. It allows users to interact
 	/// with their Blockchain.info wallet.
 	/// </summary>
-	public class WalletHelper
+	public class Wallet
 	{
-		private IHttpClient httpClient { get; }
-
-		private string identifier { get; }
-		private string password { get; }
-		private string secondPassword { get; }
+		private readonly IHttpClient _httpClient;
+		private readonly string _identifier;
+		private readonly string _password;
+		private readonly string _secondPassword;
 
 		/// <summary>
 		/// </summary>
@@ -27,12 +26,12 @@ namespace Info.Blockchain.Api.Wallet
 		/// <param name="identifier">Wallet identifier (GUID)</param>
 		/// <param name="password">Decryption password</param>
 		/// <param name="secondPassword">Second password</param>
-		internal WalletHelper(IHttpClient httpClient, string identifier, string password, string secondPassword = null)
+		internal Wallet(IHttpClient httpClient, string identifier, string password, string secondPassword = null)
 		{
-			this.httpClient = httpClient;
-			this.identifier = identifier;
-			this.password = password;
-			this.secondPassword = secondPassword;
+			_httpClient = httpClient;
+			_identifier = identifier;
+			_password = password;
+			_secondPassword = secondPassword;
 		}
 
 		/// <summary>
@@ -46,23 +45,25 @@ namespace Info.Blockchain.Api.Wallet
 		/// <returns>An instance of the PaymentResponse class</returns>
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
 		public async Task<PaymentResponse> SendAsync(string toAddress, BitcoinValue amount,
-			string fromAddress = null, BitcoinValue? fee = null, string note = null)
+			string fromAddress = null, BitcoinValue fee = null, string note = null)
 		{
 			if (string.IsNullOrWhiteSpace(toAddress))
 			{
 				throw new ArgumentNullException(nameof(toAddress));
 			}
-			if (amount.Btc <= 0)
+			if (amount.GetBtc() <= 0)
 			{
 				throw new ArgumentException("Amount sent must be greater than 0", nameof(amount));
 			}
+			
 			QueryString queryString = new QueryString();
-			queryString.Add("password", this.password);
+			queryString.Add("password", _password);
 			queryString.Add("to", toAddress);
 			queryString.Add("amount", amount.Satoshis.ToString());
-			if (!string.IsNullOrWhiteSpace(this.secondPassword))
+			
+			if (!string.IsNullOrWhiteSpace(_secondPassword))
 			{
-				queryString.Add("second_password", this.secondPassword);
+				queryString.Add("second_password", _secondPassword);
 			}
 			if (!string.IsNullOrWhiteSpace(fromAddress))
 			{
@@ -77,9 +78,9 @@ namespace Info.Blockchain.Api.Wallet
 				queryString.Add("fee", fee.ToString());
 			}
 
-			string route = $"merchant/{this.identifier}/payment";
+			string route = $"merchant/{_identifier}/payment";
 
-			PaymentResponse paymentResponse = await this.httpClient.GetAsync<PaymentResponse>(route, queryString);
+			PaymentResponse paymentResponse = await _httpClient.GetAsync<PaymentResponse>(route, queryString);
 			return paymentResponse;
 		}
 
@@ -94,7 +95,7 @@ namespace Info.Blockchain.Api.Wallet
 		/// <returns>An instance of the PaymentResponse class</returns>
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
 		public async Task<PaymentResponse> SendManyAsync(Dictionary<string, BitcoinValue> recipients,
-			string fromAddress = null, BitcoinValue? fee = null, string note = null)
+			string fromAddress = null, BitcoinValue fee = null, string note = null)
 		{
 			if (recipients == null || recipients.Count == 0)
 			{
@@ -102,12 +103,12 @@ namespace Info.Blockchain.Api.Wallet
 			}
 
 			QueryString queryString = new QueryString();
-			queryString.Add("password", this.password);
+			queryString.Add("password", _password);
 			string recipientsJson = JsonConvert.SerializeObject(recipients, Formatting.None, new BitcoinValueJsonConverter());
 			queryString.Add("recipients", recipientsJson);
-			if (!string.IsNullOrWhiteSpace(this.secondPassword))
+			if (!string.IsNullOrWhiteSpace(_secondPassword))
 			{
-				queryString.Add("second_password", this.secondPassword);
+				queryString.Add("second_password", _secondPassword);
 			}
 			if (!string.IsNullOrWhiteSpace(fromAddress))
 			{
@@ -122,9 +123,9 @@ namespace Info.Blockchain.Api.Wallet
 				queryString.Add("fee", fee.ToString());
 			}
 
-			string route = $"merchant/{this.identifier}/sendmany";
+			string route = $"merchant/{_identifier}/sendmany";
 
-			PaymentResponse paymentResponse = await this.httpClient.GetAsync<PaymentResponse>(route, queryString);
+			PaymentResponse paymentResponse = await _httpClient.GetAsync<PaymentResponse>(route, queryString);
 
 			return paymentResponse;
 		}
@@ -137,9 +138,9 @@ namespace Info.Blockchain.Api.Wallet
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
 		public async Task<BitcoinValue> GetBalanceAsync()
 		{
-			QueryString queryString = this.BuildBasicQueryString();
-			string route = $"merchant/{this.identifier}/balance";
-            BitcoinValue bitcoinValue = await this.httpClient.GetAsync<BitcoinValue>(route, queryString);
+			QueryString queryString = BuildBasicQueryString();
+			string route = $"merchant/{_identifier}/balance";
+            BitcoinValue bitcoinValue = await _httpClient.GetAsync<BitcoinValue>(route, queryString);
 			return bitcoinValue;
 		}
 
@@ -150,18 +151,18 @@ namespace Info.Blockchain.Api.Wallet
 		/// must have before being included in the balance of addresses (can be 0)</param>
 		/// <returns>A list of Address objects</returns>
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
-		public async Task<List<Address>> ListAddressesAsync(int confirmations = 0)
+		public async Task<List<WalletAddress>> ListAddressesAsync(int confirmations = 0)
 		{
 			if (confirmations < 0)
 			{
 				throw new ArgumentOutOfRangeException(nameof(confirmations), "Confirmations must be a positive number");
 			}
-			QueryString queryString = this.BuildBasicQueryString();
+			QueryString queryString = BuildBasicQueryString();
 			queryString.Add("confirmations", confirmations.ToString());
 
-			string route = $"merchant/{this.identifier}/list";
+			string route = $"merchant/{_identifier}/list";
 
-			List<Address> addressList = await this.httpClient.GetAsync<List<Address>>(route, queryString, Address.DeserializeMultiple);
+			List<WalletAddress> addressList = await _httpClient.GetAsync<List<WalletAddress>>(route, queryString, WalletAddress.DeserializeMultiple);
 			return addressList;
 		}
 
@@ -183,12 +184,12 @@ namespace Info.Blockchain.Api.Wallet
 			{
 				throw new ArgumentOutOfRangeException(nameof(confirmations), "Confirmations must be a positive number");
 			}
-			QueryString queryString = this.BuildBasicQueryString();
+			QueryString queryString = BuildBasicQueryString();
 			queryString.Add("confirmations", confirmations.ToString());
 			queryString.Add("address", address);
 
-			string route = $"merchant/{this.identifier}/address_balance";
-			Address addressObj = await this.httpClient.GetAsync<Address>(route, queryString);
+			string route = $"merchant/{_identifier}/address_balance";
+			Address addressObj = await _httpClient.GetAsync<Address>(route, queryString);
 			return addressObj;
 		}
 
@@ -200,13 +201,13 @@ namespace Info.Blockchain.Api.Wallet
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
 		public async Task<Address> NewAddress(string label = null)
 		{
-			QueryString queryString = this.BuildBasicQueryString();
+			QueryString queryString = BuildBasicQueryString();
 			if (label != null)
 			{
 				queryString.Add("label", label);
 			}
-			string route = $"merchant/{this.identifier}/new_address";
-			Address addressObj = await this.httpClient.GetAsync<Address>(route, queryString);
+			string route = $"merchant/{_identifier}/new_address";
+			Address addressObj = await _httpClient.GetAsync<Address>(route, queryString);
 			return addressObj;
 		}
 
@@ -222,11 +223,11 @@ namespace Info.Blockchain.Api.Wallet
 			{
 				throw new ArgumentNullException(nameof(address));
 			}
-			QueryString queryString = this.BuildBasicQueryString();
+			QueryString queryString = BuildBasicQueryString();
 			queryString.Add("address", address);
 
-			string route = $"merchant/{this.identifier}/archive_address";
-            string archiveAddress = await this.httpClient.GetAsync<string>(route, queryString, Address.DeserializeArchived);
+			string route = $"merchant/{_identifier}/archive_address";
+            string archiveAddress = await _httpClient.GetAsync<string>(route, queryString, WalletAddress.DeserializeArchived);
 
 			return archiveAddress;
 		}
@@ -243,11 +244,11 @@ namespace Info.Blockchain.Api.Wallet
 			{
 					throw new ArgumentNullException(nameof(address));
 			}
-			QueryString queryString = this.BuildBasicQueryString();
+			QueryString queryString = BuildBasicQueryString();
 			queryString.Add("address", address);
 
-			string route = $"merchant/{this.identifier}/unarchive_address";
-            string activeAddress = await this.httpClient.GetAsync<string>(route, queryString, Address.DeserializeUnArchived);
+			string route = $"merchant/{_identifier}/unarchive_address";
+            string activeAddress = await _httpClient.GetAsync<string>(route, queryString, WalletAddress.DeserializeUnArchived);
 			return activeAddress;
 		}
 
@@ -255,10 +256,10 @@ namespace Info.Blockchain.Api.Wallet
 		{
 			QueryString queryString = new QueryString();
 
-			queryString.Add("password", this.password);
-			if (this.secondPassword != null)
+			queryString.Add("password", _password);
+			if (_secondPassword != null)
 			{
-				queryString.Add("second_password", this.secondPassword);
+				queryString.Add("second_password", _secondPassword);
 			}
 
 			return queryString;

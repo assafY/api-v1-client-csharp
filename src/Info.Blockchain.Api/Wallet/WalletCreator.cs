@@ -46,8 +46,7 @@ namespace Info.Blockchain.Api.Wallet
 				Email = email
 			};
 
-			CreateWalletResponse walletResponse = await _httpClient.PostAsync<CreateWalletRequest, CreateWalletResponse>("api/v2/create_wallet", request);
-			return walletResponse;
+			return await _httpClient.PostAsync<CreateWalletRequest, CreateWalletResponse>("api/v2/create_wallet", request);
 		}
 	}
 }

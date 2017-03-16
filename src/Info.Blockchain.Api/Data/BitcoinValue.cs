@@ -20,6 +20,8 @@ namespace Info.Blockchain.Api.Data
 
 		public long Satoshis => (long)(_btc * SATOSHIS_PER_BITCOIN);
 
+		public decimal GetBtc() => _btc;
+
 		public static BitcoinValue Zero => new BitcoinValue(0);
 
 		public static BitcoinValue FromSatoshis(long satoshis) => new BitcoinValue((decimal)satoshis / SATOSHIS_PER_BITCOIN);
