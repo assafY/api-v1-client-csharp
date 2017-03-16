@@ -16,12 +16,12 @@ namespace Info.Blockchain.Api.Client
         private readonly HttpClient _httpClient;
         public readonly string _apiCode;
 
-		public BlockchainHttpClient(string apiCode)
+		public BlockchainHttpClient(string apiCode, string uri = BASE_URI)
         {
 			_apiCode = apiCode;
 			_httpClient = new HttpClient
 			{
-				BaseAddress = new Uri(BASE_URI),
+				BaseAddress = new Uri(uri),
 				Timeout = TimeSpan.FromMilliseconds(BlockchainHttpClient.TIMEOUT_MS)
 			};
 		}

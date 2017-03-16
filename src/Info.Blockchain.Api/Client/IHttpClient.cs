@@ -4,7 +4,7 @@ using Info.Blockchain.Api.Data;
 
 namespace Info.Blockchain.Api.Client
 {
-	public interface IHttpClient
+	public interface IHttpClient : IDisposable
 	{
 		string GetApiCode();
 		Task<T> GetAsync<T>(string route, QueryString queryString = null, Func<string, T> customDeserialization = null);
