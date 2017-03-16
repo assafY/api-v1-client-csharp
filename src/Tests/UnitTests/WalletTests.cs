@@ -9,7 +9,7 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 	public class WalletTests
 	{
 
-		private Wallet.Wallet GetWalletHelper(ApiHelper apiHelper)
+		private Wallet.Wallet GetWallet(ApiHelper apiHelper)
 		{
 			return apiHelper.CreateWallet("Test", "Test");
 		}
@@ -21,7 +21,7 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 			{
 				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
-					Wallet.Wallet wallet = this.GetWalletHelper(apiHelper);
+					Wallet.Wallet wallet = GetWallet(apiHelper);
 					await wallet.ArchiveAddress(null);
 				}
 			});
@@ -34,7 +34,7 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 			{
 				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
-					Wallet.Wallet wallet = this.GetWalletHelper(apiHelper);
+					Wallet.Wallet wallet = this.GetWallet(apiHelper);
 					await wallet.GetAddressAsync(null);
 				}
 			});
@@ -43,7 +43,7 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 			{
 				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
-					Wallet.Wallet wallet = this.GetWalletHelper(apiHelper);
+					Wallet.Wallet wallet = this.GetWallet(apiHelper);
 					await wallet.GetAddressAsync("Test", -1);
 				}
 			});
@@ -56,7 +56,7 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 			{
 				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
-					Wallet.Wallet wallet = this.GetWalletHelper(apiHelper);
+					Wallet.Wallet wallet = this.GetWallet(apiHelper);
 					await wallet.ListAddressesAsync(-1);
 				}
 			});
@@ -69,7 +69,7 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 			{
 				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
-					Wallet.Wallet wallet = this.GetWalletHelper(apiHelper);
+					Wallet.Wallet wallet = this.GetWallet(apiHelper);
 					await wallet.SendAsync(null, BitcoinValue.Zero);
 				}
 			});
@@ -78,7 +78,7 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 			{
 				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
-					Wallet.Wallet wallet = this.GetWalletHelper(apiHelper);
+					Wallet.Wallet wallet = this.GetWallet(apiHelper);
 					await wallet.SendAsync("Test", BitcoinValue.FromBtc(-1));
 				}
 			});
@@ -91,7 +91,7 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 			{
 				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
-					Wallet.Wallet wallet = this.GetWalletHelper(apiHelper);
+					Wallet.Wallet wallet = this.GetWallet(apiHelper);
 					await wallet.SendManyAsync(null);
 				}
 			});
@@ -99,7 +99,7 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 			{
 				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
-					Wallet.Wallet wallet = this.GetWalletHelper(apiHelper);
+					Wallet.Wallet wallet = this.GetWallet(apiHelper);
 					await wallet.SendManyAsync(new Dictionary<string, BitcoinValue>());
 				}
 			});
@@ -112,7 +112,7 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 			{
 				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
-					Wallet.Wallet wallet = this.GetWalletHelper(apiHelper);
+					Wallet.Wallet wallet = this.GetWallet(apiHelper);
 					await wallet.UnarchiveAddress(null);
 				}
 			});
