@@ -35,6 +35,38 @@ namespace Info.Blockchain.Api.Wallet
 		}
 
 		/// <summary>
+		/// This method reflects the functionality documented at https://blockchain.info/api/create_wallet.
+		/// Creates a new Blockchain.info wallet if the user's API code has the 'generate wallet' permission.
+		/// It can be created containing a pre-generated private key or will otherwise generate a new private key.
+		/// </summary>
+		/// <param name="password">Password for the new wallet. At least 10 characters.</param>
+		/// <param name="privateKey">Private key to add to the wallet</param>
+		/// <param name="label">Label for the first address in the wallet</param>
+		/// <param name="email">Email to associate with the new wallet</param>
+		/// <returns>An instance of the CreateWalletResponse class</returns>
+		/// <exception cref="ServerApiException">If the server returns an error</exception>
+		public async Task<CreateWalletResponse> Create(string password, string privateKey = null, string label = null, string email = null)
+		{
+			if (string.IsNullOrWhiteSpace(password))
+			{
+			throw new ArgumentNullException(nameof(password));
+			}
+			if (string.IsNullOrWhiteSpace(_httpClient.GetApiCode()))
+			{
+					throw new ArgumentNullException("Api code must be specified", innerException: null);
+			}
+			
+			var request = new CreateWalletRequest {
+				Password = password,
+				PrivateKey = privateKey,
+				Label = label,
+				Email = email
+			};
+
+			return await _httpClient.PostAsync<CreateWalletRequest, CreateWalletResponse>("api/v2/create_wallet", request);
+		}
+
+		/// <summary>
 		/// Sends bitcoin from your wallet to a single address.
 		/// </summary>
 		/// <param name="toAddress">Recipient bitcoin address</param>
@@ -60,7 +92,7 @@ namespace Info.Blockchain.Api.Wallet
 			queryString.Add("password", _password);
 			queryString.Add("to", toAddress);
 			queryString.Add("amount", amount.Satoshis.ToString());
-			
+
 			if (!string.IsNullOrWhiteSpace(_secondPassword))
 			{
 				queryString.Add("second_password", _secondPassword);
