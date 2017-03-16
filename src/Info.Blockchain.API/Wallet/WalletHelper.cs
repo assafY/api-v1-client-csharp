@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Info.Blockchain.API.Abstractions;
-using Info.Blockchain.API.BlockExplorer;
-using Info.Blockchain.API.Json;
+using Info.Blockchain.Api.Client;
+using Info.Blockchain.Api.Data;
+using Info.Blockchain.Api.Json;
 using Newtonsoft.Json;
 
-namespace Info.Blockchain.API.Wallet
+namespace Info.Blockchain.Api.Wallet
 {
 	/// <summary>
 	/// This class reflects the functionality documented

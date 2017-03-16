@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Info.Blockchain.API.Json
+namespace Info.Blockchain.Api.Json
 {
 	internal class UnixDateTimeJsonConverter : DateTimeConverterBase
 	{

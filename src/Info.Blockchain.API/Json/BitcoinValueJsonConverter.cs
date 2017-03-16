@@ -1,8 +1,8 @@
 ﻿using System;
-using Info.Blockchain.API.BlockExplorer;
+using Info.Blockchain.Api.Data;
 using Newtonsoft.Json;
 
-namespace Info.Blockchain.API.Json
+namespace Info.Blockchain.Api.Json
 {
 	internal class BitcoinValueJsonConverter : JsonConverter
 	{

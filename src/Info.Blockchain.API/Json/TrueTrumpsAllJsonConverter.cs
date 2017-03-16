@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Info.Blockchain.API.Json
+namespace Info.Blockchain.Api.Json
 {
 	internal class TrueTrumpsAllJsonConverter : JsonConverter
 	{
