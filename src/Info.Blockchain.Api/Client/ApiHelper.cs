@@ -1,10 +1,9 @@
 using System;
 using Info.Blockchain.Api.Wallet;
-using Info.Blockchain.Api.BlockExplorer;
 
 namespace Info.Blockchain.Api.Client
 {
-	public class BlockchainApiHelper : IDisposable
+	public class ApiHelper : IDisposable
 	{
         private readonly IHttpClient _baseHttpClient;
         private readonly IHttpClient _serviceHttpClient;
@@ -16,7 +15,7 @@ namespace Info.Blockchain.Api.Client
 		public StatisticsExplorer StatisticsExplorer { get; } */
 
 
-		public BlockchainApiHelper(string apiCode = null, IHttpClient baseHttpClient = null, string serviceUrl = null, IHttpClient serviceHttpClient = null)
+		public ApiHelper(string apiCode = null, IHttpClient baseHttpClient = null, string serviceUrl = null, IHttpClient serviceHttpClient = null)
 		{
 
 			if (baseHttpClient == null)

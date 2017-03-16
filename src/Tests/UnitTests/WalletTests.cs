@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Info.Blockchain.Api.Client;
 using Info.Blockchain.Api.Data;
-using Info.Blockchain.Api.Wallet;
 using Xunit;
 
 namespace Info.Blockchain.Api.Tests.UnitTests
@@ -12,9 +9,9 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 	public class WalletTests
 	{
 
-		private WalletHelper GetWalletHelper(BlockchainApiHelper apiHelper)
+		private Wallet.Wallet GetWalletHelper(ApiHelper apiHelper)
 		{
-			return apiHelper.CreateWalletHelper("Test", "Test");
+			return apiHelper.CreateWallet("Test", "Test");
 		}
 
         [Fact(Skip = "service-my-wallet-v3 not mocked")]
@@ -22,10 +19,10 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 		{
 			await Assert.ThrowsAsync<ArgumentNullException>(async () =>
 			{
-				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
+				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
-					WalletHelper walletHelper = this.GetWalletHelper(apiHelper);
-					await walletHelper.ArchiveAddress(null);
+					Wallet.Wallet wallet = this.GetWalletHelper(apiHelper);
+					await wallet.ArchiveAddress(null);
 				}
 			});
 		}
@@ -35,19 +32,19 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 		{
 			await Assert.ThrowsAsync<ArgumentNullException>(async () =>
 			{
-				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
+				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
-					WalletHelper walletHelper = this.GetWalletHelper(apiHelper);
-					await walletHelper.GetAddressAsync(null);
+					Wallet.Wallet wallet = this.GetWalletHelper(apiHelper);
+					await wallet.GetAddressAsync(null);
 				}
 			});
 
 			await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
 			{
-				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
+				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
-					WalletHelper walletHelper = this.GetWalletHelper(apiHelper);
-					await walletHelper.GetAddressAsync("Test", -1);
+					Wallet.Wallet wallet = this.GetWalletHelper(apiHelper);
+					await wallet.GetAddressAsync("Test", -1);
 				}
 			});
 		}
@@ -57,10 +54,10 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 		{
 			await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
 			{
-				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
+				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
-					WalletHelper walletHelper = this.GetWalletHelper(apiHelper);
-					await walletHelper.ListAddressesAsync(-1);
+					Wallet.Wallet wallet = this.GetWalletHelper(apiHelper);
+					await wallet.ListAddressesAsync(-1);
 				}
 			});
 		}
@@ -70,19 +67,19 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 		{
 			await Assert.ThrowsAsync<ArgumentNullException>(async () =>
 			{
-				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
+				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
-					WalletHelper walletHelper = this.GetWalletHelper(apiHelper);
-					await walletHelper.SendAsync(null, BitcoinValue.Zero);
+					Wallet.Wallet wallet = this.GetWalletHelper(apiHelper);
+					await wallet.SendAsync(null, BitcoinValue.Zero);
 				}
 			});
 
 			await Assert.ThrowsAsync<ArgumentException>(async () =>
 			{
-				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
+				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
-					WalletHelper walletHelper = this.GetWalletHelper(apiHelper);
-					await walletHelper.SendAsync("Test", BitcoinValue.FromBtc(-1));
+					Wallet.Wallet wallet = this.GetWalletHelper(apiHelper);
+					await wallet.SendAsync("Test", BitcoinValue.FromBtc(-1));
 				}
 			});
 		}
@@ -92,18 +89,18 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 		{
 			await Assert.ThrowsAsync<ArgumentException>(async () =>
 			{
-				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
+				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
-					WalletHelper walletHelper = this.GetWalletHelper(apiHelper);
-					await walletHelper.SendManyAsync(null);
+					Wallet.Wallet wallet = this.GetWalletHelper(apiHelper);
+					await wallet.SendManyAsync(null);
 				}
 			});
 			await Assert.ThrowsAsync<ArgumentException>(async () =>
 			{
-				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
+				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
-					WalletHelper walletHelper = this.GetWalletHelper(apiHelper);
-					await walletHelper.SendManyAsync(new Dictionary<string, BitcoinValue>());
+					Wallet.Wallet wallet = this.GetWalletHelper(apiHelper);
+					await wallet.SendManyAsync(new Dictionary<string, BitcoinValue>());
 				}
 			});
 		}
@@ -113,10 +110,10 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 		{
 			await Assert.ThrowsAsync<ArgumentNullException>(async () =>
 			{
-				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
+				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
-					WalletHelper walletHelper = this.GetWalletHelper(apiHelper);
-					await walletHelper.UnarchiveAddress(null);
+					Wallet.Wallet wallet = this.GetWalletHelper(apiHelper);
+					await wallet.UnarchiveAddress(null);
 				}
 			});
 		}
