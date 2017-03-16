@@ -35,7 +35,7 @@ namespace Info.Blockchain.Api.Wallet
 			}
 			if (string.IsNullOrWhiteSpace(_httpClient.GetApiCode()))
 			{
-					throw new ArgumentNullException("Api code must be specified", innerException: null);
+                throw new ArgumentNullException("Api code must be specified", innerException: null);
 			}
 			
 			var request = new CreateWalletRequest {
