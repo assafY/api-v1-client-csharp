@@ -11,12 +11,19 @@ namespace Info.Blockchain.Api.Data
 	/// </summary>
 	public class Address
 	{
+
+		[JsonConstructor]
+		// ReSharper disable once UnusedMember.Local
+		private Address()
+		{
+		}
+		
 		/// <summary>
 		/// Address object contructor to copy from another address and associate a list of transactions
 		/// </summary>
 		/// <param name="address">Address to copy all properties from except the transactions</param>
 		/// <param name="transactions">Transaction list to associate to the address object</param>
-		internal Address(Address address, List<Transaction> transactions)
+		public Address(Address address, List<Transaction> transactions)
 		{
 			if (address == null)
 			{

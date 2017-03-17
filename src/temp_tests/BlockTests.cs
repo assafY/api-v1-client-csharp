@@ -27,7 +27,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 		}
 
 
-		[Fact(Skip = "Test freezes")]
+		[Fact]
 		public async void GetBlocksAtHeight_Height100000_IsValid()
 		{
 			using (ApiHelper apiHelper = new ApiHelper())

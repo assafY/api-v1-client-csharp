@@ -47,7 +47,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 		}
 
         [Fact(Skip = "service-my-wallet-v3 not mocked")]
-        public async void ArchiveAddress_BaddAddress_ServerApiException()
+        public async void ArchiveAddress_BadAddress_ServerApiException()
 		{
 			ServerApiException apiException = await Assert.ThrowsAsync<ServerApiException>(async () =>
 			{

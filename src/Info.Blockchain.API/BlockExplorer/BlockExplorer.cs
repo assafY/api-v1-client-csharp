@@ -233,8 +233,7 @@ namespace Info.Blockchain.Api.BlockExplorer
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
 		public async Task<LatestBlock> GetLatestBlockAsync()
 		{
-			LatestBlock latestBlock = await _httpClient.GetAsync<LatestBlock>("latestblock");
-			return latestBlock;
+			return await _httpClient.GetAsync<LatestBlock>("latestblock");
 		}
 
 		/// <summary>
@@ -313,25 +312,6 @@ namespace Info.Blockchain.Api.BlockExplorer
 			ReadOnlyCollection<SimpleBlock> simpleBlocks = await _httpClient.GetAsync("blocks/" + poolNameOrTimestamp, queryString, SimpleBlock.DeserializeMultiple);
 
 			return simpleBlocks;
-		}
-
-		/// <summary>
-		/// Gets inventory data for an object.
-		/// </summary>
-		/// <param name="hash">Object hash</param>
-		/// <returns>An instance of the InventoryData class</returns>
-		/// <exception cref="ServerApiException">If the server returns an error</exception>
-		public async Task<InventoryData> GetInventoryDataAsync(string hash)
-		{
-			if (string.IsNullOrWhiteSpace(hash))
-			{
-				throw new ArgumentNullException(nameof(hash));
-			}
-			QueryString queryString = new QueryString();
-			queryString.Add("format", "json");
-
-			InventoryData inventoryData = await _httpClient.GetAsync<InventoryData>("inv/" + hash, queryString);
-			return inventoryData;
 		}
 	}
 }
