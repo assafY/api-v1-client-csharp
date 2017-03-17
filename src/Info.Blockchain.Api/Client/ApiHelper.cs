@@ -8,7 +8,7 @@ namespace Info.Blockchain.Api.Client
         private readonly IHttpClient _baseHttpClient;
         private readonly IHttpClient _serviceHttpClient;
         private readonly BlockExplorer.BlockExplorer _blockExpolorer;
-		private readonly WalletCreator _walletCreator;
+		public readonly WalletCreator _walletCreator;
 
 	/*	public ExchangeRateExplorer ExchangeRateExplorer { get; }
 		public TransactionPusher TransactionPusher { get; }

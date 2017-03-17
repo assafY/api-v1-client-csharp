@@ -118,6 +118,43 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 			});
 		}
 
+		[Fact(Skip = "service-my-wallet-v3 not mocked")]
+        public async void CreateWallet_NullPassword_ArgumentNullException()
+		{
+			await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+			{
+				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper("APICODE"))
+				{
+					await apiHelper._walletCreator.Create(null);
+				}
+			});
+		}
 
+        [Fact(Skip = "service-my-wallet-v3 not mocked")]
+        public async void CreateWallet_NullApiCode_ArgumentNullException()
+		{
+			await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+			{
+				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
+				{
+					await apiHelper._walletCreator.Create("password");
+				}
+			});
+		}
+
+
+        [Fact(Skip = "service-my-wallet-v3 not mocked")]
+        public async void CreateWallet_MockRequest_Valid()
+		{
+			using (ApiHelper apiHelper = new ApiHelper(baseHttpClient: new FakeWalletHttpClient()))
+			{
+				CreateWalletResponse walletResponse = await apiHelper._walletCreator.Create("Password");
+				Assert.NotNull(walletResponse);
+
+				Assert.Equal(walletResponse.Address, "12AaMuRnzw6vW6s2KPRAGeX53meTf8JbZS");
+				Assert.Equal(walletResponse.Identifier, "4b8cd8e9-9480-44cc-b7f2-527e98ee3287");
+				Assert.Equal(walletResponse.Label, "My Blockchain Wallet");
+			}
+		}
 	}
 }
