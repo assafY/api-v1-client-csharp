@@ -9,9 +9,9 @@ namespace Info.Blockchain.Api.Tests
 	{
 		public static T DeserializeFile<T>(string fileName, Func<string, T> customDeserialization = null)
 		{
-			Assembly assembly = Assembly.GetEntryAssembly();
+			Assembly assembly = typeof(ReflectionUtil).GetTypeInfo().Assembly;
 
-			string resourceName = $"Info.Blockchain.API.Tests.JsonObjects.{fileName}.json";
+			string resourceName = $"Info.Blockchain.Api.Tests.JsonObjects.{fileName}.json";
 
 			using (Stream stream = assembly.GetManifestResourceStream(resourceName))
 			{

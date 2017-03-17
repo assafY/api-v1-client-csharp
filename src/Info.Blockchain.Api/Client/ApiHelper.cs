@@ -7,7 +7,7 @@ namespace Info.Blockchain.Api.Client
 	{
         private readonly IHttpClient _baseHttpClient;
         private readonly IHttpClient _serviceHttpClient;
-        private readonly BlockExplorer.BlockExplorer _blockExpolorer;
+        public readonly BlockExplorer.BlockExplorer _blockExpolorer;
 		public readonly WalletCreator _walletCreator;
 
 	/*	public ExchangeRateExplorer ExchangeRateExplorer { get; }
@@ -23,10 +23,10 @@ namespace Info.Blockchain.Api.Client
 				_baseHttpClient = new BlockchainHttpClient(apiCode);
 			} else {
 				_baseHttpClient = baseHttpClient;
-				/*if (apiCode != null)
+				if (apiCode != null)
 				{
-					_baseHttpClient.ApiCode = apiCode;
-                }*/
+					_baseHttpClient._apiCode = apiCode;
+                }
 			}
 
             if (serviceHttpClient == null && serviceUrl != null)
@@ -34,10 +34,10 @@ namespace Info.Blockchain.Api.Client
                 _serviceHttpClient = new BlockchainHttpClient(apiCode, serviceUrl);
             } else if (serviceHttpClient != null) {
                 _serviceHttpClient = serviceHttpClient;
-                /*if (apiCode != null)
+                if (apiCode != null)
                 {
-                    this.serviceHttpClient.ApiCode = apiCode;
-                }*/
+                    _serviceHttpClient._apiCode = apiCode;
+                }
             } else
             {
                 _serviceHttpClient = null;

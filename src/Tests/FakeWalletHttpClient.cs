@@ -7,6 +7,9 @@ namespace Info.Blockchain.Api.Tests
 {
     public class FakeWalletHttpClient : IHttpClient
     {
+
+        public string _apiCode { get; set; }
+        
         public void Dispose()
         {
         }
@@ -26,11 +29,6 @@ namespace Info.Blockchain.Api.Tests
                 return Task.FromResult((TResponse) (object) walletResponse);
             }
             return Task.FromResult(default(TResponse));
-        }
-
-        public string GetApiCode()
-        {
-            return "Test";
         }
     }
 }

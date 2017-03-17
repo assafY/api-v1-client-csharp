@@ -33,7 +33,7 @@ namespace Info.Blockchain.Api.Wallet
 			{
 			throw new ArgumentNullException(nameof(password));
 			}
-			if (string.IsNullOrWhiteSpace(_httpClient.GetApiCode()))
+			if (string.IsNullOrWhiteSpace(_httpClient._apiCode))
 			{
                 throw new ArgumentNullException("Api code must be specified", innerException: null);
 			}

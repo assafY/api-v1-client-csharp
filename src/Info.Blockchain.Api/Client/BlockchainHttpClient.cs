@@ -14,7 +14,7 @@ namespace Info.Blockchain.Api.Client
         private const int TIMEOUT_MS = 100000;
         private const string BASE_URI = "https://blockchain.info";
         private readonly HttpClient _httpClient;
-        public readonly string _apiCode;
+        public string _apiCode { get; set; }
 
 		public BlockchainHttpClient(string apiCode, string uri = BASE_URI)
         {
@@ -110,8 +110,6 @@ namespace Info.Blockchain.Api.Client
 			}
 			throw new ServerApiException(response.ReasonPhrase + ": " + responseContent, response.StatusCode);
 		}
-
-		public string GetApiCode() => _apiCode;
 
 		public void Dispose()
 		{

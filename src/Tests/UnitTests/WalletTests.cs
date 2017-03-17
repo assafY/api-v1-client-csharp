@@ -14,7 +14,7 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 			return apiHelper.CreateWallet("Test", "Test");
 		}
 
-        [Fact(Skip = "service-my-wallet-v3 not mocked")]
+        [Fact]
         public async void ArchiveAddress_NullAddress_ArgumentNullException()
 		{
 			await Assert.ThrowsAsync<ArgumentNullException>(async () =>
@@ -27,7 +27,7 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 			});
 		}
 
-        [Fact(Skip = "service-my-wallet-v3 not mocked")]
+        [Fact]
         public async void GetAddress_BadParameters_ArgumentExceptions()
 		{
 			await Assert.ThrowsAsync<ArgumentNullException>(async () =>
@@ -49,7 +49,7 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 			});
 		}
 
-        [Fact(Skip = "service-my-wallet-v3 not mocked")]
+        [Fact]
         public async void ListAddresses_NegativeConfirmations_ArgumentOutOfRangeException()
 		{
 			await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
@@ -62,7 +62,7 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 			});
 		}
 
-        [Fact(Skip = "service-my-wallet-v3 not mocked")]
+        [Fact]
         public async void Send_BadParameters_ArgumentExceptions()
 		{
 			await Assert.ThrowsAsync<ArgumentNullException>(async () =>
@@ -84,7 +84,7 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 			});
 		}
 
-        [Fact(Skip = "service-my-wallet-v3 not mocked")]
+        [Fact]
         public async void SendMany_NullReeipients_ArgumentNUllException()
 		{
 			await Assert.ThrowsAsync<ArgumentException>(async () =>
@@ -105,7 +105,7 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 			});
 		}
 
-        [Fact(Skip = "service-my-wallet-v3 not mocked")]
+        [Fact]
         public async void Unarchive_NullAddress_ArgumentNulException()
 		{
 			await Assert.ThrowsAsync<ArgumentNullException>(async () =>
@@ -118,7 +118,7 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 			});
 		}
 
-		[Fact(Skip = "service-my-wallet-v3 not mocked")]
+		[Fact]
         public async void CreateWallet_NullPassword_ArgumentNullException()
 		{
 			await Assert.ThrowsAsync<ArgumentNullException>(async () =>
@@ -130,7 +130,7 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 			});
 		}
 
-        [Fact(Skip = "service-my-wallet-v3 not mocked")]
+        [Fact]
         public async void CreateWallet_NullApiCode_ArgumentNullException()
 		{
 			await Assert.ThrowsAsync<ArgumentNullException>(async () =>
@@ -143,10 +143,11 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 		}
 
 
-        [Fact(Skip = "service-my-wallet-v3 not mocked")]
+        [Fact]
         public async void CreateWallet_MockRequest_Valid()
 		{
-			using (ApiHelper apiHelper = new ApiHelper(baseHttpClient: new FakeWalletHttpClient()))
+			using (ApiHelper apiHelper = new ApiHelper("123", new FakeWalletHttpClient(),
+														"123", new FakeWalletHttpClient()))
 			{
 				CreateWalletResponse walletResponse = await apiHelper._walletCreator.Create("Password");
 				Assert.NotNull(walletResponse);
