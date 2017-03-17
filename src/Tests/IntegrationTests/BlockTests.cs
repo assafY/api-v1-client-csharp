@@ -27,7 +27,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 		}
 
 
-		[Fact(Skip = "Test freezes")]
+		[Fact]
 		public async void GetBlocksAtHeight_Height100000_IsValid()
 		{
 			using (ApiHelper apiHelper = new ApiHelper())
@@ -35,7 +35,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 				const int height = 100000;
 				ReadOnlyCollection<Block> knownBlocks = ReflectionUtil.DeserializeFile("blocks_height_" + height, Block.DeserializeMultiple);
 				ReadOnlyCollection<Block> receivedBlocks = await apiHelper._blockExplorer.GetBlocksAtHeightAsync(height);
-
+				
 				ComparisonResult comparisonResult = new CompareLogic().Compare(knownBlocks, receivedBlocks);
 				bool areEqual = comparisonResult.AreEqual;
 				Assert.True(areEqual);

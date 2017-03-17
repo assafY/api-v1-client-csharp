@@ -9,7 +9,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 {
 	public class TransactionTests
 	{
-		[Fact(Skip = "test")]
+		[Fact(Skip = "Test freezes because of comparison tool")]
 		public async void GetTransaction_ByHash_Valid()
 		{
 			using (ApiHelper apiHelper = new ApiHelper())
@@ -23,7 +23,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 			}
 		}
 
-		[Fact(Skip = "test")]
+		[Fact(Skip = "Test freezes because of comparison tool")]
 		public async void GetTransaction_ByIndex_Valid()
 		{
 			using (ApiHelper apiHelper = new ApiHelper())
@@ -37,7 +37,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 			}
 		}
 
-		[Fact(Skip = "test")]
+		[Fact]
 		public async void GetUnconfirmedTransaction_Valid()
 		{
 			using (ApiHelper apiHelper = new ApiHelper())

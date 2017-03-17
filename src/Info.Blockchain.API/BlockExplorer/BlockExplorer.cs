@@ -171,8 +171,7 @@ namespace Info.Blockchain.Api.BlockExplorer
 			queryString.Add("limit", transactionLimit.ToString());
 			queryString.Add("format", "json");
 
-			Address addressObj = await _httpClient.GetAsync<Address>("address/" + addressOrHash, queryString);
-			return addressObj;
+			return await _httpClient.GetAsync<Address>("address/" + addressOrHash, queryString);
 		}
 
 		/// <summary>
@@ -191,8 +190,7 @@ namespace Info.Blockchain.Api.BlockExplorer
 			QueryString queryString = new QueryString();
 			queryString.Add("format", "json");
 
-			var blocks = await _httpClient.GetAsync("block-height/" + height, queryString, Block.DeserializeMultiple);
-			return blocks;
+			return await _httpClient.GetAsync("block-height/" + height, queryString, Block.DeserializeMultiple);
 		}
 
 		/// <summary>
@@ -246,8 +244,7 @@ namespace Info.Blockchain.Api.BlockExplorer
 			QueryString queryString = new QueryString();
 			queryString.Add("format", "json");
 
-			ReadOnlyCollection<Transaction> transactions = await _httpClient.GetAsync("unconfirmed-transactions", queryString, Transaction.DeserializeMultiple);
-			return transactions;
+			return await _httpClient.GetAsync("unconfirmed-transactions", queryString, Transaction.DeserializeMultiple);
 		}
 
 		/// <summary>
