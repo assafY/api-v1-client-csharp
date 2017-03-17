@@ -1,4 +1,7 @@
 using System;
+using Info.Blockchain.Api.ExchangeRates;
+using Info.Blockchain.Api.PushTx;
+using Info.Blockchain.Api.Statistics;
 using Info.Blockchain.Api.Wallet;
 
 namespace Info.Blockchain.Api.Client
@@ -7,12 +10,11 @@ namespace Info.Blockchain.Api.Client
 	{
         private readonly IHttpClient _baseHttpClient;
         private readonly IHttpClient _serviceHttpClient;
-        public readonly BlockExplorer.BlockExplorer _blockExpolorer;
+        public readonly BlockExplorer.BlockExplorer _blockExplorer;
 		public readonly WalletCreator _walletCreator;
-
-	/*	public ExchangeRateExplorer ExchangeRateExplorer { get; }
-		public TransactionPusher TransactionPusher { get; }
-		public StatisticsExplorer StatisticsExplorer { get; } */
+        public readonly TransactionBroadcaster _transactionBroadcaster;
+    	public readonly ExchangeRateExplorer _exchangeRateExplorer;
+		public readonly StatisticsExplorer _statisticsExplorer;
 
 
 		public ApiHelper(string apiCode = null, IHttpClient baseHttpClient = null, string serviceUrl = null, IHttpClient serviceHttpClient = null)
@@ -21,8 +23,11 @@ namespace Info.Blockchain.Api.Client
 			if (baseHttpClient == null)
 			{
 				_baseHttpClient = new BlockchainHttpClient(apiCode);
-			} else {
+			}
+            else
+            {
 				_baseHttpClient = baseHttpClient;
+
 				if (apiCode != null)
 				{
 					_baseHttpClient._apiCode = apiCode;
@@ -32,26 +37,31 @@ namespace Info.Blockchain.Api.Client
             if (serviceHttpClient == null && serviceUrl != null)
             {
                 _serviceHttpClient = new BlockchainHttpClient(apiCode, serviceUrl);
-            } else if (serviceHttpClient != null) {
+            }
+            else if (serviceHttpClient != null)
+            {
                 _serviceHttpClient = serviceHttpClient;
+
                 if (apiCode != null)
                 {
                     _serviceHttpClient._apiCode = apiCode;
                 }
-            } else
+            }
+            else
             {
                 _serviceHttpClient = null;
             }
 
-            _blockExpolorer = new BlockExplorer.BlockExplorer(_baseHttpClient);
-			/*this.ExchangeRateExplorer = new ExchangeRateExplorer(this.baseHttpClient);
-			this.TransactionPusher = new TransactionPusher(this.baseHttpClient);
-			this.StatisticsExplorer = new StatisticsExplorer(this.baseHttpClient);*/
+            _blockExplorer = new BlockExplorer.BlockExplorer(_baseHttpClient);
+            _transactionBroadcaster = new TransactionBroadcaster(_baseHttpClient);
+			_exchangeRateExplorer = new ExchangeRateExplorer(_baseHttpClient);
+            _statisticsExplorer = new StatisticsExplorer(_baseHttpClient);
 
             if (_serviceHttpClient != null)
             {
                 _walletCreator = new WalletCreator(_serviceHttpClient);
-            } else
+            }
+            else
             {
                 _walletCreator = null;
             }
@@ -78,6 +88,7 @@ namespace Info.Blockchain.Api.Client
 		public void Dispose()
 		{
             _baseHttpClient.Dispose();
+
             if (_serviceHttpClient != null)
             {
                 _serviceHttpClient.Dispose();
