@@ -8,8 +8,8 @@ Example usage:
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Info.Blockchain.API;
-using Info.Blockchain.API.Statistics;
+using Info.Blockchain.Api.Client;
+using Info.Blockchain.Api.Statistics;
 
 namespace TestApp
 {

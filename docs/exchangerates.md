@@ -1,6 +1,6 @@
-##`Info.Blockchain.Api.Exchangerates` namespace
+##`Info.Blockchain.Api.ExchangeRates` namespace
 
-The `Exchangerates` namespace contains the `ExchangeRates` class that reflects the functionality documented at https://blockchain.info/api/exchange_rates_api. It allows users to get price tickers for most major currencies and directly convert fiat amounts to BTC.
+The `Exchangerates` namespace contains the `ExchangeRateExplorer` class that reflects the functionality documented at https://blockchain.info/api/exchange_rates_api. It allows users to get price tickers for most major currencies and directly convert fiat amounts to BTC.
 
 Example usage:
 
@@ -8,8 +8,8 @@ Example usage:
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Info.Blockchain.API;
-using Info.Blockchain.API.ExchangeRates;
+using Info.Blockchain.Api.Clieny;
+using Info.Blockchain.Api.ExchangeRates;
 
 namespace TestApp
 {
@@ -17,15 +17,17 @@ namespace TestApp
     {
         static void Main(string[] args)
         {
+
+            var explorer = new ExchangeRateExplorer();
             try
             {
-                var ticker = ExchangeRates.GetTicker();
-                foreach (var key in ticker.Keys)
+                var ticker = await explorer.GetTickerAsync();
+                foreach (var key in ticker.Keys)    
                 {
                     Console.WriteLine("The last price of BTC in {0} is {1}", key, ticker[key].Last);
                 }
 
-                double btcAmount = ExchangeRates.ToBTC("USD", 1500);
+                double btcAmount = await explorer.ToBtcAsync("USD", 1500);
                 Console.WriteLine("1500 USD equals {0} BTC", btcAmount);
             }
             catch (APIException e)
