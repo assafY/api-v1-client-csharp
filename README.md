@@ -1,19 +1,19 @@
-#Blockchain API library (C#, .NET Core, v1)
+# Blockchain API library (C#, .NET Core, v1)
 
 An official C# (.NET Core) library for interacting with the Blockchain.info API.
 
-##Latest changes
+## Latest changes
 
 This library is a migration of the original .NET library to .NET Core. Some models and namespaces have been modified. Most notably:
 
-* All models previously under the `Info.Blockchain.Api.BlockExplorer` namespace have been moved to `Info.Blockchain.Api.Data`
-* The client, excpetion and helper classes under the root namespace have been moved to `Info.Blockchain.Api.Client`
+* All models have been moved to `Info.Blockchain.Api.Data`
+* The client, exception and helper classes under the root namespace have been moved to `Info.Blockchain.Api.Client`
 * `CreateWallet.cs`, which previously contained the CreateWallet response and request models, was split into two separate models and moved to the `Data` namespace
-* The `Info.Blockchain.Api.CreateWaller` namespace was removed, the `WalletCreator.cs` class moved to `Info.Blockchain.Api.Wallet`
+* The `Info.Blockchain.Api.CreateWallet` namespace was removed, the `WalletCreator.cs` class moved to `Info.Blockchain.Api.Wallet`
 * `BlockchainApiHelper.cs` was changed to `ApiHelper.cs`
 *  `TransactionPusher.cs` under `Info.Blockchain.Api.PushTx` was changed to `TransactionBroadcaster.cs`
 
-##Getting started
+## Getting started
 
 The library requires requires .NET Core 1.1. It is possible to use this library with the .NET Framework by editing 
 `Info.Blockchain.Api.csproj`
@@ -48,11 +48,11 @@ The following namespacse contain helpers and models used by the above:
 In order to use Wallet and CreateWallet functionality, you must provide an URL to an instance of [service-my-wallet-v3](https://github.com/blockchain/service-my-wallet-v3) as first parameter to BlockchainApiHelper.
 If you don't intend to use these functionalities, this parameter can be null.
 
-##Error handling
+## Error handling
 
 All methods may throw exceptions caused by incorrectly passed parameters or other problems. If a call is rejected server-side, the `APIException` exception will be thrown. Other exceptions may also be thrown by the environment (e.g. no internet connection etc).
 
-##Connection timeouts
+## Connection timeouts
 
 It is possible to set arbitrary connection timeouts.
 
@@ -60,7 +60,7 @@ It is possible to set arbitrary connection timeouts.
 Info.Blockchain.API.HttpClient.TimeoutMs = 5000; // time out after 5 seconds
 ```
 
-##Request limits and API keys
+## Request limits and API keys
 
 In order to prevent abuse some API methods require an API key approved with some basic contact information and a description of its intended use. Please request an API key [here](https://blockchain.info/api/api_create_code).
 
