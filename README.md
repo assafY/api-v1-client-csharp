@@ -28,7 +28,7 @@ to your project's .NET version, e.g.
 
 The recommended way to install and use the library is via NuGet:
 ```
-PM> Install-Package BlockchainAPINetCore
+PM> Install-Package BlockchainAPI
 ```
 
 The library consists of the following namespaces:
