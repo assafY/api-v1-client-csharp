@@ -187,4 +187,5 @@ FakesAssemblies/
 #Nuget
 NuGet.exe
 *.nuspec
+.vscode
 src/.vs/config/applicationhost.config
