@@ -12,7 +12,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 			using (ApiHelper apiHelper = new ApiHelper())
 			{
 				const string addressString = "13k5KUK2vswXRdjgjxgCorGoY2EFGMFTnu";
-				Address address = await apiHelper._blockExplorer.GetAddressAsync(addressString, null);
+				Address address = await apiHelper._blockExplorer.GetAddressAsync(addressString);
 				Assert.NotNull(address);
 				Assert.Equal(address.AddressStr, addressString);
 			}
@@ -24,7 +24,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 			using (ApiHelper apiHelper = new ApiHelper())
 			{
 				const string hash = "1e15be27e4763513af36364674eebdba5a047323";
-				Address address = await apiHelper._blockExplorer.GetAddressAsync(hash, null);
+				Address address = await apiHelper._blockExplorer.GetAddressAsync(hash);
 				Assert.NotNull(address);
 				Assert.Equal(address.Hash160, hash);
 			}

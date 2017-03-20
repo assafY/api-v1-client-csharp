@@ -94,7 +94,7 @@ namespace Info.Blockchain.Api.BlockExplorer
 		/// <param name="maxTransactionCount">Max amount of transactions to retrieve</param>
 		/// <returns>An instance of the Address class</returns>
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
-		public async Task<Address> GetAddressAsync(string addressOrHash, int? maxTransactionCount)
+		public async Task<Address> GetAddressAsync(string addressOrHash, int? maxTransactionCount = 0)
 		{
 			if (string.IsNullOrWhiteSpace(addressOrHash))
 			{
