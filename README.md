@@ -2,6 +2,17 @@
 
 An official C# (.NET Core) library for interacting with the Blockchain.info API.
 
+##Latest changes
+
+This library is a migration of the original .NET library to .NET Core. Some models and namespaces have been modified. Most notably:
+
+* All models previously under the `Info.Blockchain.Api.BlockExplorer` namespace have been moved to `Info.Blockchain.Api.Data`
+* The client, excpetion and helper classes under the root namespace have been moved to `Info.Blockchain.Api.Client`
+* `CreateWallet.cs`, which previously contained the CreateWallet response and request models, was split into two separate models and moved to the `Data` namespace
+* The `Info.Blockchain.Api.CreateWaller` namespace was removed, the `WalletCreator.cs` class moved to `Info.Blockchain.Api.Wallet`
+* `BlockchainApiHelper.cs` was changed to `ApiHelper.cs`
+*  `TransactionPusher.cs` under `Info.Blockchain.Api.PushTx` was changed to `TransactionBroadcaster.cs`
+
 ##Getting started
 
 The library requires requires .NET Core 1.1. It is possible to use this library with the .NET Framework by editing 
