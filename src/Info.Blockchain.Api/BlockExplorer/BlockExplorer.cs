@@ -19,6 +19,11 @@ namespace Info.Blockchain.Api.BlockExplorer
 		private readonly IHttpClient _httpClient;
         public const int MAX_TRANSACTIONS_PER_REQUEST = 50;
 
+		public BlockExplorer()
+		{
+			_httpClient  = new BlockchainHttpClient();
+		}
+
 		internal BlockExplorer(IHttpClient httpClient)
 		{
 			_httpClient = httpClient;
@@ -209,14 +214,13 @@ namespace Info.Blockchain.Api.BlockExplorer
 			queryString.Add("active", address);
 			try
 			{
-				ReadOnlyCollection<UnspentOutput> unspentOuputs = await _httpClient.GetAsync("unspent", queryString, UnspentOutput.DeserializeMultiple);
-				return unspentOuputs;
+				return await _httpClient.GetAsync("unspent", queryString, UnspentOutput.DeserializeMultiple);
 			}
-			catch (ServerApiException ex)
+			catch (Exception ex)
 			{
 				// the API isn't supposed to return an error code here. No free outputs is
 				// a legitimate situation. We are circumventing that by returning an empty list
-				if (ex.Message == "No free outputs to spend")
+				if (ex.Message.Contains("outputs to spend"))
 				{
 					return new ReadOnlyCollection<UnspentOutput>(new List<UnspentOutput>());
 				}
@@ -254,7 +258,7 @@ namespace Info.Blockchain.Api.BlockExplorer
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
 		public async Task<ReadOnlyCollection<SimpleBlock>> GetBlocksAsync()
 		{
-			return await GetBlocksAsync(DateTime.Now); //TODO?
+			return await GetBlocksAsync("");
 		}
 
 		/// <summary>
@@ -266,7 +270,10 @@ namespace Info.Blockchain.Api.BlockExplorer
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
 		public async Task<ReadOnlyCollection<SimpleBlock>> GetBlocksAsync(DateTime dateTime)
 		{
-			if (dateTime < UnixDateTimeJsonConverter.GenesisBlockDate)
+			DateTimeOffset utcDate = DateTime.SpecifyKind(dateTime, DateTimeKind.Utc);
+			var unixMillisInt32 = (long)(utcDate.ToUnixTimeMilliseconds());
+			
+			if (unixMillisInt32 < UnixDateTimeJsonConverter.GenesisBlockUnixMillis)
 			{
 				throw new ArgumentOutOfRangeException(nameof(dateTime), "Date must be greater than or equal to the genesis block creation date (2009-01-03T18:15:05+00:00)");
 			}
@@ -274,9 +281,8 @@ namespace Info.Blockchain.Api.BlockExplorer
 			{
 				throw new ArgumentOutOfRangeException(nameof(dateTime), "Date must be in the past");
 			}
-			double unixTimestap = UnixDateTimeJsonConverter.DateTimeToUnixSeconds(dateTime);
-			string unixMillisstring = (unixTimestap * 1000).ToString(); //TODO?
-			return await GetBlocksAsync(unixMillisstring);
+
+			return await GetBlocksAsync(unixMillisInt32);
 		}
 		/// <summary>
 		/// Gets a list of blocks mined on a specific day.

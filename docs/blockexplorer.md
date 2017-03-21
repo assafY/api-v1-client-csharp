@@ -6,7 +6,6 @@ Example usage:
 
 ```csharp
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Info.Blockchain.Api.Client;
 using Info.Blockchain.Api.BlockExplorer;
@@ -16,65 +15,77 @@ namespace TestApp
 {
     class Program
     {
+        private static BlockExplorer _explorer;
+
         static void Main(string[] args)
         {
             try
-            {
-                // instantiate a block explorer
-                var blockExplorer = new BlockExplorer();
+                {
+                // instantiate a block explorer with no api code...
+                _explorer = new BlockExplorer();
 
                 // get a transaction by hash and list the value of all its inputs
-                var tx = await blockExplorer.GetTransactionAsync("df67414652722d38b43dcbcac6927c97626a65bd4e76a2e2787e22948a7c5c47");
-    	        foreach (Input i in tx.Inputs)
-    	        {
-                    Console.WriteLine(i.PreviousOutput.Value);
-    	        }
-
-                // get a block by hash and read the number of transactions in the block
-                var block = await blockExplorer.GetBlockAsync("0000000000000000050fe18c9b961fc7c275f02630309226b15625276c714bf1");
-                int numberOfTxsInBlock = block.Transactions.Count;
-
-                // get an address and read its final balance
-                var address = await blockExplorer.GetAddressAsync("1EjmmDULiZT2GCbJSeXRbjbJVvAPYkSDBw");
-                long finalBalance = address.FinalBalance;
-
-                // get a list of currently unconfirmed transactions and print the relay IP address for each
-    	        var unconfirmedTxs = await blockExplorer.GetUnconfirmedTransactionsAsync();
-    	        foreach (Transaction unconfTx in unconfirmedTxs)
+                var tx = _explorer.GetTransactionAsync("df67414652722d38b43dcbcac6927c97626a65bd4e76a2e2787e22948a7c5c47").Result;
+                foreach (Input i in tx.Inputs)
                 {
-                    Console.WriteLine(unconfTx.RelayedBy);
+                    Console.WriteLine(i.PreviousOutput.Value);
                 }
 
-                // calculate the balanace of an address by fetching a list of all its unspent outputs
-    	        var outs = await blockExplorer.GetUnspentOutputsAsync("1EjmmDULiZT2GCbJSeXRbjbJVvAPYkSDBw");
-                long totalUnspentValue = outs.Sum(x => x.Value);
+                // get a block by hash and read the number of transactions in the block
+                var block = _explorer.GetBlockAsync("0000000000000000050fe18c9b961fc7c275f02630309226b15625276c714bf1").Result;
+                int numberOfTxsInBlock = block.Transactions.Count;
 
-                // get inventory data for a recent transaction (valid up to one hour)
-                //var inv = blockExplorer.GetInventoryData("f23ee3525f78df032b47c3c9be6cd0d930f38c32674e861c1e41c6558b32ee97");
+                // get an address by hash...
+                var address = _explorer.GetAddressAsync("1e15be27e4763513af36364674eebdba5a047323").Result;
+
+                // or by address string...
+                address = _explorer.GetAddressAsync("13k5KUK2vswXRdjgjxgCorGoY2EFGMFTnu").Result;
+                
+                // and print its final balance
+                var finalBalance = address.FinalBalance;
+
+                // get a list of currently unconfirmed transactions...
+                var unconfirmedTxs = _explorer.GetUnconfirmedTransactionsAsync().Result;
+
+                // and get the relay IP address for each
+                var relayIPs = unconfirmedTxs.Select(v => v.RelayedBy);
+
+                // calculate the balanace of an address by fetching a list of all its unspent outputs
+                var outs = _explorer.GetUnspentOutputsAsync("13k5KUK2vswXRdjgjxgCorGoY2EFGMFTnu").Result;
+                var totalUnspentValue = outs.Sum(v => v.Value.GetBtc());
 
                 // get the latest block on the main chain and read its height
-                var latestBlock = await blockExplorer.GetLatestBlockAsync();
+                var latestBlock = _explorer.GetLatestBlockAsync().Result;
                 long latestBlockHeight = latestBlock.Height;
 
                 // use the previous block height to get a list of blocks at that height
-		        // and detect a potential chain fork
-    	        var blocksAtHeight = await blockExplorer.GetBlocksAtHeightAsync(latestBlockHeight);
-    	        if (blocksAtHeight.Count > 1)
-    		        Console.WriteLine("The chain has forked!");
-    	        else
-    		        Console.WriteLine("The chain is still in one piece :)");
-
-                // get a list of all blocks that were mined today since 00:00 UTC
-                var todaysBlocks = blockExplorer.GetBlocks();
-                Console.WriteLine(todaysBlocks.Count);
+                // and detect a potential chain fork
+                var blocksAtHeight = _explorer.GetBlocksAtHeightAsync(latestBlockHeight).Result;
+                if (blocksAtHeight.Count > 1)
+                    Console.WriteLine("The chain has forked!");
+                else
+                    Console.WriteLine("The chain is still in one piece :)");
                 
+                // get a list of all blocks that were mined today since 00:00 UTC
+                var todaysBlocks = _explorer.GetBlocksAsync().Result;
+
+                // get a list of all blocks that were mined yesterday using DateTime
+                var yesterdaysBlocks = _explorer.GetBlocksAsync(DateTime.Now.AddDays(-1)).Result;
+
+                // get a list of all blocks mined on a particular day using a unix timestamp...
+                var someDaysBlocks = _explorer.GetBlocksAsync(1490000210396).Result;
+
+                // or a unix timestamp string
+                someDaysBlocks = _explorer.GetBlocksAsync("1490000210396").Result;
+                
+                // you can also get a particular mining pool's recent blocks
+                // note: this approach is case-sensitive
+                var minePoolBlocks = _explorer.GetBlocksAsync("BTC.com").Result;
             }
-            catch (APIException e)
+            catch (ClientApiException e)
             {
                 Console.WriteLine("Blockchain exception: " + e.Message);
             }
-
-            Console.ReadLine();
         }
     }
 }

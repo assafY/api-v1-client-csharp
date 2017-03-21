@@ -16,7 +16,7 @@ namespace Info.Blockchain.Api.Client
         private readonly HttpClient _httpClient;
         public string _apiCode { get; set; }
 
-		public BlockchainHttpClient(string apiCode, string uri = BASE_URI)
+		public BlockchainHttpClient(string apiCode = null, string uri = BASE_URI)
         {
 			_apiCode = apiCode;
 			_httpClient = new HttpClient
