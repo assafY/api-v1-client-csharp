@@ -11,6 +11,10 @@ namespace Info.Blockchain.Api.PushTx
 	public class TransactionBroadcaster
 	{
 		private readonly IHttpClient _httpClient;
+		public TransactionBroadcaster()
+		{
+			_httpClient = new BlockchainHttpClient();
+		}
 		public TransactionBroadcaster(IHttpClient httpClient)
 		{
 			_httpClient = httpClient;
