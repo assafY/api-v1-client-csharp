@@ -13,6 +13,12 @@ namespace Info.Blockchain.Api.ExchangeRates
 	public class ExchangeRateExplorer
 	{
 		private readonly IHttpClient _httpClient;
+
+		public ExchangeRateExplorer()
+		{
+			_httpClient = new BlockchainHttpClient();
+		}
+
 		internal ExchangeRateExplorer(IHttpClient httpClient)
 		{
 			_httpClient = httpClient;

@@ -1,4 +1,4 @@
-##`Info.Blockchain.Api.BlockExplorer` namespace
+## `Info.Blockchain.Api.BlockExplorer` namespace
 
 The `BlockExplorer` namespace contains the `BlockExplorer` class that reflects the functionality documented at  https://blockchain.info/api/blockchain_api. It can be used to query the block chain, fetch block, transaction and address data, get unspent outputs for an address etc.
 
@@ -20,8 +20,8 @@ namespace TestApp
         static void Main(string[] args)
         {
             try
-                {
-                // instantiate a block explorer with no api code...
+            {
+                // instantiate a block explorer with no api code
                 _explorer = new BlockExplorer();
 
                 // get a transaction by hash and list the value of all its inputs
