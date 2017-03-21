@@ -15,7 +15,7 @@ This library is a migration of the original .NET library to .NET Core. Some mode
 
 ## Getting started
 
-The library requires requires .NET Core 1.1. It is possible to use this library with the .NET Framework by editing 
+The library requires .NET Core 1.1. It is possible to use this library with the .NET Framework by editing 
 `Info.Blockchain.Api.csproj`
 
 and changing
