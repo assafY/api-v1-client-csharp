@@ -11,6 +11,10 @@ namespace Info.Blockchain.Api.Statistics
 	public class StatisticsExplorer
 	{
 		private readonly IHttpClient _httpClient;
+		public StatisticsExplorer()
+		{
+			_httpClient = new BlockchainHttpClient();
+		}
 		internal StatisticsExplorer(IHttpClient httpClient)
 		{
 			_httpClient = httpClient;
