@@ -12,6 +12,11 @@ namespace Info.Blockchain.Api.Wallet
     {       
         private readonly IHttpClient _httpClient;
         
+		public WalletCreator()
+		{
+			_httpClient = new BlockchainHttpClient();
+		}
+
         public WalletCreator(IHttpClient httpClient)
         {
             _httpClient = httpClient;

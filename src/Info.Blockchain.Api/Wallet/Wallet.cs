@@ -173,7 +173,7 @@ namespace Info.Blockchain.Api.Wallet
 		/// must have before being included in the balance of addresses (can be 0)</param>
 		/// <returns>An instance of the Address class</returns>
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
-		public async Task<Address> GetAddressAsync(string address, int confirmations = 0)
+		public async Task<WalletAddress> GetAddressAsync(string address, int confirmations = 0)
 		{
 			if (string.IsNullOrWhiteSpace(address))
 			{
@@ -188,7 +188,7 @@ namespace Info.Blockchain.Api.Wallet
 			queryString.Add("address", address);
 
 			string route = $"merchant/{_identifier}/address_balance";
-			Address addressObj = await _httpClient.GetAsync<Address>(route, queryString);
+			WalletAddress addressObj = await _httpClient.GetAsync<WalletAddress>(route, queryString);
 			return addressObj;
 		}
 
@@ -198,7 +198,7 @@ namespace Info.Blockchain.Api.Wallet
 		/// <param name="label">Label to attach to this address</param>
 		/// <returns>An instance of the Address class</returns>
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
-		public async Task<Address> NewAddress(string label = null)
+		public async Task<WalletAddress> NewAddress(string label = null)
 		{
 			QueryString queryString = BuildBasicQueryString();
 			if (label != null)
@@ -206,7 +206,7 @@ namespace Info.Blockchain.Api.Wallet
 				queryString.Add("label", label);
 			}
 			string route = $"merchant/{_identifier}/new_address";
-			Address addressObj = await _httpClient.GetAsync<Address>(route, queryString);
+			WalletAddress addressObj = await _httpClient.GetAsync<WalletAddress>(route, queryString);
 			return addressObj;
 		}
 
