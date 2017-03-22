@@ -34,25 +34,25 @@ namespace Info.Blockchain.Api.Wallet
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
 		public async Task<CreateWalletResponse> Create(string password, string privateKey = null, string label = null, string email = null)
 		{
-			if (string.IsNullOrWhiteSpace(password))
-			{
+            if (string.IsNullOrWhiteSpace(password))
+            {
                 throw new ArgumentNullException(nameof(password));
-			}
-			if (string.IsNullOrWhiteSpace(_httpClient._apiCode))
-			{
+            }
+            if (string.IsNullOrWhiteSpace(_httpClient._apiCode))
+            {
                 throw new ArgumentNullException("Api code must be specified", innerException: null);
-			}
+            }
 
-			var request = new CreateWalletRequest {
-				Password = password,
-				ApiCode = _httpClient._apiCode,
-				PrivateKey = privateKey,
-				Label = label,
-				Email = email
-			};
+            var request = new CreateWalletRequest {
+                Password = password,
+                ApiCode = _httpClient._apiCode,
+                PrivateKey = privateKey,
+                Label = label,
+                Email = email
+            };
 
-			var newWallet = await _httpClient.PostAsync<CreateWalletRequest, CreateWalletResponse>("api/v2/create/", request, contentType: "application/json");
-			return newWallet;
+            var newWallet = await _httpClient.PostAsync<CreateWalletRequest, CreateWalletResponse>("api/v2/create/", request, contentType: "application/json");
+            return newWallet;
 		}
     }
 }
