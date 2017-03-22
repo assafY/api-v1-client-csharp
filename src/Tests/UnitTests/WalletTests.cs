@@ -118,7 +118,7 @@ namespace Info.Blockchain.Api.Tests.UnitTests
 			});
 		}
 
-		[Fact]
+        [Fact]
         public async void CreateWallet_NullPassword_ArgumentNullException()
 		{
 			await Assert.ThrowsAsync<ArgumentNullException>(async () =>

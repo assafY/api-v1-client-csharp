@@ -5,7 +5,7 @@ using Info.Blockchain.Api.Client;
 namespace Info.Blockchain.Api.PushTx
 {
 	/// <summary>
-	/// This class reflects the functionality provided at https://blockchain.info/pushtx. 
+	/// This class reflects the functionality provided at https://blockchain.info/pushtx.
 	/// It allows users to broadcast hex encoded transactions to the bitcoin network.
 	/// </summary>
 	public class TransactionBroadcaster
@@ -31,7 +31,7 @@ namespace Info.Blockchain.Api.PushTx
 			{
 				throw new ArgumentNullException(nameof(transactionString));
 			}
-			
+
             await _httpClient.PostAsync<string, object>("pushtx", transactionString, multiPartContent: true);
 		}
 	}

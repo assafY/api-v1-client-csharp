@@ -93,7 +93,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 			using (ApiHelper apiHelper = new ApiHelper())
 			{
 				Wallet wallet = apiHelper.CreateWallet(WalletTests.WALLET_ID, WalletTests.WALLET_PASSWORD, WalletTests.WALLET_PASSWORD2);
-				Address address = await wallet.NewAddress("Test");
+				WalletAddress address = await wallet.NewAddress("Test");
 				Assert.NotNull(address);
 
 				string archivedAddress = await wallet.ArchiveAddress(address.AddressStr);
@@ -105,8 +105,8 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 			}
 		}
 
-		[Fact(Skip = "service-my-wallet-v3 not mocked")]
-		public async void CreateWallet_BadCredentials_ServerApiException()
+        [Fact(Skip = "service-my-wallet-v3 not mocked")]
+        public async void CreateWallet_BadCredentials_ServerApiException()
 		{
 			await Assert.ThrowsAsync<ArgumentNullException>(async () =>
 			{

@@ -55,7 +55,7 @@ namespace Info.Blockchain.Api.Wallet
 			{
 				throw new ArgumentException("Amount sent must be greater than 0", nameof(amount));
 			}
-			
+
 			QueryString queryString = new QueryString();
 			queryString.Add("password", _password);
 			queryString.Add("to", toAddress);
@@ -241,7 +241,7 @@ namespace Info.Blockchain.Api.Wallet
 		{
 			if (address == null)
 			{
-					throw new ArgumentNullException(nameof(address));
+                throw new ArgumentNullException(nameof(address));
 			}
 			QueryString queryString = BuildBasicQueryString();
 			queryString.Add("address", address);

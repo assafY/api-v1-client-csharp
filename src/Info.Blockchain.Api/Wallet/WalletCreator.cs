@@ -4,18 +4,18 @@ using Info.Blockchain.Api.Client;
 using Info.Blockchain.Api.Data;
 
 namespace Info.Blockchain.Api.Wallet
-{   
+{
     /// <summary>
     /// This class reflects the functionality documented at https://blockchain.info/api/create_wallet.
     /// <summary>
     public class WalletCreator
-    {       
+    {
         private readonly IHttpClient _httpClient;
-        
-		public WalletCreator()
-		{
-			_httpClient = new BlockchainHttpClient(uri: "http://127.0.0.1:3000");
-		}
+
+        public WalletCreator()
+        {
+            _httpClient = new BlockchainHttpClient(uri: "http://127.0.0.1:3000");
+        }
 
         public WalletCreator(IHttpClient httpClient)
         {
@@ -36,13 +36,13 @@ namespace Info.Blockchain.Api.Wallet
 		{
 			if (string.IsNullOrWhiteSpace(password))
 			{
-			throw new ArgumentNullException(nameof(password));
+                throw new ArgumentNullException(nameof(password));
 			}
 			if (string.IsNullOrWhiteSpace(_httpClient._apiCode))
 			{
                 throw new ArgumentNullException("Api code must be specified", innerException: null);
 			}
-			
+
 			var request = new CreateWalletRequest {
 				Password = password,
 				ApiCode = _httpClient._apiCode,
