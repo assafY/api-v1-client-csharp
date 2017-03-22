@@ -16,19 +16,18 @@ namespace Info.Blockchain.Api.Client
         public readonly ExchangeRateExplorer _exchangeRateExplorer;
         public readonly StatisticsExplorer _statisticsExplorer;
 
-		public ApiHelper(string apiCode = null, IHttpClient baseHttpClient = null, string serviceUrl = null, IHttpClient serviceHttpClient = null)
-		{
-
-			if (baseHttpClient == null)
-			{
-				_baseHttpClient = new BlockchainHttpClient(apiCode);
-			}
+        public ApiHelper(string apiCode = null, IHttpClient baseHttpClient = null, string serviceUrl = null, IHttpClient serviceHttpClient = null)
+        {
+            if (baseHttpClient == null)
+            {
+                _baseHttpClient = new BlockchainHttpClient(apiCode);
+            }
             else
             {
-            	_baseHttpClient = baseHttpClient;
-				if (apiCode != null)
-				{
-					_baseHttpClient._apiCode = apiCode;
+                _baseHttpClient = baseHttpClient;
+                if (apiCode != null)
+                {
+                    _baseHttpClient._apiCode = apiCode;
                 }
             }
 
@@ -73,12 +72,11 @@ namespace Info.Blockchain.Api.Client
         /// <param name="password">Decryption password</param>
         /// <param name="secondPassword">Second password</param>
         public Wallet.Wallet CreateWallet(string identifier, string password, string secondPassword = null)
-		{
+        {
             if (_serviceHttpClient == null)
             {
                 throw new ClientApiException("In order to create wallets, you must provide a valid service_url to BlockchainApiHelper");
             }
-
             return new Wallet.Wallet(_serviceHttpClient, identifier, password, secondPassword);
 		}
 
