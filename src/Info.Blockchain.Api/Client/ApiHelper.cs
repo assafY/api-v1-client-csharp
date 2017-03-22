@@ -78,21 +78,20 @@ namespace Info.Blockchain.Api.Client
                 throw new ClientApiException("In order to create wallets, you must provide a valid service_url to BlockchainApiHelper");
             }
             return new Wallet.Wallet(_serviceHttpClient, identifier, password, secondPassword);
-		}
+        }
 
         public WalletCreator CreateWalletCreator()
         {
             return new WalletCreator(_serviceHttpClient);
         }
 
-		public void Dispose()
-		{
+        public void Dispose()
+        {
             _baseHttpClient.Dispose();
-
             if (_serviceHttpClient != null)
             {
                 _serviceHttpClient.Dispose();
             }
-		}
-	}
+        }
+    }
 }
