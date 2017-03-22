@@ -6,8 +6,8 @@ using Info.Blockchain.Api.Wallet;
 
 namespace Info.Blockchain.Api.Client
 {
-	public class ApiHelper : IDisposable
-	{
+    public class ApiHelper : IDisposable
+    {
         private readonly IHttpClient _baseHttpClient;
         private readonly IHttpClient _serviceHttpClient;
         public readonly BlockExplorer.BlockExplorer _blockExplorer;
@@ -50,7 +50,7 @@ namespace Info.Blockchain.Api.Client
 
             _blockExplorer = new BlockExplorer.BlockExplorer(_baseHttpClient);
             _transactionBroadcaster = new TransactionBroadcaster(_baseHttpClient);
-			_exchangeRateExplorer = new ExchangeRateExplorer(_baseHttpClient);
+            _exchangeRateExplorer = new ExchangeRateExplorer(_baseHttpClient);
             _statisticsExplorer = new StatisticsExplorer(_baseHttpClient);
 
             if (_serviceHttpClient != null)
