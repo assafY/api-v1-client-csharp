@@ -9,7 +9,7 @@ namespace Info.Blockchain.Api.Tests.UnitTests
     public class WalletTests
     {
 
-		private Wallet.Wallet GetWallet(ApiHelper apiHelper)
+        private Wallet.Wallet GetWallet(ApiHelper apiHelper)
         {
             return apiHelper.CreateWallet("Test", "Test");
         }

@@ -20,8 +20,6 @@ namespace Info.Blockchain.Api.Tests
 			return Task.FromResult(default(TResponse));
 		}
 
-        void IDisposable.Dispose()
-        {
-        }
+        void IDisposable.Dispose() {}
     }
 }
