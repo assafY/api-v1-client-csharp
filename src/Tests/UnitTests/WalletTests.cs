@@ -6,8 +6,8 @@ using Xunit;
 
 namespace Info.Blockchain.Api.Tests.UnitTests
 {
-	public class WalletTests
-	{
+    public class WalletTests
+    {
 
 		private Wallet.Wallet GetWallet(ApiHelper apiHelper)
         {
@@ -47,7 +47,7 @@ namespace Info.Blockchain.Api.Tests.UnitTests
                     await wallet.GetAddressAsync("Test", -1);
                 }
             });
-}
+        }
 
         [Fact]
         public async void ListAddresses_NegativeConfirmations_ArgumentOutOfRangeException()
@@ -60,7 +60,7 @@ namespace Info.Blockchain.Api.Tests.UnitTests
                     await wallet.ListAddressesAsync(-1);
                 }
             });
-}
+        }
 
         [Fact]
         public async void Send_BadParameters_ArgumentExceptions()
