@@ -18,5 +18,11 @@ namespace Info.Blockchain.Api.Data
 		/// </summary>
 		[JsonProperty("address", Required = Required.Always)]
 		public string Address { get; private set; }
+		
+		/// <summary>
+		/// Optional label
+		/// </summary>
+		[JsonProperty("label")]
+		public string Label { get; private set; }
 	}
 }

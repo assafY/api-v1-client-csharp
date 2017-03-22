@@ -15,10 +15,7 @@ namespace Info.Blockchain.Api.Data
 		public string Label { get; set; }
 		[JsonProperty("password")]
 		public string Password { get; set; }
-		// not providing a private key throws a 
-		// create wallet error, therefore it is
-		//disabled for the time being
-		/*[JsonProperty("priv")]
-		public string PrivateKey { get; set; }*/
+		[JsonProperty("privateKey")]
+		public string PrivateKey { get; set; }
 	}
 }

@@ -30,7 +30,7 @@ namespace TestProj
                     _walletCreator = apiHelper.CreateWalletCreator();
                     
                     // create a new wallet
-                    var newWallet = _walletCreator.Create("someComplicated123Password").Result;
+                    var newWallet = _walletCreator.Create("someComplicated123Password", label: "some-optional-label").Result;
                     Console.WriteLine("The new wallet identifier is: {0}", newWallet.Identifier);
 
                     // create an instance of an existing wallet (will be identical to the _wallet

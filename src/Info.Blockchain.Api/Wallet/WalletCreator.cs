@@ -46,9 +46,7 @@ namespace Info.Blockchain.Api.Wallet
 			var request = new CreateWalletRequest {
 				Password = password,
 				ApiCode = _httpClient._apiCode,
-				// not providing a private key throws a create wallet error
-				// therefore it is diabled for the time being
-				// PrivateKey = privateKey,
+				PrivateKey = privateKey,
 				Label = label,
 				Email = email
 			};
