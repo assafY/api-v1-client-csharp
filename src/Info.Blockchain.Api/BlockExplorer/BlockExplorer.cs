@@ -17,7 +17,7 @@ namespace Info.Blockchain.Api.BlockExplorer
 	public class BlockExplorer
 	{
 		private readonly IHttpClient _httpClient;
-        public const int MAX_TRANSACTIONS_PER_REQUEST = 50;
+		public const int MAX_TRANSACTIONS_PER_REQUEST = 50;
 
 		public BlockExplorer()
 		{

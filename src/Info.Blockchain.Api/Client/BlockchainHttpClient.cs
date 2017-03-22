@@ -6,19 +6,18 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Info.Blockchain.Api.Data;
-using System.Net.Http.Headers;
 
 namespace Info.Blockchain.Api.Client
 {
 	public class BlockchainHttpClient : IHttpClient
 	{
+		private const string BASE_URI = "https://blockchain.info";
         private const int TIMEOUT_MS = 100000;
-        private const string BASE_URI = "https://blockchain.info";
-        private readonly HttpClient _httpClient;
-        public string _apiCode { get; set; }
+		private readonly HttpClient _httpClient;
+		public string _apiCode { get; set; }
 
 		public BlockchainHttpClient(string apiCode = null, string uri = BASE_URI)
-        {
+		{
 			_apiCode = apiCode;
 			_httpClient = new HttpClient
 			{
@@ -33,12 +32,12 @@ namespace Info.Blockchain.Api.Client
 			{
 				throw new ArgumentNullException(nameof(route));
 			}
-			
+
 			if (_apiCode != null)
 			{
 				queryString?.Add("api_code", _apiCode);
 			}
-			
+
 			if (queryString != null && queryString.Count > 0)
 			{
 				int queryStringIndex = route.IndexOf('?');

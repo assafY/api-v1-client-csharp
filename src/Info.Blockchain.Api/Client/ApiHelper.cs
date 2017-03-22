@@ -11,11 +11,10 @@ namespace Info.Blockchain.Api.Client
         private readonly IHttpClient _baseHttpClient;
         private readonly IHttpClient _serviceHttpClient;
         public readonly BlockExplorer.BlockExplorer _blockExplorer;
-		public readonly WalletCreator _walletCreator;
+        public readonly WalletCreator _walletCreator;
         public readonly TransactionBroadcaster _transactionBroadcaster;
-    	public readonly ExchangeRateExplorer _exchangeRateExplorer;
-		public readonly StatisticsExplorer _statisticsExplorer;
-
+        public readonly ExchangeRateExplorer _exchangeRateExplorer;
+        public readonly StatisticsExplorer _statisticsExplorer;
 
 		public ApiHelper(string apiCode = null, IHttpClient baseHttpClient = null, string serviceUrl = null, IHttpClient serviceHttpClient = null)
 		{
@@ -26,13 +25,12 @@ namespace Info.Blockchain.Api.Client
 			}
             else
             {
-				_baseHttpClient = baseHttpClient;
-
+            	_baseHttpClient = baseHttpClient;
 				if (apiCode != null)
 				{
 					_baseHttpClient._apiCode = apiCode;
                 }
-			}
+            }
 
             if (serviceHttpClient == null && serviceUrl != null)
             {
@@ -41,7 +39,6 @@ namespace Info.Blockchain.Api.Client
             else if (serviceHttpClient != null)
             {
                 _serviceHttpClient = serviceHttpClient;
-
                 if (apiCode != null)
                 {
                     _serviceHttpClient._apiCode = apiCode;
