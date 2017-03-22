@@ -4,6 +4,9 @@ namespace Info.Blockchain.Api.Data
 {
     public class CreateWalletResponse
 	{
+		[JsonConstructor]
+		public CreateWalletResponse() {}
+
 		/// <summary>
 		/// Wallet identifier (GUID)
 		/// </summary>
@@ -15,11 +18,5 @@ namespace Info.Blockchain.Api.Data
 		/// </summary>
 		[JsonProperty("address", Required = Required.Always)]
 		public string Address { get; private set; }
-
-		/// <summary>
-		/// Wallet label
-		/// </summary>
-		[JsonProperty("label", Required = Required.Always)]
-		public string Label { get; private set; }
 	}
 }

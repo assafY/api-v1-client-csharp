@@ -14,7 +14,7 @@ namespace Info.Blockchain.Api.Wallet
         
 		public WalletCreator()
 		{
-			_httpClient = new BlockchainHttpClient();
+			_httpClient = new BlockchainHttpClient(uri: "http://127.0.0.1:3000");
 		}
 
         public WalletCreator(IHttpClient httpClient)
@@ -45,12 +45,16 @@ namespace Info.Blockchain.Api.Wallet
 			
 			var request = new CreateWalletRequest {
 				Password = password,
-				PrivateKey = privateKey,
+				ApiCode = _httpClient._apiCode,
+				// not providing a private key throws a create wallet error
+				// therefore it is diabled for the time being
+				// PrivateKey = privateKey,
 				Label = label,
 				Email = email
 			};
 
-			return await _httpClient.PostAsync<CreateWalletRequest, CreateWalletResponse>("api/v2/create_wallet", request);
+			var newWallet = await _httpClient.PostAsync<CreateWalletRequest, CreateWalletResponse>("api/v2/create/", request, contentType: "application/json");
+			return newWallet;
 		}
     }
 }

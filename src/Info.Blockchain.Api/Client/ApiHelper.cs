@@ -85,6 +85,11 @@ namespace Info.Blockchain.Api.Client
             return new Wallet.Wallet(_serviceHttpClient, identifier, password, secondPassword);
 		}
 
+        public WalletCreator CreateWalletCreator()
+        {
+            return new WalletCreator(_serviceHttpClient);
+        }
+
 		public void Dispose()
 		{
             _baseHttpClient.Dispose();

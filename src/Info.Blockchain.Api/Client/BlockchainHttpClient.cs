@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Info.Blockchain.Api.Data;
+using System.Net.Http.Headers;
 
 namespace Info.Blockchain.Api.Client
 {
-	internal class BlockchainHttpClient : IHttpClient
+	public class BlockchainHttpClient : IHttpClient
 	{
         private const int TIMEOUT_MS = 100000;
         private const string BASE_URI = "https://blockchain.info";
@@ -61,7 +62,7 @@ namespace Info.Blockchain.Api.Client
 			return responseObject;
 		}
 
-		public async Task<TResponse> PostAsync<TPost, TResponse>(string route, TPost postObject, Func<string, TResponse> customDeserialization = null, bool multiPartContent = false)
+		public async Task<TResponse> PostAsync<TPost, TResponse>(string route, TPost postObject, Func<string, TResponse> customDeserialization = null, bool multiPartContent = false, string contentType = "application/x-www-form-urlencoded")
 		{
 			if (route == null)
 			{
@@ -77,12 +78,12 @@ namespace Info.Blockchain.Api.Client
 			{
 				httpContent = new MultipartFormDataContent
 				{
-					new StringContent(json, Encoding.UTF8, "application/x-www-form-urlencoded")
+					new StringContent(json, Encoding.UTF8, contentType)
 				};
 			}
 			else
 			{
-				httpContent = new StringContent(json, Encoding.UTF8, "application/x-www-form-urlencoded");
+				httpContent = new StringContent(json, Encoding.UTF8, contentType);
 			}
 			HttpResponseMessage response = await _httpClient.PostAsync(route, httpContent);
 			string responseString = await this.ValidateResponse(response);

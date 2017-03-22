@@ -18,25 +18,33 @@ namespace TestProj
     class Program
     {
         private static Wallet _wallet;
+
         private static WalletCreator _walletCreator;
 
         static void Main(string[] args)
         {
-            using (ApiHelper apiHelper = new ApiHelper(apiCode: "your-api-code", serviceUrl: "url-to-service-my-wallet-v3"))
+            using (ApiHelper apiHelper = new ApiHelper(apiCode: "1770d5d9-bcea-4d28-ad21-6cbd5be018a8", serviceUrl: "http://127.0.0.1:3000/"))
             {
                 try
                 {
-                    _wallet = apiHelper.CreateWallet("your-wallet-guid", "your-wallet-password");
-                    _walletCreator = new WalletCreator();
+                    _walletCreator = apiHelper.CreateWalletCreator();
+                    
+                    // create a new wallet
+                    var newWallet = _walletCreator.Create("someComplicated123Password").Result;
+                    Console.WriteLine("The new wallet identifier is: {0}", newWallet.Identifier);
 
-                    // get an address from your wallet and include only transactions with up to 3
-                    // confirmations in the balance
-                    WalletAddress addr = _wallet.GetAddressAsync("15urYnyeJe3gwbGJ74wcX89Tz7ZtsFDVew", 3).Result;
-                    Console.WriteLine("The balance is {0}", addr.Balance);
-
+                    // create an instance of an existing wallet (will be identical to the _wallet
+                    // created above in this specific example)
+                    _wallet = apiHelper.CreateWallet(newWallet.Identifier, "someComplicated123Password");
+                    
                     // create a new address and attach a label to it
                     WalletAddress newAddr = _wallet.NewAddress("test label 123").Result;
                     Console.WriteLine("The new address is {0}", newAddr.AddressStr);
+
+                    // get an address from your wallet and include only transactions with up to 3
+                    // confirmations in the balance (in this example we use the address just created)
+                    WalletAddress addr = _wallet.GetAddressAsync(newAddr.AddressStr, 3).Result;
+                    Console.WriteLine("The balance is {0}", addr.Balance);
 
                     // list the wallet balance
                     BitcoinValue totalBalance = _wallet.GetBalanceAsync().Result;
@@ -44,6 +52,7 @@ namespace TestProj
 
                     // send 0.2 bitcoins with a custom fee of 100,000 satoshis and a note
                     // public notes require a minimum transaction value of 0.005 BTC
+                    // this will throw an error if insufficient wallet funds
                     BitcoinValue fee = BitcoinValue.FromSatoshis(10000);
                     BitcoinValue amount = BitcoinValue.FromSatoshis(20000000);
                     PaymentResponse payment = _wallet.SendAsync("1dice6YgEVBf88erBFra9BHf6ZMoyvG88", amount, fee: fee, note: "Amazon payment").Result;
@@ -57,11 +66,7 @@ namespace TestProj
                     }
 
                     // archive an old address
-                    _wallet.ArchiveAddress("1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa").Wait();
-
-                    // create a new wallet
-                    var newWallet = _walletCreator.Create("someComplicated123Password", "8fd2335e-720c-442b-9694-83bdd2983cc9").Result;
-                    Console.WriteLine("The new wallet identifier is: {0}", newWallet.Identifier);
+                    _wallet.ArchiveAddress(addr.AddressStr).Wait();
                 }
                 catch (ClientApiException e)
                 {
