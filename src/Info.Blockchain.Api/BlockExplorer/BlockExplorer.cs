@@ -16,17 +16,17 @@ namespace Info.Blockchain.Api.BlockExplorer
 	/// </summary>
 	public class BlockExplorer
 	{
-		private readonly IHttpClient _httpClient;
+		private readonly IHttpClient httpClient;
 		public const int MAX_TRANSACTIONS_PER_REQUEST = 50;
 
 		public BlockExplorer()
 		{
-			_httpClient  = new BlockchainHttpClient();
+			httpClient  = new BlockchainHttpClient();
 		}
 
 		internal BlockExplorer(IHttpClient httpClient)
 		{
-			_httpClient = httpClient;
+			this.httpClient = httpClient;
 		}
 
 		/// <summary>
@@ -58,7 +58,7 @@ namespace Info.Blockchain.Api.BlockExplorer
 				throw new ArgumentNullException(nameof(hashOrIndex));
 			}
 
-			return await _httpClient.GetAsync<Transaction>("rawtx/" + hashOrIndex);
+			return await httpClient.GetAsync<Transaction>("rawtx/" + hashOrIndex);
 		}
 
 		/// <summary>
@@ -89,7 +89,7 @@ namespace Info.Blockchain.Api.BlockExplorer
 			{
 				throw new ArgumentNullException(nameof(hashOrIndex));
 			}
-			return await _httpClient.GetAsync<Block>("rawblock/" + hashOrIndex, customDeserialization: Block.Deserialize);
+			return await httpClient.GetAsync<Block>("rawblock/" + hashOrIndex, customDeserialization: Block.Deserialize);
 		}
 
 		/// <summary>
@@ -176,7 +176,7 @@ namespace Info.Blockchain.Api.BlockExplorer
 			queryString.Add("limit", transactionLimit.ToString());
 			queryString.Add("format", "json");
 
-			return await _httpClient.GetAsync<Address>("address/" + addressOrHash, queryString);
+			return await httpClient.GetAsync<Address>("address/" + addressOrHash, queryString);
 		}
 
 		/// <summary>
@@ -195,7 +195,7 @@ namespace Info.Blockchain.Api.BlockExplorer
 			QueryString queryString = new QueryString();
 			queryString.Add("format", "json");
 
-			return await _httpClient.GetAsync("block-height/" + height, queryString, Block.DeserializeMultiple);
+			return await httpClient.GetAsync("block-height/" + height, queryString, Block.DeserializeMultiple);
 		}
 
 		/// <summary>
@@ -214,7 +214,7 @@ namespace Info.Blockchain.Api.BlockExplorer
 			queryString.Add("active", address);
 			try
 			{
-				return await _httpClient.GetAsync("unspent", queryString, UnspentOutput.DeserializeMultiple);
+				return await httpClient.GetAsync("unspent", queryString, UnspentOutput.DeserializeMultiple);
 			}
 			catch (Exception ex)
 			{
@@ -235,7 +235,7 @@ namespace Info.Blockchain.Api.BlockExplorer
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
 		public async Task<LatestBlock> GetLatestBlockAsync()
 		{
-			return await _httpClient.GetAsync<LatestBlock>("latestblock");
+			return await httpClient.GetAsync<LatestBlock>("latestblock");
 		}
 
 		/// <summary>
@@ -248,7 +248,7 @@ namespace Info.Blockchain.Api.BlockExplorer
 			QueryString queryString = new QueryString();
 			queryString.Add("format", "json");
 
-			return await _httpClient.GetAsync("unconfirmed-transactions", queryString, Transaction.DeserializeMultiple);
+			return await httpClient.GetAsync("unconfirmed-transactions", queryString, Transaction.DeserializeMultiple);
 		}
 
 		/// <summary>
@@ -313,7 +313,7 @@ namespace Info.Blockchain.Api.BlockExplorer
 			QueryString queryString = new QueryString();
 			queryString.Add("format", "json");
 
-			ReadOnlyCollection<SimpleBlock> simpleBlocks = await _httpClient.GetAsync("blocks/" + poolNameOrTimestamp, queryString, SimpleBlock.DeserializeMultiple);
+			ReadOnlyCollection<SimpleBlock> simpleBlocks = await httpClient.GetAsync("blocks/" + poolNameOrTimestamp, queryString, SimpleBlock.DeserializeMultiple);
 
 			return simpleBlocks;
 		}

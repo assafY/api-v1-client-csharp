@@ -27,7 +27,7 @@ namespace Info.Blockchain.Api.Client
                 _baseHttpClient = baseHttpClient;
                 if (apiCode != null)
                 {
-                    _baseHttpClient._apiCode = apiCode;
+                    _baseHttpClient.ApiCode = apiCode;
                 }
             }
 
@@ -40,7 +40,7 @@ namespace Info.Blockchain.Api.Client
                 _serviceHttpClient = serviceHttpClient;
                 if (apiCode != null)
                 {
-                    _serviceHttpClient._apiCode = apiCode;
+                    _serviceHttpClient.ApiCode = apiCode;
                 }
             }
             else

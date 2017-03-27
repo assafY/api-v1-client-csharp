@@ -10,14 +10,14 @@ namespace Info.Blockchain.Api.Statistics
 	/// </summary>
 	public class StatisticsExplorer
 	{
-		private readonly IHttpClient _httpClient;
+		private readonly IHttpClient httpClient;
 		public StatisticsExplorer()
 		{
-			_httpClient = new BlockchainHttpClient();
+			httpClient = new BlockchainHttpClient();
 		}
 		internal StatisticsExplorer(IHttpClient httpClient)
 		{
-			_httpClient = httpClient;
+			this.httpClient = httpClient;
 		}
 
 		/// <summary>
@@ -30,7 +30,7 @@ namespace Info.Blockchain.Api.Statistics
 			QueryString queryString = new QueryString();
 			queryString.Add("format", "json");
 
-			return await _httpClient.GetAsync<StatisticsResponse>("stats", queryString);
+			return await httpClient.GetAsync<StatisticsResponse>("stats", queryString);
 		}
 	}
 }

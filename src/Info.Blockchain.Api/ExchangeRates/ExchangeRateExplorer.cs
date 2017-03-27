@@ -7,21 +7,21 @@ using Info.Blockchain.Api.Data;
 namespace Info.Blockchain.Api.ExchangeRates
 {
 	/// <summary>
-	/// This class reflects the functionality documented at https://blockchain.info/api/exchange_rates_api. 
+	/// This class reflects the functionality documented at https://blockchain.info/api/exchange_rates_api.
 	/// It allows users to fetch the latest ticker data and convert amounts between BTC and fiat currencies.
 	/// </summary>
 	public class ExchangeRateExplorer
 	{
-		private readonly IHttpClient _httpClient;
+		private readonly IHttpClient httpClient;
 
 		public ExchangeRateExplorer()
 		{
-			_httpClient = new BlockchainHttpClient();
+			httpClient = new BlockchainHttpClient();
 		}
 
 		internal ExchangeRateExplorer(IHttpClient httpClient)
 		{
-			_httpClient = httpClient;
+			this.httpClient = httpClient;
 		}
 
 		/// <summary>
@@ -32,7 +32,7 @@ namespace Info.Blockchain.Api.ExchangeRates
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
 		public async Task<Dictionary<string, Currency>> GetTickerAsync()
 		{
-			return await _httpClient.GetAsync<Dictionary<string, Currency>>("ticker");
+			return await httpClient.GetAsync<Dictionary<string, Currency>>("ticker");
 		}
 
 		/// <summary>
@@ -56,7 +56,7 @@ namespace Info.Blockchain.Api.ExchangeRates
 			queryString.Add("currency", currency);
 			queryString.Add("value", value.ToString());
 
-			return await _httpClient.GetAsync<double>("tobtc", queryString);
+			return await httpClient.GetAsync<double>("tobtc", queryString);
 		}
 	}
 }

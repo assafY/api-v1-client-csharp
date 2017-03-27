@@ -10,16 +10,16 @@ namespace Info.Blockchain.Api.Wallet
     /// <summary>
     public class WalletCreator
     {
-        private readonly IHttpClient _httpClient;
+        private readonly IHttpClient httpClient;
 
         public WalletCreator()
         {
-            _httpClient = new BlockchainHttpClient(uri: "http://127.0.0.1:3000");
+            httpClient = new BlockchainHttpClient(uri: "http://127.0.0.1:3000");
         }
 
         public WalletCreator(IHttpClient httpClient)
         {
-            _httpClient = httpClient;
+            this.httpClient = httpClient;
         }
 
         /// <summary>
@@ -38,20 +38,20 @@ namespace Info.Blockchain.Api.Wallet
             {
                 throw new ArgumentNullException(nameof(password));
             }
-            if (string.IsNullOrWhiteSpace(_httpClient._apiCode))
+            if (string.IsNullOrWhiteSpace(httpClient.ApiCode))
             {
                 throw new ArgumentNullException("Api code must be specified", innerException: null);
             }
 
             var request = new CreateWalletRequest {
                 Password = password,
-                ApiCode = _httpClient._apiCode,
+                ApiCode = httpClient.ApiCode,
                 PrivateKey = privateKey,
                 Label = label,
                 Email = email
             };
 
-            var newWallet = await _httpClient.PostAsync<CreateWalletRequest, CreateWalletResponse>("api/v2/create/", request, contentType: "application/json");
+            var newWallet = await httpClient.PostAsync<CreateWalletRequest, CreateWalletResponse>("api/v2/create/", request, contentType: "application/json");
             return newWallet;
 		}
     }

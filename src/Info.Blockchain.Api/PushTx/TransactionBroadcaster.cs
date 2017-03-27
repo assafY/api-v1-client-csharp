@@ -10,14 +10,14 @@ namespace Info.Blockchain.Api.PushTx
     /// </summary>
     public class TransactionBroadcaster
     {
-        private readonly IHttpClient _httpClient;
+        private readonly IHttpClient httpClient;
         public TransactionBroadcaster()
         {
-            _httpClient = new BlockchainHttpClient();
+            httpClient = new BlockchainHttpClient();
         }
         public TransactionBroadcaster(IHttpClient httpClient)
         {
-            _httpClient = httpClient;
+            this.httpClient = httpClient;
 }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Info.Blockchain.Api.PushTx
                 throw new ArgumentNullException(nameof(transactionString));
             }
 
-            await _httpClient.PostAsync<string, object>("pushtx", transactionString, multiPartContent: true);
+            await httpClient.PostAsync<string, object>("pushtx", transactionString, multiPartContent: true);
         }
     }
 }

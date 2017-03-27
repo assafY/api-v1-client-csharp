@@ -8,8 +8,8 @@ namespace Info.Blockchain.Api.Tests
     public class FakeWalletHttpClient : IHttpClient
     {
 
-        public string _apiCode { get; set; }
-        
+        public string ApiCode { get; set; }
+
         public void Dispose()
         {
         }
@@ -21,7 +21,7 @@ namespace Info.Blockchain.Api.Tests
 
         public Task<TResponse> PostAsync<TPost, TResponse>(string route, TPost postObject,
             Func<string, TResponse> customDeserialization = null,
-            bool multiPartContent = false)
+            bool multiPartContent = false, string contentType = null)
         {
             CreateWalletResponse walletResponse = ReflectionUtil.DeserializeFile<CreateWalletResponse>("create_wallet_mock");
             if (walletResponse is TResponse)
