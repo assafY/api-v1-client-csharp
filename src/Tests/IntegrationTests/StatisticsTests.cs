@@ -1,10 +1,10 @@
 ﻿using Info.Blockchain.API.Client;
-using Info.Blockchain.API.Data;
+using Info.Blockchain.API.Statistics;
 using Xunit;
 
 namespace Info.Blockchain.API.Tests.IntegrationTests
 {
-	public class StatisticsTests
+    public class StatisticsTests
 	{
 		[Fact]
 		public async void GetStatistics_Valid()

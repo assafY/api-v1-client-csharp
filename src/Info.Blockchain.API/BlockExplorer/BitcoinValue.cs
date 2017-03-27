@@ -1,6 +1,6 @@
 using System;
 
-namespace Info.Blockchain.API.Data
+namespace Info.Blockchain.API.BlockExplorer
 {
     public class BitcoinValue : IEquatable<BitcoinValue>
     {

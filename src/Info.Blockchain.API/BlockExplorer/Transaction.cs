@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 
-namespace Info.Blockchain.API.Data
+namespace Info.Blockchain.API.BlockExplorer
 {
 	/// <summary>
 	/// Represents a transaction.

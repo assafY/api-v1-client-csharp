@@ -1,7 +1,8 @@
+using Info.Blockchain.API.BlockExplorer;
 using Info.Blockchain.API.Json;
 using Newtonsoft.Json;
 
-namespace Info.Blockchain.API.Data
+namespace Info.Blockchain.API.Statistics
 {
 	/// <summary>
 	/// This class is used as a response object to the 'get' method in the 'Statistics' class

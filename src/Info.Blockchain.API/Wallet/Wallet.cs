@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Info.Blockchain.API.BlockExplorer;
 using Info.Blockchain.API.Client;
 using Info.Blockchain.API.Data;
 using Info.Blockchain.API.Json;

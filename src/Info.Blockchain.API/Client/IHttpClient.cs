@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Info.Blockchain.API.Data;
 
 namespace Info.Blockchain.API.Client
 {

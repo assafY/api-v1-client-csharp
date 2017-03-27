@@ -1,9 +1,9 @@
-﻿using Info.Blockchain.API.Data;
+﻿using Info.Blockchain.API.BlockExplorer;
 using Xunit;
 
 namespace Info.Blockchain.API.Tests.UnitTests
 {
-	public class BitcoinValueTests
+    public class BitcoinValueTests
 	{
 		[Fact]
 		public void BitcoinValue_ConvertSatoshis_ValidConversion()

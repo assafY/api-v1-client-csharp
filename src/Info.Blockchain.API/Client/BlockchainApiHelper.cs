@@ -1,8 +1,8 @@
 using System;
+using Info.Blockchain.API.CreateWallet;
 using Info.Blockchain.API.ExchangeRates;
 using Info.Blockchain.API.PushTx;
 using Info.Blockchain.API.Statistics;
-using Info.Blockchain.API.Wallet;
 
 namespace Info.Blockchain.API.Client
 {

@@ -1,10 +1,10 @@
-﻿using Info.Blockchain.API.Client;
-using Info.Blockchain.API.Data;
+﻿using Info.Blockchain.API.BlockExplorer;
+using Info.Blockchain.API.Client;
 using Xunit;
 
 namespace Info.Blockchain.API.Tests.IntegrationTests
 {
-	public class AddressTests
+    public class AddressTests
 	{
 		[Fact]
 		public async void GetAddress_ByAddress_Valid()

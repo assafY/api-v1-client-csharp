@@ -1,5 +1,5 @@
 ﻿using System;
-using Info.Blockchain.API.Data;
+using Info.Blockchain.API.BlockExplorer;
 using Newtonsoft.Json;
 
 namespace Info.Blockchain.API.Json

@@ -1,7 +1,7 @@
-using Info.Blockchain.API.Data;
 using Info.Blockchain.API.Client;
 using System;
 using System.Threading.Tasks;
+using Info.Blockchain.API.CreateWallet;
 
 namespace Info.Blockchain.API.Tests
 {

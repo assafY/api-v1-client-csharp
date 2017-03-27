@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using Info.Blockchain.API.Json;
 using Newtonsoft.Json;
 
-namespace Info.Blockchain.API.Data
+namespace Info.Blockchain.API.BlockExplorer
 {
 	/// <summary>
 	/// Represents an address.

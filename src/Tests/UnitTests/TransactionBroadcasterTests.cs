@@ -1,11 +1,10 @@
 ﻿using System;
 using Info.Blockchain.API.Client;
-using Info.Blockchain.API.Tests.UnitTests;
 using Xunit;
 
 namespace Info.Blockchain.API.Tests.UnitTests
 {
-	public class TransactionBroadcasterTests
+    public class TransactionBroadcasterTests
 	{
 		[Fact]
 		public async void GetTransaction_BadIds_ArgumentExecption()

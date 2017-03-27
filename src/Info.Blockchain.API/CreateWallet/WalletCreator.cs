@@ -1,9 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using Info.Blockchain.API.Client;
-using Info.Blockchain.API.Data;
 
-namespace Info.Blockchain.API.Wallet
+namespace Info.Blockchain.API.CreateWallet
 {
     /// <summary>
     /// This class reflects the functionality documented at https://blockchain.info/api/create_wallet.

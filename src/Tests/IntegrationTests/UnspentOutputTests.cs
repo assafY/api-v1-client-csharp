@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
+using Info.Blockchain.API.BlockExplorer;
 using Info.Blockchain.API.Client;
-using Info.Blockchain.API.Data;
 using Xunit;
 
 namespace Info.Blockchain.API.Tests.IntegrationTests
