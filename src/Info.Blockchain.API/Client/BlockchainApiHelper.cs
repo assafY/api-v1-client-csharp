@@ -87,7 +87,10 @@ namespace Info.Blockchain.API.Client
 
         public void Dispose()
         {
-            baseHttpClient.Dispose();
+            if (baseHttpClient != null)
+            {
+                baseHttpClient.Dispose();
+            }
             if (serviceHttpClient != null)
             {
                 serviceHttpClient.Dispose();
