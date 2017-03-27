@@ -1,5 +1,5 @@
-﻿using Info.Blockchain.Api.Client;
-using Info.Blockchain.Api.Data;
+﻿using Info.Blockchain.API.Client;
+using Info.Blockchain.API.Data;
 using Xunit;
 
 namespace Info.Blockchain.API.Tests.IntegrationTests
@@ -12,7 +12,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 			using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 			{
 				const string addressString = "13k5KUK2vswXRdjgjxgCorGoY2EFGMFTnu";
-				Address address = await apiHelper._blockExplorer.GetAddressAsync(addressString);
+				Address address = await apiHelper.blockExplorer.GetAddressAsync(addressString);
 				Assert.NotNull(address);
 				Assert.Equal(address.AddressStr, addressString);
 			}
@@ -24,7 +24,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 			using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 			{
 				const string hash = "1e15be27e4763513af36364674eebdba5a047323";
-				Address address = await apiHelper._blockExplorer.GetAddressAsync(hash);
+				Address address = await apiHelper.blockExplorer.GetAddressAsync(hash);
 				Assert.NotNull(address);
 				Assert.Equal(address.Hash160, hash);
 			}
@@ -41,7 +41,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 			using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 			{
 				const string hash = "1e15be27e4763513af36364674eebdba5a047323";
-				Address address = await apiHelper._blockExplorer.GetAddressAsync(hash, transactionCount);
+				Address address = await apiHelper.blockExplorer.GetAddressAsync(hash, transactionCount);
 				Assert.NotNull(address);
 				Assert.Equal(address.Transactions.Count, transactionCount);
 			}

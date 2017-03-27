@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Info.Blockchain.Api.Client;
-using Info.Blockchain.Api.Data;
+using Info.Blockchain.API.Client;
+using Info.Blockchain.API.Data;
 using Xunit;
 
-namespace Info.Blockchain.Api.Tests.UnitTests
+namespace Info.Blockchain.API.Tests.UnitTests
 {
     public class WalletTests
     {
@@ -125,7 +125,7 @@ namespace Info.Blockchain.Api.Tests.UnitTests
             {
                 using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper("APICODE"))
                 {
-                    await apiHelper._walletCreator.Create(null);
+                    await apiHelper.walletCreator.Create(null);
                 }
             });
         }
@@ -137,7 +137,7 @@ namespace Info.Blockchain.Api.Tests.UnitTests
             {
                 using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
                 {
-                    await apiHelper._walletCreator.Create("password");
+                    await apiHelper.walletCreator.Create("password");
                 }
             });
         }
@@ -148,7 +148,7 @@ namespace Info.Blockchain.Api.Tests.UnitTests
             using (BlockchainApiHelper apiHelper = new BlockchainApiHelper("123", new FakeWalletHttpClient(),
                                                         "123", new FakeWalletHttpClient()))
             {
-                CreateWalletResponse walletResponse = await apiHelper._walletCreator.Create("Password");
+                CreateWalletResponse walletResponse = await apiHelper.walletCreator.Create("Password");
                 Assert.NotNull(walletResponse);
 
                 Assert.Equal(walletResponse.Address, "12AaMuRnzw6vW6s2KPRAGeX53meTf8JbZS");

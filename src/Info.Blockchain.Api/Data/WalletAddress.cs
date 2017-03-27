@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Info.Blockchain.Api.Json;
+using Info.Blockchain.API.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Info.Blockchain.Api.Data
+namespace Info.Blockchain.API.Data
 {
 	/// <summary>
 	/// Used in combination with the `Wallet` class

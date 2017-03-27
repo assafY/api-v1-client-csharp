@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using Info.Blockchain.Api.Client;
+using Info.Blockchain.API.Client;
 
-namespace Info.Blockchain.Api.Data
+namespace Info.Blockchain.API.Data
 {
     public class QueryString
     {

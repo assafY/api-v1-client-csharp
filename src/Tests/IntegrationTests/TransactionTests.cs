@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
-using Info.Blockchain.Api.Client;
-using Info.Blockchain.Api.Data;
-using Info.Blockchain.Api.Tests;
+using Info.Blockchain.API.Client;
+using Info.Blockchain.API.Data;
+using Info.Blockchain.API.Tests;
 using KellermanSoftware.CompareNetObjects;
 using Xunit;
 
@@ -15,7 +15,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 			using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 			{
 				Transaction knownTransaction = ReflectionUtil.DeserializeFile<Transaction>("single_transaction");
-				Transaction receivedTransaction = await apiHelper._blockExplorer.GetTransactionAsync(knownTransaction.Hash);
+				Transaction receivedTransaction = await apiHelper.blockExplorer.GetTransactionAsync(knownTransaction.Hash);
 
 				CompareLogic compareLogic = new CompareLogic();
 				ComparisonResult comparisonResult = compareLogic.Compare(knownTransaction, receivedTransaction);
@@ -29,7 +29,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 			using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 			{
 				Transaction knownTransaction = ReflectionUtil.DeserializeFile<Transaction>("single_transaction");
-				Transaction receivedTransaction = await apiHelper._blockExplorer.GetTransactionByIndexAsync(knownTransaction.Index);
+				Transaction receivedTransaction = await apiHelper.blockExplorer.GetTransactionByIndexAsync(knownTransaction.Index);
 
 				CompareLogic compareLogic = new CompareLogic();
 				ComparisonResult comparisonResult = compareLogic.Compare(knownTransaction, receivedTransaction);
@@ -42,7 +42,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 		{
 			using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 			{
-				ReadOnlyCollection<Transaction> unconfirmedTransactions = await apiHelper._blockExplorer.GetUnconfirmedTransactionsAsync();
+				ReadOnlyCollection<Transaction> unconfirmedTransactions = await apiHelper.blockExplorer.GetUnconfirmedTransactionsAsync();
 
 				Assert.NotNull(unconfirmedTransactions);
 			}

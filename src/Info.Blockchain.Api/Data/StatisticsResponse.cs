@@ -1,7 +1,7 @@
-using Info.Blockchain.Api.Json;
+using Info.Blockchain.API.Json;
 using Newtonsoft.Json;
 
-namespace Info.Blockchain.Api.Data
+namespace Info.Blockchain.API.Data
 {
 	/// <summary>
 	/// This class is used as a response object to the 'get' method in the 'Statistics' class
@@ -109,7 +109,7 @@ namespace Info.Blockchain.Api.Data
 		public long MinedBlocks { get; private set; }
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		[JsonProperty("blocks_size", Required = Required.Always)]
 		public long BlocksSize { get; private set; }

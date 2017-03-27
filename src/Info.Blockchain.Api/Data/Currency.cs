@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Info.Blockchain.Api.Data
+namespace Info.Blockchain.API.Data
 {
 	/// <summary>
 	/// This class is used in the response of the `GetTicker` method in the `ExchangeRates` class.

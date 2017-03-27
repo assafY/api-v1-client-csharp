@@ -1,4 +1,4 @@
-﻿using Info.Blockchain.Api.Client;
+﻿using Info.Blockchain.API.Client;
 using Xunit;
 
 namespace Info.Blockchain.API.Tests.IntegrationTests
@@ -13,7 +13,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 			{
 				using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 				{
-					await apiHelper._transactionBroadcaster.PushTransactionAsync("Test");
+					await apiHelper.transactionBroadcaster.PushTransactionAsync("Test");
 				}
 			});
 			Assert.Contains("Parse", serverApiException.Message);

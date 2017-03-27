@@ -1,4 +1,4 @@
-﻿using Info.Blockchain.Api.Data;
+﻿using Info.Blockchain.API.Data;
 using Xunit;
 
 namespace Info.Blockchain.API.Tests.UnitTests

@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
-using Info.Blockchain.Api.Json;
+using Info.Blockchain.API.Json;
 
-namespace Info.Blockchain.Api.Data
+namespace Info.Blockchain.API.Data
 {
 	/// <summary>
 	/// Represents a transaction output.

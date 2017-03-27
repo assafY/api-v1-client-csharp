@@ -1,65 +1,65 @@
 using System;
-using Info.Blockchain.Api.ExchangeRates;
-using Info.Blockchain.Api.PushTx;
-using Info.Blockchain.Api.Statistics;
-using Info.Blockchain.Api.Wallet;
+using Info.Blockchain.API.ExchangeRates;
+using Info.Blockchain.API.PushTx;
+using Info.Blockchain.API.Statistics;
+using Info.Blockchain.API.Wallet;
 
-namespace Info.Blockchain.Api.Client
+namespace Info.Blockchain.API.Client
 {
     public class BlockchainApiHelper : IDisposable
     {
-        private readonly IHttpClient _baseHttpClient;
-        private readonly IHttpClient _serviceHttpClient;
-        public readonly BlockExplorer.BlockExplorer _blockExplorer;
-        public readonly WalletCreator _walletCreator;
-        public readonly TransactionBroadcaster _transactionBroadcaster;
-        public readonly ExchangeRateExplorer _exchangeRateExplorer;
-        public readonly StatisticsExplorer _statisticsExplorer;
+        private readonly IHttpClient baseHttpClient;
+        private readonly IHttpClient serviceHttpClient;
+        public readonly BlockExplorer.BlockExplorer blockExplorer;
+        public readonly WalletCreator walletCreator;
+        public readonly TransactionBroadcaster transactionBroadcaster;
+        public readonly ExchangeRateExplorer exchangeRateExplorer;
+        public readonly StatisticsExplorer statisticsExplorer;
 
         public BlockchainApiHelper(string apiCode = null, IHttpClient baseHttpClient = null, string serviceUrl = null, IHttpClient serviceHttpClient = null)
         {
             if (baseHttpClient == null)
             {
-                _baseHttpClient = new BlockchainHttpClient(apiCode);
+                baseHttpClient = new BlockchainHttpClient(apiCode);
             }
             else
             {
-                _baseHttpClient = baseHttpClient;
+                this.baseHttpClient = baseHttpClient;
                 if (apiCode != null)
                 {
-                    _baseHttpClient.ApiCode = apiCode;
+                    baseHttpClient.ApiCode = apiCode;
                 }
             }
 
             if (serviceHttpClient == null && serviceUrl != null)
             {
-                _serviceHttpClient = new BlockchainHttpClient(apiCode, serviceUrl);
+                serviceHttpClient = new BlockchainHttpClient(apiCode, serviceUrl);
             }
             else if (serviceHttpClient != null)
             {
-                _serviceHttpClient = serviceHttpClient;
+                this.serviceHttpClient = serviceHttpClient;
                 if (apiCode != null)
                 {
-                    _serviceHttpClient.ApiCode = apiCode;
+                    serviceHttpClient.ApiCode = apiCode;
                 }
             }
             else
             {
-                _serviceHttpClient = null;
+                serviceHttpClient = null;
             }
 
-            _blockExplorer = new BlockExplorer.BlockExplorer(_baseHttpClient);
-            _transactionBroadcaster = new TransactionBroadcaster(_baseHttpClient);
-            _exchangeRateExplorer = new ExchangeRateExplorer(_baseHttpClient);
-            _statisticsExplorer = new StatisticsExplorer(_baseHttpClient);
+            this.blockExplorer = new BlockExplorer.BlockExplorer(baseHttpClient);
+            this.transactionBroadcaster = new TransactionBroadcaster(baseHttpClient);
+            this.exchangeRateExplorer = new ExchangeRateExplorer(baseHttpClient);
+            this.statisticsExplorer = new StatisticsExplorer(baseHttpClient);
 
-            if (_serviceHttpClient != null)
+            if (serviceHttpClient != null)
             {
-                _walletCreator = new WalletCreator(_serviceHttpClient);
+                walletCreator = new WalletCreator(serviceHttpClient);
             }
             else
             {
-                _walletCreator = null;
+                walletCreator = null;
             }
 
         }
@@ -73,24 +73,24 @@ namespace Info.Blockchain.Api.Client
         /// <param name="secondPassword">Second password</param>
         public Wallet.Wallet CreateWallet(string identifier, string password, string secondPassword = null)
         {
-            if (_serviceHttpClient == null)
+            if (serviceHttpClient == null)
             {
                 throw new ClientApiException("In order to create wallets, you must provide a valid service_url to BlockchainApiHelper");
             }
-            return new Wallet.Wallet(_serviceHttpClient, identifier, password, secondPassword);
+            return new Wallet.Wallet(serviceHttpClient, identifier, password, secondPassword);
         }
 
         public WalletCreator CreateWalletCreator()
         {
-            return new WalletCreator(_serviceHttpClient);
+            return new WalletCreator(serviceHttpClient);
         }
 
         public void Dispose()
         {
-            _baseHttpClient.Dispose();
-            if (_serviceHttpClient != null)
+            baseHttpClient.Dispose();
+            if (serviceHttpClient != null)
             {
-                _serviceHttpClient.Dispose();
+                serviceHttpClient.Dispose();
             }
         }
     }

@@ -1,5 +1,5 @@
-﻿using Info.Blockchain.Api.Client;
-using Info.Blockchain.Api.Data;
+﻿using Info.Blockchain.API.Client;
+using Info.Blockchain.API.Data;
 using Xunit;
 
 namespace Info.Blockchain.API.Tests.IntegrationTests
@@ -11,7 +11,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 		{
 			using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 			{
-				StatisticsResponse statisticsResponse = await apiHelper._statisticsExplorer.GetAsync();
+				StatisticsResponse statisticsResponse = await apiHelper.statisticsExplorer.GetAsync();
 				Assert.NotNull(statisticsResponse);
 			}
 		}

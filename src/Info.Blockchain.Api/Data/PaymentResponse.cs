@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Info.Blockchain.Api.Data
+namespace Info.Blockchain.API.Data
 {
 	/// <summary>
 	/// Used as a response object to the `send` and `sendMany` methods in the `Wallet` class.

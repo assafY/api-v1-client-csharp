@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Info.Blockchain.Api.Json;
+using Info.Blockchain.API.Json;
 using Newtonsoft.Json;
 
-namespace Info.Blockchain.Api.Data
+namespace Info.Blockchain.API.Data
 {
 	/// <summary>
 	/// Represents an address.
@@ -17,7 +17,7 @@ namespace Info.Blockchain.Api.Data
 		private Address()
 		{
 		}
-		
+
 		/// <summary>
 		/// Address object contructor to copy from another address and associate a list of transactions
 		/// </summary>
@@ -29,7 +29,7 @@ namespace Info.Blockchain.Api.Data
 			{
 				throw new ArgumentNullException(nameof(address));
 			}
-			
+
 			Hash160 = address.Hash160;
 			AddressStr = address.AddressStr;
 			TotalReceived = address.TotalReceived;

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Info.Blockchain.Api.Client;
-using Info.Blockchain.Api.Data;
+using Info.Blockchain.API.Client;
+using Info.Blockchain.API.Data;
 
-namespace Info.Blockchain.Api.Tests
+namespace Info.Blockchain.API.Tests
 {
 	public class FakeHttpClient : IHttpClient
 	{

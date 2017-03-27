@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Info.Blockchain.Api.Json
+namespace Info.Blockchain.API.Json
 {
 	internal class UnixDateTimeJsonConverter : DateTimeConverterBase
 	{
@@ -37,7 +37,7 @@ namespace Info.Blockchain.Api.Json
 			}
 			if (value is double)
 			{
-				return this.convertFromMillis 
+				return this.convertFromMillis
 					? UnixDateTimeJsonConverter.UnixMillisToDateTime((double) value)
 					: UnixDateTimeJsonConverter.UnixSecondsToDateTime((double) value);
 			}

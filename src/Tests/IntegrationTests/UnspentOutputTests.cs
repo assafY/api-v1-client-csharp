@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
-using Info.Blockchain.Api.Client;
-using Info.Blockchain.Api.Data;
+using Info.Blockchain.API.Client;
+using Info.Blockchain.API.Data;
 using Xunit;
 
 namespace Info.Blockchain.API.Tests.IntegrationTests
@@ -13,7 +13,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 			using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 			{
 				const string address = "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa";
-				ReadOnlyCollection<UnspentOutput> outputs = await apiHelper._blockExplorer.GetUnspentOutputsAsync(address);
+				ReadOnlyCollection<UnspentOutput> outputs = await apiHelper.blockExplorer.GetUnspentOutputsAsync(address);
 				Assert.NotNull(outputs);
 			}
 		}

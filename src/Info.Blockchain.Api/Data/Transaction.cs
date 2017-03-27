@@ -1,12 +1,12 @@
 using System;
 using System.Collections.ObjectModel;
-using Info.Blockchain.Api.Json;
+using Info.Blockchain.API.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 
-namespace Info.Blockchain.Api.Data
+namespace Info.Blockchain.API.Data
 {
 	/// <summary>
 	/// Represents a transaction.

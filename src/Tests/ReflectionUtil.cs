@@ -3,7 +3,7 @@ using System.IO;
 using System.Reflection;
 using Newtonsoft.Json;
 
-namespace Info.Blockchain.Api.Tests
+namespace Info.Blockchain.API.Tests
 {
 	public static class ReflectionUtil
 	{
@@ -11,7 +11,7 @@ namespace Info.Blockchain.Api.Tests
 		{
 			Assembly assembly = typeof(ReflectionUtil).GetTypeInfo().Assembly;
 
-			string resourceName = $"Info.Blockchain.Api.Tests.JsonObjects.{fileName}.json";
+			string resourceName = $"Info.Blockchain.API.Tests.JsonObjects.{fileName}.json";
 
 			using (Stream stream = assembly.GetManifestResourceStream(resourceName))
 			{

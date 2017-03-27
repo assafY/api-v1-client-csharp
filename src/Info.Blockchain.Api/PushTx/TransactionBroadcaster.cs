@@ -1,8 +1,8 @@
 using System;
 using System.Threading.Tasks;
-using Info.Blockchain.Api.Client;
+using Info.Blockchain.API.Client;
 
-namespace Info.Blockchain.Api.PushTx
+namespace Info.Blockchain.API.PushTx
 {
     /// <summary>
     /// This class reflects the functionality provided at https://blockchain.info/pushtx.

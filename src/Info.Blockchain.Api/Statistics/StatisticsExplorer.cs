@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
-using Info.Blockchain.Api.Client;
-using Info.Blockchain.Api.Data;
+using Info.Blockchain.API.Client;
+using Info.Blockchain.API.Data;
 
-namespace Info.Blockchain.Api.Statistics
+namespace Info.Blockchain.API.Statistics
 {
 	/// <summary>
 	/// This class allows users to get the bitcoin network statistics.

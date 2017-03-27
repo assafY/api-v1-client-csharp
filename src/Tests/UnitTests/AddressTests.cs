@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Info.Blockchain.Api.Client;
-using Info.Blockchain.Api.Tests.UnitTests;
+using Info.Blockchain.API.Client;
+using Info.Blockchain.API.Tests.UnitTests;
 using Xunit;
 
 namespace Info.Blockchain.API.Tests.UnitTests
@@ -18,7 +18,7 @@ namespace Info.Blockchain.API.Tests.UnitTests
 			{
 				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
-					await apiHelper._blockExplorer.GetAddressAsync("", null);
+					await apiHelper.blockExplorer.GetAddressAsync("", null);
 				}
 			});
 		}
@@ -30,7 +30,7 @@ namespace Info.Blockchain.API.Tests.UnitTests
 			{
 				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
-					await apiHelper._blockExplorer.GetAddressAsync("test", -1);
+					await apiHelper.blockExplorer.GetAddressAsync("test", -1);
 				}
 			});
 		}

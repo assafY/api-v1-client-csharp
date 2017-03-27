@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Info.Blockchain.Api.Json;
+using Info.Blockchain.API.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Info.Blockchain.Api.Data
+namespace Info.Blockchain.API.Data
 {
 	/// <summary>
 	/// This class is a full representation of a block. For simpler representations, see SimpleBlock and LatestBlock.
@@ -93,7 +93,7 @@ namespace Info.Blockchain.Api.Data
 		/// <summary>
 		/// Transactions in the block
 		/// </summary>!
-		[JsonProperty("tx", Required = Required.Always)] 
+		[JsonProperty("tx", Required = Required.Always)]
 		public ReadOnlyCollection<Transaction> Transactions { get; private set; }
 
 

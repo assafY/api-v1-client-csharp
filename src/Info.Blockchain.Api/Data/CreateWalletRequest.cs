@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Info.Blockchain.Api.Data
+namespace Info.Blockchain.API.Data
 {
     public class CreateWalletRequest
 	{

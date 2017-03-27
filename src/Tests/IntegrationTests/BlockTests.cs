@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Info.Blockchain.Api.Client;
-using Info.Blockchain.Api.Data;
-using Info.Blockchain.Api.Tests;
+using Info.Blockchain.API.Client;
+using Info.Blockchain.API.Data;
 using KellermanSoftware.CompareNetObjects;
 using Xunit;
 
@@ -22,7 +21,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 		{
 			using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 			{
-				LatestBlock latestBlock = await apiHelper._blockExplorer.GetLatestBlockAsync();
+				LatestBlock latestBlock = await apiHelper.blockExplorer.GetLatestBlockAsync();
 				Assert.NotNull(latestBlock);
 			}
 		}
@@ -35,7 +34,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 			{
 				const int height = 100000;
 				IEnumerable<Block> knownBlocks = ReflectionUtil.DeserializeFile("blocks_height_" + height, Block.DeserializeMultiple);
-				IEnumerable<Block> receivedBlocks = await apiHelper._blockExplorer.GetBlocksAtHeightAsync(height);
+				IEnumerable<Block> receivedBlocks = await apiHelper.blockExplorer.GetBlocksAtHeightAsync(height);
 
 				ComparisonResult comparisonResult = new CompareLogic().Compare(knownBlocks, receivedBlocks);
 
@@ -51,7 +50,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 			{
 				const long unixMillis = 1293623863000;
 				ReadOnlyCollection<SimpleBlock> knownBlocks = ReflectionUtil.DeserializeFile("blocks_timestamp_" + 1293623863000, SimpleBlock.DeserializeMultiple);
-				ReadOnlyCollection<SimpleBlock> receivedBlocks = await apiHelper._blockExplorer.GetBlocksAsync(unixMillis);
+				ReadOnlyCollection<SimpleBlock> receivedBlocks = await apiHelper.blockExplorer.GetBlocksAsync(unixMillis);
 
 				ComparisonResult comparisonResult = new CompareLogic().Compare(knownBlocks, receivedBlocks);
 				bool areEqual = comparisonResult.AreEqual;
@@ -67,7 +66,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 				const long unixMillis = 1293623863000;
 				DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(unixMillis);
 				ReadOnlyCollection<SimpleBlock> knownBlocks = ReflectionUtil.DeserializeFile("blocks_timestamp_" + 1293623863000, SimpleBlock.DeserializeMultiple);
-				ReadOnlyCollection<SimpleBlock> receivedBlocks = await apiHelper._blockExplorer.GetBlocksAsync(dateTime);
+				ReadOnlyCollection<SimpleBlock> receivedBlocks = await apiHelper.blockExplorer.GetBlocksAsync(dateTime);
 
 				ComparisonResult comparisonResult = new CompareLogic().Compare(knownBlocks, receivedBlocks);
 				bool areEqual = comparisonResult.AreEqual;
@@ -81,7 +80,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 			using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 			{
 				const string poolName = "AntPool";
-				ReadOnlyCollection<SimpleBlock> receivedBlocks = await apiHelper._blockExplorer.GetBlocksAsync(poolName);
+				ReadOnlyCollection<SimpleBlock> receivedBlocks = await apiHelper.blockExplorer.GetBlocksAsync(poolName);
 
 				Assert.NotNull(receivedBlocks);
 			}

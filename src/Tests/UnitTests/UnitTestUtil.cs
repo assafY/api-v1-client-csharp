@@ -1,6 +1,6 @@
-﻿using Info.Blockchain.Api.Client;
+﻿using Info.Blockchain.API.Client;
 
-namespace Info.Blockchain.Api.Tests.UnitTests
+namespace Info.Blockchain.API.Tests.UnitTests
 {
 	internal static class UnitTestUtil
 	{

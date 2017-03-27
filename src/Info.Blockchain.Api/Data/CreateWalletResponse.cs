@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Info.Blockchain.Api.Data
+namespace Info.Blockchain.API.Data
 {
     public class CreateWalletResponse
 	{
@@ -18,7 +18,7 @@ namespace Info.Blockchain.Api.Data
 		/// </summary>
 		[JsonProperty("address", Required = Required.Always)]
 		public string Address { get; private set; }
-		
+
 		/// <summary>
 		/// Optional label
 		/// </summary>

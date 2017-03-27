@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Info.Blockchain.Api.Client;
-using Info.Blockchain.Api.Data;
+using Info.Blockchain.API.Client;
+using Info.Blockchain.API.Data;
 
-namespace Info.Blockchain.Api.ExchangeRates
+namespace Info.Blockchain.API.ExchangeRates
 {
 	/// <summary>
 	/// This class reflects the functionality documented at https://blockchain.info/api/exchange_rates_api.

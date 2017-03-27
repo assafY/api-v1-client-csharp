@@ -1,13 +1,13 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Info.Blockchain.Api.Json
+namespace Info.Blockchain.API.Json
 {
 	internal class TrueTrumpsAllJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType)
 		{
-			return objectType == typeof(bool); 
+			return objectType == typeof(bool);
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

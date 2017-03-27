@@ -1,13 +1,13 @@
-using Info.Blockchain.Api.Data;
+using Info.Blockchain.API.Data;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Info.Blockchain.Api.Client;
-using Info.Blockchain.Api.Json;
+using Info.Blockchain.API.Client;
+using Info.Blockchain.API.Json;
 
-namespace Info.Blockchain.Api.BlockExplorer
+namespace Info.Blockchain.API.BlockExplorer
 {
 	/// <summary>
 	/// The BlockExplorer class reflects the functionality documented at

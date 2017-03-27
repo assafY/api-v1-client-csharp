@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Info.Blockchain.Api.Data;
+using Info.Blockchain.API.Data;
 
-namespace Info.Blockchain.Api.Client
+namespace Info.Blockchain.API.Client
 {
 	public class BlockchainHttpClient : IHttpClient
 	{
