@@ -10,8 +10,8 @@ using Info.Blockchain.Api.Json;
 namespace Info.Blockchain.Api.BlockExplorer
 {
 	/// <summary>
-	/// The BlockExplorer class reflects the functionality documented at 
-	/// https://blockchain.info/api/blockchain_api. It can be used to query the block chain, 
+	/// The BlockExplorer class reflects the functionality documented at
+	/// https://blockchain.info/api/blockchain_api. It can be used to query the block chain,
 	/// fetch block, transaction and address data, get unspent outputs for an address etc.
 	/// </summary>
 	public class BlockExplorer
@@ -180,7 +180,7 @@ namespace Info.Blockchain.Api.BlockExplorer
 		}
 
 		/// <summary>
-		/// Gets a list of blocks at the specified height. Normally, only one block will be returned, 
+		/// Gets a list of blocks at the specified height. Normally, only one block will be returned,
 		/// but in case of a chain fork, multiple blocks may be present.
 		/// </summary>
 		/// <param name="height">Block height</param>
@@ -258,13 +258,13 @@ namespace Info.Blockchain.Api.BlockExplorer
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
 		public async Task<ReadOnlyCollection<SimpleBlock>> GetBlocksAsync()
 		{
-			return await GetBlocksAsync("");
+			return await GetBlocksAsync();
 		}
 
 		/// <summary>
 		/// Gets a list of blocks mined on a specific day.
 		/// </summary>
-		/// <param name="dateTime">DateTime that falls 
+		/// <param name="dateTime">DateTime that falls
 		/// between 00:00 UTC and 23:59 UTC of the desired day.</param>
 		/// <returns>A list of SimpleBlock objects</returns>
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
@@ -272,7 +272,7 @@ namespace Info.Blockchain.Api.BlockExplorer
 		{
 			DateTimeOffset utcDate = DateTime.SpecifyKind(dateTime, DateTimeKind.Utc);
 			var unixMillisInt32 = (long)(utcDate.ToUnixTimeMilliseconds());
-			
+
 			if (unixMillisInt32 < UnixDateTimeJsonConverter.GenesisBlockUnixMillis)
 			{
 				throw new ArgumentOutOfRangeException(nameof(dateTime), "Date must be greater than or equal to the genesis block creation date (2009-01-03T18:15:05+00:00)");
@@ -301,13 +301,14 @@ namespace Info.Blockchain.Api.BlockExplorer
 		}
 
 		/// <summary>
-		/// Gets a list of recent blocks by a specific mining pool.
+		/// Gets a list of recent blocks by a specific mining pool or up to a specified timestamp.
+        /// If neither is provided returns all blocks mined since midnight.
 		/// </summary>
-		/// <param name="poolNameOrTimestamp">Name of the mining pool or Unix timestamp in milliseconds that falls 
+		/// <param name="poolNameOrTimestamp">Name of the mining pool or Unix timestamp in milliseconds that falls
 		/// between 00:00 UTC and 23:59 UTC of the desired day.</param>
 		/// <returns>A list of SimpleBlock objects</returns>
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
-		public async Task<ReadOnlyCollection<SimpleBlock>> GetBlocksAsync(string poolNameOrTimestamp)
+		public async Task<ReadOnlyCollection<SimpleBlock>> GetBlocksAsync(string poolNameOrTimestamp = "")
 		{
 			QueryString queryString = new QueryString();
 			queryString.Add("format", "json");
