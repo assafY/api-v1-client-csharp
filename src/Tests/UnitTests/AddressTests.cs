@@ -16,7 +16,7 @@ namespace Info.Blockchain.API.Tests.UnitTests
 		{
 			await Assert.ThrowsAsync<ArgumentNullException>(async () =>
 			{
-				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
+				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
 					await apiHelper._blockExplorer.GetAddressAsync("", null);
 				}
@@ -28,7 +28,7 @@ namespace Info.Blockchain.API.Tests.UnitTests
 		{
 			await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
 			{
-				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
+				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
 					await apiHelper._blockExplorer.GetAddressAsync("test", -1);
 				}

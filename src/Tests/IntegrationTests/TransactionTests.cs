@@ -12,7 +12,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 		[Fact(Skip = "Test freezes because of comparison tool")]
 		public async void GetTransaction_ByHash_Valid()
 		{
-			using (ApiHelper apiHelper = new ApiHelper())
+			using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 			{
 				Transaction knownTransaction = ReflectionUtil.DeserializeFile<Transaction>("single_transaction");
 				Transaction receivedTransaction = await apiHelper._blockExplorer.GetTransactionAsync(knownTransaction.Hash);
@@ -26,7 +26,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 		[Fact(Skip = "Test freezes because of comparison tool")]
 		public async void GetTransaction_ByIndex_Valid()
 		{
-			using (ApiHelper apiHelper = new ApiHelper())
+			using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 			{
 				Transaction knownTransaction = ReflectionUtil.DeserializeFile<Transaction>("single_transaction");
 				Transaction receivedTransaction = await apiHelper._blockExplorer.GetTransactionByIndexAsync(knownTransaction.Index);
@@ -40,10 +40,10 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 		[Fact]
 		public async void GetUnconfirmedTransaction_Valid()
 		{
-			using (ApiHelper apiHelper = new ApiHelper())
+			using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 			{
 				ReadOnlyCollection<Transaction> unconfirmedTransactions = await apiHelper._blockExplorer.GetUnconfirmedTransactionsAsync();
-				
+
 				Assert.NotNull(unconfirmedTransactions);
 			}
 		}

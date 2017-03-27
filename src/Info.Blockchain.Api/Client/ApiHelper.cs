@@ -6,7 +6,7 @@ using Info.Blockchain.Api.Wallet;
 
 namespace Info.Blockchain.Api.Client
 {
-    public class ApiHelper : IDisposable
+    public class BlockchainApiHelper : IDisposable
     {
         private readonly IHttpClient _baseHttpClient;
         private readonly IHttpClient _serviceHttpClient;
@@ -16,7 +16,7 @@ namespace Info.Blockchain.Api.Client
         public readonly ExchangeRateExplorer _exchangeRateExplorer;
         public readonly StatisticsExplorer _statisticsExplorer;
 
-        public ApiHelper(string apiCode = null, IHttpClient baseHttpClient = null, string serviceUrl = null, IHttpClient serviceHttpClient = null)
+        public BlockchainApiHelper(string apiCode = null, IHttpClient baseHttpClient = null, string serviceUrl = null, IHttpClient serviceHttpClient = null)
         {
             if (baseHttpClient == null)
             {

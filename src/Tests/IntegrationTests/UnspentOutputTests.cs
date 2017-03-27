@@ -10,7 +10,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 		[Fact]
 		public async void GetUnspent_ByAdress_Valid()
 		{
-			using (ApiHelper apiHelper = new ApiHelper())
+			using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 			{
 				const string address = "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa";
 				ReadOnlyCollection<UnspentOutput> outputs = await apiHelper._blockExplorer.GetUnspentOutputsAsync(address);

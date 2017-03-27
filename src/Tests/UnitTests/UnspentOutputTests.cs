@@ -12,7 +12,7 @@ namespace Info.Blockchain.API.Tests.UnitTests
 		{
 			await Assert.ThrowsAsync<ArgumentNullException>(async () =>
 			{
-				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
+				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
 					await apiHelper._blockExplorer.GetUnspentOutputsAsync(null);
 				}

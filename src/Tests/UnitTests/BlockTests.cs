@@ -12,7 +12,7 @@ namespace Info.Blockchain.API.Tests.UnitTests
 		{
 			await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
 			{
-				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
+				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
 					await apiHelper._blockExplorer.GetBlockAsync(-1);
 				}
@@ -21,7 +21,7 @@ namespace Info.Blockchain.API.Tests.UnitTests
 
 			await Assert.ThrowsAsync<ArgumentNullException>(async () =>
 			{
-				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
+				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
 					await apiHelper._blockExplorer.GetBlockAsync(null);
 				}
@@ -33,7 +33,7 @@ namespace Info.Blockchain.API.Tests.UnitTests
 		{
 			await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
 			{
-				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
+				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
 					await apiHelper._blockExplorer.GetBlocksAsync(-1);
 				}
@@ -42,7 +42,7 @@ namespace Info.Blockchain.API.Tests.UnitTests
 
 			await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
 			{
-				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
+				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
 					await apiHelper._blockExplorer.GetBlocksAsync(1000);
 				}
@@ -50,7 +50,7 @@ namespace Info.Blockchain.API.Tests.UnitTests
 
 			await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
 			{
-				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
+				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
 					await apiHelper._blockExplorer.GetBlocksAsync(int.MaxValue);
 				}
@@ -59,15 +59,15 @@ namespace Info.Blockchain.API.Tests.UnitTests
 
 			await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
 			{
-				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
+				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
 					await apiHelper._blockExplorer.GetBlocksAsync(DateTime.MinValue);
-				}	
+				}
 			});
 
 			await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
 			{
-				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
+				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
 					await apiHelper._blockExplorer.GetBlocksAsync(DateTime.MaxValue);
 				}
@@ -79,7 +79,7 @@ namespace Info.Blockchain.API.Tests.UnitTests
 		{
 			await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
 			{
-				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
+				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
 					await apiHelper._blockExplorer.GetBlocksAtHeightAsync(-1);
 				}

@@ -10,7 +10,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 		[Fact]
 		public async void GetTicker_Valid()
 		{
-			using (ApiHelper apiHelper = new ApiHelper())
+			using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 			{
 				Dictionary<string, Currency> currencies = await apiHelper._exchangeRateExplorer.GetTickerAsync();
 				Assert.NotNull(currencies);
@@ -21,7 +21,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 		[Fact]
 		public async void ToBtc_FromUs_HasValue()
 		{
-			using (ApiHelper apiHelper = new ApiHelper())
+			using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 			{
 				double btcValue = await apiHelper._exchangeRateExplorer.ToBtcAsync("USD", 1000);
 				Assert.True(btcValue > 0);

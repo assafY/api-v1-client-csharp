@@ -9,7 +9,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 		[Fact]
 		public async void GetAddress_ByAddress_Valid()
 		{
-			using (ApiHelper apiHelper = new ApiHelper())
+			using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 			{
 				const string addressString = "13k5KUK2vswXRdjgjxgCorGoY2EFGMFTnu";
 				Address address = await apiHelper._blockExplorer.GetAddressAsync(addressString);
@@ -21,7 +21,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 		[Fact]
 		public async void GetAddress_ByHash_Valid()
 		{
-			using (ApiHelper apiHelper = new ApiHelper())
+			using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 			{
 				const string hash = "1e15be27e4763513af36364674eebdba5a047323";
 				Address address = await apiHelper._blockExplorer.GetAddressAsync(hash);
@@ -38,7 +38,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 		[InlineData(3)]
 		public async void GetAddress_LimitTransactions_Valid(int transactionCount)
 		{
-			using (ApiHelper apiHelper = new ApiHelper())
+			using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 			{
 				const string hash = "1e15be27e4763513af36364674eebdba5a047323";
 				Address address = await apiHelper._blockExplorer.GetAddressAsync(hash, transactionCount);

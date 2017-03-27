@@ -9,7 +9,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 		[Fact]
 		public async void GetStatistics_Valid()
 		{
-			using (ApiHelper apiHelper = new ApiHelper())
+			using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 			{
 				StatisticsResponse statisticsResponse = await apiHelper._statisticsExplorer.GetAsync();
 				Assert.NotNull(statisticsResponse);

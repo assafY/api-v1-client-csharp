@@ -12,7 +12,7 @@ namespace Info.Blockchain.API.Tests.UnitTests
 		{
 			await Assert.ThrowsAsync<ArgumentNullException>(async () =>
 			{
-				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
+				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
 					await apiHelper._exchangeRateExplorer.ToBtcAsync(null, 1);
 				}
@@ -24,7 +24,7 @@ namespace Info.Blockchain.API.Tests.UnitTests
 		{
 			await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
 			{
-				using (ApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
+				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
 					await apiHelper._exchangeRateExplorer.ToBtcAsync("USD", -1);
 				}

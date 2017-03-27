@@ -19,7 +19,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
         public async void SendPayment_SendBtc_NoFreeOutputs()
 		{
 			ServerApiException apiException = await Assert.ThrowsAsync<ServerApiException>(async () => {
-				using (ApiHelper apiHelper = new ApiHelper())
+				using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 				{
 					Wallet wallet = apiHelper.CreateWallet(WalletTests.WALLET_ID, WalletTests.WALLET_PASSWORD, WalletTests.WALLET_PASSWORD2);
 					await wallet.SendAsync(WalletTests.FIRST_ADDRESS, BitcoinValue.FromBtc(1));
@@ -33,7 +33,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
         public async void SendPayment_SendMultiBtc_NoFreeOutputs()
 		{
 			ServerApiException apiException = await Assert.ThrowsAsync<ServerApiException>(async () => {
-				using (ApiHelper apiHelper = new ApiHelper())
+				using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 				{
 					Wallet wallet = apiHelper.CreateWallet(WalletTests.WALLET_ID, WalletTests.WALLET_PASSWORD, WalletTests.WALLET_PASSWORD2);
 					Dictionary<string, BitcoinValue> recipients = new Dictionary<string, BitcoinValue>()
@@ -51,7 +51,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 		{
 			ServerApiException apiException = await Assert.ThrowsAsync<ServerApiException>(async () =>
 			{
-				using (ApiHelper apiHelper = new ApiHelper())
+				using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 				{
 					Wallet wallet = apiHelper.CreateWallet(WalletTests.WALLET_ID, WalletTests.WALLET_PASSWORD,
 						WalletTests.WALLET_PASSWORD2);
@@ -64,7 +64,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
         [Fact(Skip = "service-my-wallet-v3 not mocked")]
         public async void GetAddresses_Valid()
 		{
-			using (ApiHelper apiHelper = new ApiHelper())
+			using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 			{
 				Wallet wallet = apiHelper.CreateWallet(WalletTests.WALLET_ID, WalletTests.WALLET_PASSWORD, WalletTests.WALLET_PASSWORD2);
 				List<WalletAddress> addresses = await wallet.ListAddressesAsync();
@@ -78,7 +78,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
         public async void Unarchive_BadAddress_ServerApiException()
 		{
 			ServerApiException apiException = await Assert.ThrowsAsync<ServerApiException>(async () => {
-				using (ApiHelper apiHelper = new ApiHelper())
+				using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 				{
 					Wallet walletHelper = apiHelper.CreateWallet(WalletTests.WALLET_ID, WalletTests.WALLET_PASSWORD, WalletTests.WALLET_PASSWORD2);
 					await walletHelper.UnarchiveAddress("BadAddress");
@@ -90,7 +90,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
         [Fact(Skip = "service-my-wallet-v3 not mocked")]
         public async void NewAddress_ArchiveThenConsolidate_Valid()
 		{
-			using (ApiHelper apiHelper = new ApiHelper())
+			using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 			{
 				Wallet wallet = apiHelper.CreateWallet(WalletTests.WALLET_ID, WalletTests.WALLET_PASSWORD, WalletTests.WALLET_PASSWORD2);
 				WalletAddress address = await wallet.NewAddress("Test");
@@ -110,7 +110,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 		{
 			await Assert.ThrowsAsync<ArgumentNullException>(async () =>
 			{
-				using (ApiHelper apiHelper = new ApiHelper())
+				using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 				{
 					await apiHelper._walletCreator.Create("badpassword");
 				}

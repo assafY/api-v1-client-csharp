@@ -4,13 +4,13 @@ using Xunit;
 
 namespace Info.Blockchain.API.Tests.UnitTests
 {
-	public class ApiHelperTests
+	public class BlockchainApiHelperTests
 	{
 		[Fact]
 		public void CreateHelper_Valid()
 		{
 			const string apiCode = "5";
-			using (ApiHelper apiHelper = new ApiHelper(apiCode, new FakeHttpClient()))
+			using (BlockchainApiHelper apiHelper = new BlockchainApiHelper(apiCode, new FakeHttpClient()))
 			{
 				Assert.NotNull(apiHelper);
 				Assert.NotNull(apiHelper._statisticsExplorer);
@@ -25,7 +25,7 @@ namespace Info.Blockchain.API.Tests.UnitTests
         public void CreateHelperWithService_Valid()
         {
             const string apiCode = "5";
-            using (ApiHelper apiHelper = new ApiHelper(apiCode, new FakeHttpClient(), "http://localhost:3000"))
+            using (BlockchainApiHelper apiHelper = new BlockchainApiHelper(apiCode, new FakeHttpClient(), "http://localhost:3000"))
             {
                 Assert.NotNull(apiHelper);
                 Assert.NotNull(apiHelper._statisticsExplorer);
