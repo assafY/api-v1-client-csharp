@@ -218,8 +218,8 @@ namespace Info.Blockchain.Api.BlockExplorer
 			}
 			catch (Exception ex)
 			{
-				// the API isn't supposed to return an error code here. No free outputs is
-				// a legitimate situation. We are circumventing that by returning an empty list
+				// Currently the API throws an internal error if there are no free outputs to spend. No free outputs is
+				// a legitimate situation. Therefore for the time being we are circumventing this by returning an empty list
 				if (ex.Message.Contains("outputs to spend"))
 				{
 					return new ReadOnlyCollection<UnspentOutput>(new List<UnspentOutput>());
@@ -271,9 +271,9 @@ namespace Info.Blockchain.Api.BlockExplorer
 		public async Task<ReadOnlyCollection<SimpleBlock>> GetBlocksAsync(DateTime dateTime)
 		{
 			DateTimeOffset utcDate = DateTime.SpecifyKind(dateTime, DateTimeKind.Utc);
-			var unixMillisInt32 = (long)(utcDate.ToUnixTimeMilliseconds());
+			var unixMillis = (long)(utcDate.ToUnixTimeMilliseconds());
 
-			if (unixMillisInt32 < UnixDateTimeJsonConverter.GenesisBlockUnixMillis)
+			if (unixMillis < UnixDateTimeJsonConverter.GenesisBlockUnixMillis)
 			{
 				throw new ArgumentOutOfRangeException(nameof(dateTime), "Date must be greater than or equal to the genesis block creation date (2009-01-03T18:15:05+00:00)");
 			}
@@ -282,7 +282,7 @@ namespace Info.Blockchain.Api.BlockExplorer
 				throw new ArgumentOutOfRangeException(nameof(dateTime), "Date must be in the past");
 			}
 
-			return await GetBlocksAsync(unixMillisInt32);
+			return await GetBlocksAsync(unixMillis);
 		}
 		/// <summary>
 		/// Gets a list of blocks mined on a specific day.
