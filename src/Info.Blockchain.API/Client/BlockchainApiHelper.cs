@@ -12,7 +12,7 @@ namespace Info.Blockchain.API.Client
         private readonly IHttpClient serviceHttpClient;
         public readonly BlockExplorer.BlockExplorer blockExplorer;
         public readonly WalletCreator walletCreator;
-        public readonly TransactionBroadcaster transactionBroadcaster;
+        public readonly TransactionPusher transactionBroadcaster;
         public readonly ExchangeRateExplorer exchangeRateExplorer;
         public readonly StatisticsExplorer statisticsExplorer;
 
@@ -49,7 +49,7 @@ namespace Info.Blockchain.API.Client
             }
 
             this.blockExplorer = new BlockExplorer.BlockExplorer(baseHttpClient);
-            this.transactionBroadcaster = new TransactionBroadcaster(baseHttpClient);
+            this.transactionBroadcaster = new TransactionPusher(baseHttpClient);
             this.exchangeRateExplorer = new ExchangeRateExplorer(baseHttpClient);
             this.statisticsExplorer = new StatisticsExplorer(baseHttpClient);
 

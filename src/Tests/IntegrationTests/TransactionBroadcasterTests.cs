@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Info.Blockchain.API.Tests.IntegrationTests
 {
-	public class TransactionBroadcasterTests
+	public class TransactionPusherTests
 	{
 		[Fact]
 		public async void PushTransaction_BadTransaction_ServerError()

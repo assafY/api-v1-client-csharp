@@ -8,14 +8,14 @@ namespace Info.Blockchain.API.PushTx
     /// This class reflects the functionality provided at https://blockchain.info/pushtx.
     /// It allows users to broadcast hex encoded transactions to the bitcoin network.
     /// </summary>
-    public class TransactionBroadcaster
+    public class TransactionPusher
     {
         private readonly IHttpClient httpClient;
-        public TransactionBroadcaster()
+        public TransactionPusher()
         {
             httpClient = new BlockchainHttpClient();
         }
-        public TransactionBroadcaster(IHttpClient httpClient)
+        public TransactionPusher(IHttpClient httpClient)
         {
             this.httpClient = httpClient;
 }

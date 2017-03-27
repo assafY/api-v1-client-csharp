@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Info.Blockchain.API.Tests.UnitTests
 {
-    public class TransactionBroadcasterTests
+    public class TransactionPusherTests
 	{
 		[Fact]
 		public async void GetTransaction_BadIds_ArgumentExecption()
