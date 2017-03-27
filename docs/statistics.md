@@ -1,4 +1,4 @@
-## `Info.Blockchain.Api.Statistics` namespace
+## `Info.Blockchain.API.Statistics` namespace
 
 The `Statistics` namespace contains the `StatisticsExplorer` class that reflects the functionality documented at at https://blockchain.info/api/charts_api. It makes various network statistics available, such as the total number of blocks in existence, next difficulty retarget block, total BTC mined in the past 24 hours etc.
 
@@ -6,21 +6,21 @@ Example usage:
 
 ```csharp
 using System;
-using Info.Blockchain.Api.Client;
-using Info.Blockchain.Api.Statistics;
+using Info.Blockchain.API.Client;
+using Info.Blockchain.API.Statistics;
 
-namespace TestProj
+namespace TestApp
 {
     class Program
     {
-        private static StatisticsExplorer _explorer;
+        private static StatisticsExplorer explorer;
 
         static void Main(string[] args)
         {
             try
             {
-                _explorer = new StatisticsExplorer();
-                var stats = _explorer.GetAsync().Result;
+                explorer = new StatisticsExplorer();
+                var stats = explorer.GetAsync().Result;
 
                 Console.WriteLine("The current difficulty is {0}. The next retarget will happen in {1} hours",
                     stats.Difficulty,
