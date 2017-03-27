@@ -2,10 +2,6 @@
 
 An official C# (.NET Core) library for interacting with the Blockchain.info API.
 
-## Latest changes
-
-This library is a migration of the original .NET library to .NET Core.
-
 ## Getting started
 
 The library requires .NET Core 1.1. It is possible to use this library with the .NET Framework by editing
