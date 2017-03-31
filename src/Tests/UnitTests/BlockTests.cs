@@ -13,7 +13,7 @@ namespace Info.Blockchain.API.Tests.UnitTests
 			{
 				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
-					await apiHelper.blockExplorer.GetBlockAsync(-1);
+					await apiHelper.blockExplorer.GetBlockByIndexAsync(-1);
 				}
 			});
 
@@ -22,7 +22,7 @@ namespace Info.Blockchain.API.Tests.UnitTests
 			{
 				using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
 				{
-					await apiHelper.blockExplorer.GetBlockAsync(null);
+					await apiHelper.blockExplorer.GetBlockByHashAsync(null);
 				}
 			});
 		}
