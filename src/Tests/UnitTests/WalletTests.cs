@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Info.Blockchain.API.BlockExplorer;
+using Info.Blockchain.API.Models;
 using Info.Blockchain.API.Client;
-using Info.Blockchain.API.CreateWallet;
 using Xunit;
 
 namespace Info.Blockchain.API.Tests.UnitTests

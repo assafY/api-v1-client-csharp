@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Info.Blockchain.API.Client;
+using Info.Blockchain.API.Models;
 
 namespace Info.Blockchain.API.ExchangeRates
 {

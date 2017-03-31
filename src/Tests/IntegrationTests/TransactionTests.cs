@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using Info.Blockchain.API.BlockExplorer;
+using Info.Blockchain.API.Models;
 using Info.Blockchain.API.Client;
 using KellermanSoftware.CompareNetObjects;
 using Xunit;

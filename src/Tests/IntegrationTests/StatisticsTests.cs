@@ -1,5 +1,5 @@
 ﻿using Info.Blockchain.API.Client;
-using Info.Blockchain.API.Statistics;
+using Info.Blockchain.API.Models;
 using Xunit;
 
 namespace Info.Blockchain.API.Tests.IntegrationTests

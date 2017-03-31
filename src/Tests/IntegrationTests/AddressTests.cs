@@ -1,4 +1,4 @@
-﻿using Info.Blockchain.API.BlockExplorer;
+﻿using Info.Blockchain.API.Models;
 using Info.Blockchain.API.Client;
 using Xunit;
 

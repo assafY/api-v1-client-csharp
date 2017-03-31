@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Info.Blockchain.API.Client;
-using Info.Blockchain.API.Data;
-using Info.Blockchain.API.ExchangeRates;
+using Info.Blockchain.API.Models;
 using Xunit;
 
 namespace Info.Blockchain.API.Tests.IntegrationTests
