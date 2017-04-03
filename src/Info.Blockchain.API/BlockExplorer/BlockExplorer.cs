@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using Info.Blockchain.API.Client;
 using Info.Blockchain.API.Json;
@@ -71,42 +70,6 @@ namespace Info.Blockchain.API.BlockExplorer
 
 			return await httpClient.GetAsync<Transaction>("rawtx/" + hashOrIndex);
 		}
-
-        /*private async Task<List<Transaction>> GetTransactionsAsync(Address address, int? limit)
-		{
-			if (address == null)
-			{
-				throw new ArgumentNullException(nameof(address));
-			}
-
-			limit = limit ?? (int)address.TransactionCount;
-			IList<Task<Address>> tasks = new List<Task<Address>>();
-
-			int offset;
-			for (offset = MAX_TRANSACTIONS_PER_REQUEST; offset <= limit - MAX_TRANSACTIONS_PER_REQUEST; offset += MAX_TRANSACTIONS_PER_REQUEST)
-			{
-				Task<Address> task = this.GetAddressWithOffsetAsync(address.AddressStr, MAX_TRANSACTIONS_PER_REQUEST, offset);
-				tasks.Add(task);
-			}
-
-			if (offset < maxTransactionCount.Value)
-			{
-				int remainingTransactions = (int)maxTransactionCount.Value - offset;
-				Task<Address> task = this.GetAddressWithOffsetAsync(address.AddressStr, remainingTransactions, offset);
-				tasks.Add(task);
-			}
-
-			await Task.WhenAll(tasks.ToArray());
-
-			List<Transaction> transactions = address.Transactions.ToList();
-
-			foreach (Task<Address> task in tasks)
-			{
-				transactions.AddRange(task.Result.Transactions);
-			}
-
-			return transactions;
-		}*/
 
 		/// <summary>
 		/// Deprecated. Gets a single block based on a block index.
@@ -187,10 +150,8 @@ namespace Info.Blockchain.API.BlockExplorer
             return await GetAddressAsync(address, limit, offset);
         }
 
-		private async Task<Address> GetAddressAsync(string address, int limit = MAX_TRANSACTIONS_PER_REQUEST, int offset = 0)
+		private async Task<Address> GetAddressAsync(string address, int limit, int offset)
 		{
-            QueryString queryString = new QueryString();
-
 			if (string.IsNullOrWhiteSpace(address))
 			{
 				throw new ArgumentNullException(address);
@@ -204,14 +165,12 @@ namespace Info.Blockchain.API.BlockExplorer
                 throw new ArgumentOutOfRangeException(nameof(offset), "offset must be greater than 0");
             }
 
+            QueryString queryString = new QueryString();
             queryString.Add("limit", limit.ToString());
             queryString.Add("offset", offset.ToString());
 			queryString.Add("format", "json");
 
             return await httpClient.GetAsync<Address>("address/" + address, queryString);
-			// Address addressObj = await httpClient.GetAsync<Address>("address/" + address, queryString);
-			// List<Transaction> transactionList = await GetTransactionsAsync(addressObj, limit);
-			// return new Address(addressObj, transactionList);
 		}
 
 		/// <summary>

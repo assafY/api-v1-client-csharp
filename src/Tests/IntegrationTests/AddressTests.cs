@@ -14,7 +14,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 				const string addressString = "13k5KUK2vswXRdjgjxgCorGoY2EFGMFTnu";
 				Address address = await apiHelper.blockExplorer.GetBase58AddressAsync(addressString);
 				Assert.NotNull(address);
-				Assert.Equal(address.AddressStr, addressString);
+				Assert.Equal(address.Base58Check, addressString);
 			}
 		}
 

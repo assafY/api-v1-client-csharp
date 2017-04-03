@@ -14,30 +14,7 @@ namespace Info.Blockchain.API.Models
 
 		[JsonConstructor]
 		// ReSharper disable once UnusedMember.Local
-		private Address()
-		{
-		}
-
-		/// <summary>
-		/// Address object contructor to copy from another address and associate a list of transactions
-		/// </summary>
-		/// <param name="address">Address to copy all properties from except the transactions</param>
-		/// <param name="transactions">Transaction list to associate to the address object</param>
-		public Address(Address address, List<Transaction> transactions)
-		{
-			if (address == null)
-			{
-				throw new ArgumentNullException(nameof(address));
-			}
-
-			Hash160 = address.Hash160;
-			AddressStr = address.AddressStr;
-			TotalReceived = address.TotalReceived;
-			TotalSent = address.TotalSent;
-			FinalBalance = address.FinalBalance;
-			TransactionCount = address.TransactionCount;
-			Transactions = new ReadOnlyCollection<Transaction>(transactions);
-		}
+		private Address() {}
 
 		/// <summary>
 		/// Hash160 representation of the address
@@ -49,7 +26,7 @@ namespace Info.Blockchain.API.Models
 		/// Base58Check representation of the address
 		/// </summary>
 		[JsonProperty("address", Required = Required.Always)]
-		public string AddressStr { get; private set; }
+		public string Base58Check { get; private set; }
 
 		/// <summary>
 		/// Total amount received
