@@ -12,7 +12,7 @@ Task PushTransactionAsync(string transactionString)
 
    Broadcast a hex encoded transaction to the network
 
-Example usage:
+## Example usage:
 
 ```csharp
 using System;

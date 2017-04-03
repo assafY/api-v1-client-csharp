@@ -33,8 +33,7 @@ A description of the objects returned by the methods in this class
 * `Symbol`: *string*
 
 
-
-Example usage:
+## Example usage:
 
 ```csharp
 using System;

@@ -37,7 +37,7 @@ Get the network statistics.
 * `TotalBlocks`: *long*
 * `NextRetarget`: *long*
 
-Example usage:
+## Example usage:
 
 ```csharp
 using System;
