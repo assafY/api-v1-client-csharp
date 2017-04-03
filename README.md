@@ -4,7 +4,12 @@ An official C# (.NET Core) library for interacting with the Blockchain.info API.
 
 ## Latest changes
 
-This library is a migration of the original .NET library to .NET Core.
+This library is a migration of the original .NET library to .NET Core. Some models and namespaces have been modified. Most notably:
+
+* All models have been moved to `Info.Blockchain.API.Data`
+* The client, exception and helper classes under the root namespace have been moved to `Info.Blockchain.API.Client`
+* `CreateWallet.cs`, which previously contained the CreateWallet response and request models, was split into two separate models and moved to the `Data` namespace
+* The `Info.Blockchain.API.CreateWallet` namespace was removed, the `WalletCreator.cs` class moved to `Info.Blockchain.API.Wallet`
 
 ## Getting started
 
@@ -26,12 +31,18 @@ PM> Install-Package BlockchainAPI
 
 The library consists of the following namespaces:
 
+* `Info.Blockchain.API.Client` ([docs](docs/blockchainhttpclient.md))
 * `Info.Blockchain.API.Blockexplorer` ([docs](docs/blockexplorer.md)) ([api/blockchain_api][api1])
-* `Info.Blockchain.API.CreateWallet` ([docs](docs/createwallet.md)) ([api/blockchain/create_wallet][api2])
 * `Info.Blockchain.API.Exchangerates` ([docs](docs/exchangerates.md)) ([api/exchange\_rates\_api][api3])
 * `Info.Blockchain.API.PushTx` ([docs](docs/pushtx.md)) ([pushtx][api6])
 * `Info.Blockchain.API.Statistics` ([docs](docs/statistics.md)) ([api/charts_api][api4])
-* `Info.Blockchain.API.Wallet` ([docs](docs/wallet.md)) ([api/blockchain\_wallet\_api][api5])
+* `Info.Blockchain.API.Wallet` ([docs](docs/wallet.md)) ([api/blockchain\_wallet\_api][api5]) and ([api/blockchain/create_wallet][api2])
+
+The following namespacse contain helpers and models used by the above:
+
+* `Info.Blockchain.API.Client`
+* `Info.Blockchain.API.Data`
+* `Info.Blockchain.API.Json`
 
 In order to use Wallet and CreateWallet functionality, you must provide an URL to an instance of [service-my-wallet-v3](https://github.com/blockchain/service-my-wallet-v3) as first parameter to BlockchainApiHelper.
 If you don't intend to use these functionalities, this parameter can be null.

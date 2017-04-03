@@ -1,5 +1,5 @@
 using System;
-using Info.Blockchain.API.CreateWallet;
+using Info.Blockchain.API.Wallet;
 using Info.Blockchain.API.ExchangeRates;
 using Info.Blockchain.API.PushTx;
 using Info.Blockchain.API.Statistics;
