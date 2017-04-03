@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Info.Blockchain.API.Client;
 using Info.Blockchain.API.Models;
@@ -13,7 +14,7 @@ namespace Info.Blockchain.API.Statistics
 		private readonly IHttpClient httpClient;
 		public StatisticsExplorer()
 		{
-			httpClient = new BlockchainHttpClient();
+			httpClient = new BlockchainHttpClient(uri: "https://api.blockchain.info/");
 		}
 		internal StatisticsExplorer(IHttpClient httpClient)
 		{
@@ -27,10 +28,32 @@ namespace Info.Blockchain.API.Statistics
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
 		public async Task<StatisticsResponse> GetStatsAsync()
 		{
-			QueryString queryString = new QueryString();
-			queryString.Add("format", "json");
-
-			return await httpClient.GetAsync<StatisticsResponse>("stats", queryString);
+			return await httpClient.GetAsync<StatisticsResponse>("stats");
 		}
+
+        /// <summary>
+        /// Gets chart data for a specified chart
+        /// </summary>
+        /// <param name="chartType">Chart name</param>
+        /// <returns>Chart data?</returns> <summary>
+        /// <param name="timespan">Optional timespan to include</param>
+        /// <exception cref="ServerApiException">If the server returns an error</exception>
+        public async Task<dynamic> GetChartAsync(string chartType, string timespan = null)
+        {
+            var queryString = new QueryString();
+
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("No chart with this name"))
+                {
+                    throw new ArgumentOutOfRangeException(nameof(chartType), "This chart name does not exist");
+                }
+                throw;
+            }
+        }
 	}
 }

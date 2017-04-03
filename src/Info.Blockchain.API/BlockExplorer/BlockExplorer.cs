@@ -165,7 +165,7 @@ namespace Info.Blockchain.API.BlockExplorer
                 throw new ArgumentOutOfRangeException(nameof(offset), "offset must be greater than 0");
             }
 
-            QueryString queryString = new QueryString();
+            var queryString = new QueryString();
             queryString.Add("limit", limit.ToString());
             queryString.Add("offset", offset.ToString());
 			queryString.Add("format", "json");
@@ -186,7 +186,7 @@ namespace Info.Blockchain.API.BlockExplorer
 			{
 				throw new ArgumentOutOfRangeException(nameof(height), "Block height must be greater than or equal to zero");
 			}
-			QueryString queryString = new QueryString();
+			var queryString = new QueryString();
 			queryString.Add("format", "json");
 
 			return await httpClient.GetAsync("block-height/" + height, queryString, Block.DeserializeMultiple);
@@ -204,7 +204,7 @@ namespace Info.Blockchain.API.BlockExplorer
 			{
 				throw new ArgumentNullException(nameof(address));
 			}
-			QueryString queryString = new QueryString();
+			var queryString = new QueryString();
 			queryString.Add("active", address);
 			try
 			{
@@ -239,7 +239,7 @@ namespace Info.Blockchain.API.BlockExplorer
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
 		public async Task<ReadOnlyCollection<Transaction>> GetUnconfirmedTransactionsAsync()
 		{
-			QueryString queryString = new QueryString();
+			var queryString = new QueryString();
 			queryString.Add("format", "json");
 
 			return await httpClient.GetAsync("unconfirmed-transactions", queryString, Transaction.DeserializeMultiple);
@@ -306,7 +306,7 @@ namespace Info.Blockchain.API.BlockExplorer
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
 		private async Task<ReadOnlyCollection<SimpleBlock>> GetBlocksAsync(string poolNameOrTimestamp)
 		{
-			QueryString queryString = new QueryString();
+			var queryString = new QueryString();
 			queryString.Add("format", "json");
 
 			ReadOnlyCollection<SimpleBlock> simpleBlocks = await httpClient.GetAsync("blocks/" + poolNameOrTimestamp, queryString, SimpleBlock.DeserializeMultiple);
