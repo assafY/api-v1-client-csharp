@@ -10,13 +10,13 @@ The `BlockExplorer` namespace contains the `BlockExplorer` class that reflects t
 Task<Transaction> GetTransactionByIndexAsync(long index)
 ```
 
-Get a single transaction based on a transaction index. (Deprecated)
+   Get a single transaction based on a transaction index. (Deprecated)
 
 ```csharp
 Task<Transaction> GetTransactionByHashAsync(string hash)
 ```
 
-Get a single transaction based on a transaction hash.
+   Get a single transaction based on a transaction hash.
 
 ### GetBlock
 
@@ -24,13 +24,13 @@ Get a single transaction based on a transaction hash.
 Task<Block> GetBlockByIndexAsync(long index)
 ```
 
-Get a single block based on a block index. (Deprecated)
+   Get a single block based on a block index. (Deprecated)
 
 ```csharp
 Task<Block> GetBlockByHashAsync(string hash)
 ```
 
-Get a single block based on a block hash.
+   Get a single block based on a block hash.
 
 ### GetAddress
 
@@ -43,19 +43,19 @@ The implementations of these methods are currently interchangeable, but this is 
 Task<Address> GetBase58AddressAsync(string address)
 ```
 
-Get data for a single Base58Check address and its transactions.
+   Get data for a single Base58Check address and its transactions.
 
 ```csharp
 Task<Address> GetHash160AddressAsync(string address)
 ```
 
-Get data for a single Hash160 address and its transactions.
+   Get data for a single Hash160 address and its transactions.
 
 ```csharp
 Task<Address> GetXpubAddressAsync(string address)
 ```
 
-Get data for a single Xpub address and its transactions.
+   Get data for a single Xpub address and its transactions.
 
 ### GetBlocksAtHeight
 
@@ -63,7 +63,7 @@ Get data for a single Xpub address and its transactions.
 Task<ReadOnlyCollection<Block>> GetBlocksAtHeightAsync(long height)
 ```
 
-Get a list of blocks at a specified height.
+   Get a list of blocks at a specified height.
 
 ### GetUnspentOutputs
 
@@ -71,7 +71,7 @@ Get a list of blocks at a specified height.
 Task<ReadOnlyCollection<UnspentOutput>> GetUnspentOutputsAsync(string address)
 ```
 
-Get unspent outputs for a single Base58Check address.
+   Get unspent outputs for a single Base58Check address.
 
 ### GetLatestBlock
 
@@ -79,7 +79,7 @@ Get unspent outputs for a single Base58Check address.
 Task<LatestBlock> GetLatestBlockAsync()
 ```
 
-Get the latest block on the main chain.
+   Get the latest block on the main chain.
 
 ### GetUnconfirmedTransactions
 
@@ -87,7 +87,7 @@ Get the latest block on the main chain.
 Task<ReadOnlyCollection<Transaction>> GetUnconfirmedTransactionAsync()
 ```
 
-Get a list of currently unconfirmed transactions.
+   Get a list of currently unconfirmed transactions.
 
 ### GetBlocks
 
@@ -95,19 +95,19 @@ Get a list of currently unconfirmed transactions.
 Task<ReadOnlyCollection<SimpleBlock>> GetBlocksByDateTimeAsync(DateTime dateTime)
 ```
 
-Get a list of blocks mined on a specific day using a `DateTime` object.
+   Get a list of blocks mined on a specific day using a `DateTime` object.
 
 ```csharp
 Task<ReadOnlyCollection<SimpleBlock>> GetBlocksByTimestampAsync(long unixMillis)
 ```
 
-Get a list of blocks mined on a specific day using a unix timestamp.
+   Get a list of blocks mined on a specific day using a unix timestamp.
 
 ```csharp
 Task<ReadOnlyCollection<SimpleBlock>> GetBlocksByPoolNameAsync(string poolName = "")
 ```
 
-Get a list of blocks (max. 101) mined by a specific mining pool. `poolName` is an optional parameter - if it is not passed, the method returns a list of all blocks mined since midnight today.
+   Get a list of blocks (max. 101) mined by a specific mining pool. `poolName` is an optional parameter - if it is not passed, the method returns a list of all blocks mined since midnight today.
 
 ## Response Object Properties
 
