@@ -58,6 +58,7 @@ Wallet wallet = apiHelper.InitializeWallet(identifier, password, secondPassword)
 
 ## Methods
 
+
 ### Send
 
 ```csharp
@@ -154,7 +155,8 @@ Unarchive an address.
 * `TxHash`: *string*
 * `Notice`: *string*
 
-### Wallet Address Object
+
+### Wallet Address Object
 
 * `Balance`: *BitcoinValue*
 * `AddressStr`: *string*

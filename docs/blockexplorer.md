@@ -113,7 +113,7 @@ Task<ReadOnlyCollection<SimpleBlock>> GetBlocksByPoolNameAsync(string poolName =
 
 A description of the objects returned by the methods in this class.
 
-### Transaction Object
+### Transaction Object
 
 * `DoubleSpend`: *bool*
 * `BlockHeight`: *long*
