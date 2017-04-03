@@ -123,8 +123,8 @@ A description of the objects returned by the methods in this class.
 * `Index`: *long*
 * `Version`: *int*
 * `Size`: *long*
-* `Inputs`: *ReadOnlyCollection<Input>*
-* `Outputs`: *ReadOnlyCollection<Output>*
+* `Inputs`: *ReadOnlyCollection(Input)*
+* `Outputs`: *ReadOnlyCollection(Output)*
 
 ### Block Object
 
@@ -138,7 +138,7 @@ A description of the objects returned by the methods in this class.
 * `Index`: *long*
 * `ReceivedTime`: *DateTime*
 * `RelayedBy`: *string*
-* `Transactions`: *ReadOnlyCollection<Transaction>*
+* `Transactions`: *ReadOnlyCollection(Transaction)*
 
 ### Address Object
 
@@ -148,7 +148,7 @@ A description of the objects returned by the methods in this class.
 * `TotalSent`: *BitcoinValue*
 * `FinalBalance`: *BitcoinValue*
 * `TransactionCount`: *long*
-* `Transactions`: *ReadOnlyCollection<Transaction>*
+* `Transactions`: *ReadOnlyCollection(Transaction)*
 
 ### Unspent Output Object
 
@@ -169,7 +169,7 @@ A description of the objects returned by the methods in this class.
 ### Latest Block Object
 
 * `Index`: *long*
-* `TransactionIndexes`: *ReadOnlyCollection<long>*
+* `TransactionIndexes`: *ReadOnlyCollection(long)*
 
 ## Example usage:
 
