@@ -1,6 +1,38 @@
-## `Info.Blockchain.API.ExchangeRates` namespace
+# `Info.Blockchain.API.ExchangeRates` namespace
 
 The `ExchangeRates` namespace contains the `ExchangeRateExplorer` class that reflects the functionality documented at https://blockchain.info/api/exchange_rates_api. It allows users to get price tickers for most major currencies and directly convert fiat amounts to BTC.
+
+## Methods
+
+### GetTicker
+
+```csharp
+Task<Dictionary<string, Currency>> GetTickerAsync()
+```
+
+   Get a dictionary of currencies and their Bitcoin exchange rate from https://blockchain.info/ticker.
+
+### ToBtc
+
+```csharp
+Task<double> ToBtcAsync(string currency, double value)
+```
+
+   Convert a value in a provided currency to Bitcoin.
+
+## Response Object Properties
+
+A description of the objects returned by the methods in this class
+
+### Currency Object
+
+* `Buy`: *double*
+* `Sell`: *double*
+* `Last`: *double*
+* `Price15M`: *double*
+* `Symbol`: *string*
+
+
 
 Example usage:
 

@@ -11,7 +11,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 		{
 			using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 			{
-				StatisticsResponse statisticsResponse = await apiHelper.statisticsExplorer.GetAsync();
+				StatisticsResponse statisticsResponse = await apiHelper.statisticsExplorer.GetStatsAsync();
 				Assert.NotNull(statisticsResponse);
 			}
 		}

@@ -25,7 +25,7 @@ namespace Info.Blockchain.API.Statistics
 		/// </summary>
 		/// <returns>An instance of the StatisticsResponse class</returns>
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
-		public async Task<StatisticsResponse> GetAsync()
+		public async Task<StatisticsResponse> GetStatsAsync()
 		{
 			QueryString queryString = new QueryString();
 			queryString.Add("format", "json");

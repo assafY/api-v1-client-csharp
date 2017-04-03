@@ -1,6 +1,41 @@
-## `Info.Blockchain.API.Statistics` namespace
+# `Info.Blockchain.API.Statistics` namespace
 
 The `Statistics` namespace contains the `StatisticsExplorer` class that reflects the functionality documented at at https://blockchain.info/api/charts_api. It makes various network statistics available, such as the total number of blocks in existence, next difficulty retarget block, total BTC mined in the past 24 hours etc.
+
+## Methods
+
+### GetStats
+
+```csharp
+Task<StatisticsResponse> GetStatsAsync()
+```
+
+Get the network statistics.
+
+## Response Object Properties
+
+### Statistics Response Object
+
+* `TradeVolumeBtc`: *double*
+* `TradeVolumeUsd`: *double*
+* `MinersRevenueBtc`: *double*
+* `MinersRevenueUsd`: *double*
+* `MarketPriceUsd`: *double*
+* `EstimatedTransactionVolumeUsd`: *double*
+* `TotalFeesBtc`: *BitcoinValue*
+* `TotalBtcSent`: *BitcoinValue*
+* `EstimatedBtcSent`; *BitcoinValue*
+* `BtcMined`: *BitcoinValue*
+* `Difficulty`: *double*
+* `MinutesBetweenBlocks`: *double*
+* `NumberOfTransactions`: *long*
+* `HashRate`: *double*
+* `Timestamp`: *long*
+* `MinedBlocks`: *long*
+* `BlocksSize`: *long*
+* `TotalBtc`: *BitcoinValue*
+* `TotalBlocks`: *long*
+* `NextRetarget`: *long*
 
 Example usage:
 
