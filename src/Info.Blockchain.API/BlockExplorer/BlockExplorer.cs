@@ -156,7 +156,7 @@ namespace Info.Blockchain.API.BlockExplorer
         /// <param name="offset">Number of transactions to skip</param>
 		/// <returns>An instance of the Address class</returns>
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
-        public async Task<Address> GetBase58AddressAsync(string address, int? limit, int? offset)
+        public async Task<Address> GetBase58AddressAsync(string address, int limit = MAX_TRANSACTIONS_PER_REQUEST, int offset = 0)
         {
             return await GetAddressAsync(address, limit, offset);
         }
@@ -169,7 +169,7 @@ namespace Info.Blockchain.API.BlockExplorer
         /// <param name="offset">Number of transactions to skip</param>
 		/// <returns>An instance of the Address class</returns>
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
-        public async Task<Address> GetHash160AddressAsync(string address, int? limit, int? offset)
+        public async Task<Address> GetHash160AddressAsync(string address, int limit = MAX_TRANSACTIONS_PER_REQUEST, int offset = 0)
         {
             return await GetAddressAsync(address, limit, offset);
         }
@@ -182,12 +182,12 @@ namespace Info.Blockchain.API.BlockExplorer
         /// <param name="offset">Number of transactions to skip</param>
 		/// <returns>An instance of the Address class</returns>
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
-        public async Task<Address> GetXpubAddressAsync(string address, int? limit, int? offset)
+        public async Task<Address> GetXpubAddressAsync(string address, int limit = MAX_TRANSACTIONS_PER_REQUEST, int offset = 0)
         {
             return await GetAddressAsync(address, limit, offset);
         }
 
-		private async Task<Address> GetAddressAsync(string address, int? limit, int? offset)
+		private async Task<Address> GetAddressAsync(string address, int limit = MAX_TRANSACTIONS_PER_REQUEST, int offset = 0)
 		{
             QueryString queryString = new QueryString();
 
@@ -195,23 +195,17 @@ namespace Info.Blockchain.API.BlockExplorer
 			{
 				throw new ArgumentNullException(address);
 			}
-			if (limit != null)
-			{
-                if (limit < 1 || limit > MAX_TRANSACTIONS_PER_REQUEST)
-                {
-    				throw new ArgumentOutOfRangeException(nameof(limit), "transaction limit must be greater than 0 and smaller than " + MAX_TRANSACTIONS_PER_REQUEST);
-                }
-                queryString.Add("limit", limit.ToString());
-			}
-            if (offset != null)
+            if (limit < 1 || limit > MAX_TRANSACTIONS_PER_REQUEST)
             {
-                if (offset < 0)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(offset), "offset must be greater than 0");
-                }
-                queryString.Add("offset", offset.ToString());
+                throw new ArgumentOutOfRangeException(nameof(limit), "transaction limit must be greater than 0 and smaller than " + MAX_TRANSACTIONS_PER_REQUEST);
+            }
+            if (offset < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(offset), "offset must be greater than 0");
             }
 
+            queryString.Add("limit", limit.ToString());
+            queryString.Add("offset", offset.ToString());
 			queryString.Add("format", "json");
 
             return await httpClient.GetAsync<Address>("address/" + address, queryString);

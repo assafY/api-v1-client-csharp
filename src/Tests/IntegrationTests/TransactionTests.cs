@@ -14,7 +14,7 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 			using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
 			{
 				Transaction knownTransaction = ReflectionUtil.DeserializeFile<Transaction>("single_transaction");
-				Transaction receivedTransaction = await apiHelper.blockExplorer.GetTransactionAsync(knownTransaction.Hash);
+				Transaction receivedTransaction = await apiHelper.blockExplorer.GetTransactionByHashAsync(knownTransaction.Hash);
 
 				CompareLogic compareLogic = new CompareLogic();
 				ComparisonResult comparisonResult = compareLogic.Compare(knownTransaction, receivedTransaction);
