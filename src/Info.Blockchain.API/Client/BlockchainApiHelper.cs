@@ -71,7 +71,7 @@ namespace Info.Blockchain.API.Client
         /// <param name="identifier">Wallet identifier (GUID)</param>
         /// <param name="password">Decryption password</param>
         /// <param name="secondPassword">Second password</param>
-        public Wallet.Wallet CreateWallet(string identifier, string password, string secondPassword = null)
+        public Wallet.Wallet InitializeWallet(string identifier, string password, string secondPassword = null)
         {
             if (serviceHttpClient == null)
             {

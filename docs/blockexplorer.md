@@ -171,6 +171,10 @@ A description of the objects returned by the methods in this class.
 * `Index`: *long*
 * `TransactionIndexes`: *ReadOnlyCollection(long)*
 
+### Bitcoin Value Object
+
+([docs](bitcoinvalue.md))
+
 ## Example usage:
 
 ```csharp
