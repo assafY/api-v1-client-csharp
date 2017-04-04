@@ -6,6 +6,9 @@ An official C# (.NET Core) library for interacting with the Blockchain.info API.
 
 This library is a migration of the original .NET library to .NET Core. Some models and namespaces have been modified. Most notably:
 
+* Receive Payments v2 API functionality has been introduced
+* Additional chart functionality has been added to the `StatisticsExplorer` class
+* All documentation has been brought up to date
 * All models have been moved to `Info.Blockchain.API.Data`
 * The client, exception and helper classes under the root namespace have been moved to `Info.Blockchain.API.Client`
 * `CreateWallet.cs`, which previously contained the CreateWallet response and request models, was split into two separate models and moved to the `Data` namespace
@@ -37,6 +40,7 @@ The library consists of the following namespaces:
 * `Info.Blockchain.API.PushTx` ([docs](docs/pushtx.md)) ([pushtx][api6])
 * `Info.Blockchain.API.Statistics` ([docs](docs/statistics.md)) ([api/charts_api][api4])
 * `Info.Blockchain.API.Wallet` ([docs](docs/wallet.md)) ([api/blockchain\_wallet\_api][api5]) and ([api/blockchain/create_wallet][api2])
+* `Info.Blockchain.API.Receive` ([docs](docs/receive.md)) ([api/receive\_payments\_v2\_api][api7])
 
 The following namespacse contain helpers and models used by the above:
 
@@ -44,7 +48,7 @@ The following namespacse contain helpers and models used by the above:
 * `Info.Blockchain.API.Data`
 * `Info.Blockchain.API.Json`
 
-In order to use Wallet and CreateWallet functionality, you must provide an URL to an instance of [service-my-wallet-v3](https://github.com/blockchain/service-my-wallet-v3) as first parameter to BlockchainApiHelper.
+In order to use the Wallet and CreateWallet functionality, you must provide a URL to an instance of [service-my-wallet-v3](https://github.com/blockchain/service-my-wallet-v3) as first parameter to BlockchainApiHelper.
 If you don't intend to use these functionalities, this parameter can be null.
 
 ## Error handling
@@ -56,12 +60,13 @@ All methods may throw exceptions caused by incorrectly passed parameters or othe
 It is possible to set arbitrary connection timeouts.
 
 ```csharp
-Info.Blockchain.API.HttpClient.TimeoutMs = 5000; // time out after 5 seconds
+// time out after 5 seconds
+Info.Blockchain.API.HttpClient.TimeoutMs = 5000;
 ```
 
 ## Request limits and API keys
 
-In order to prevent abuse some API methods require an API key approved with some basic contact information and a description of its intended use. Please request an API key [here](https://blockchain.info/api/api_create_code).
+In order to prevent abuse some API methods require an API key approved with some basic contact information and a description of its intended use. Please request an API key [here](https://blockchain.info/api/api_create_code). The API key can be passed to the constructor of the `BlockchainHttpClient` class, which can be passed to the constructor of all other classes in this library.
 
 The same API key can be used to bypass the request limiter.
 
@@ -71,3 +76,4 @@ The same API key can be used to bypass the request limiter.
 [api4]: https://blockchain.info/api/charts_api
 [api5]: https://blockchain.info/api/blockchain_wallet_api
 [api6]: https://blockchain.info/pushtx
+[api7]: https://blockchain.info/api/api_receive
