@@ -1,6 +1,6 @@
 # `Info.Blockchain.API.Statistics` namespace
 
-The `Statistics` namespace contains the `StatisticsExplorer` class that reflects the functionality documented at at https://blockchain.info/api/charts_api. It makes various network statistics available, such as the total number of blocks in existence, next difficulty retarget block, total BTC mined in the past 24 hours etc.
+The `Statistics` namespace contains the `StatisticsExplorer` class that reflects the functionality documented at https://blockchain.info/api/charts_api. It makes various network statistics available, such as the total number of blocks in existence, next difficulty retarget block, total BTC mined in the past 24 hours etc.
 
 ## Methods
 
