@@ -14,7 +14,7 @@ namespace Info.Blockchain.API.Statistics
 		private readonly IHttpClient httpClient;
 		public StatisticsExplorer()
 		{
-			httpClient = new BlockchainHttpClient(uri: "https://api.blockchain.info/");
+			httpClient = new BlockchainHttpClient("https://api.blockchain.info");
 		}
 		internal StatisticsExplorer(IHttpClient httpClient)
 		{
@@ -28,29 +28,39 @@ namespace Info.Blockchain.API.Statistics
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
 		public async Task<StatisticsResponse> GetStatsAsync()
 		{
-			return await httpClient.GetAsync<StatisticsResponse>("stats");
+            var queryString = new QueryString();
+            queryString.Add("format","json");
+			return await httpClient.GetAsync<StatisticsResponse>("stats", queryString);
 		}
 
         /// <summary>
         /// Gets chart data for a specified chart
         /// </summary>
         /// <param name="chartType">Chart name</param>
-        /// <returns>Chart data?</returns> <summary>
         /// <param name="timespan">Optional timespan to include</param>
+        /// <returns>Chart response object</returns>
         /// <exception cref="ServerApiException">If the server returns an error</exception>
-        public async Task<dynamic> GetChartAsync(string chartType, string timespan = null)
+        public async Task<ChartResponse> GetChartAsync(string chartType, string timespan = null)
         {
             var queryString = new QueryString();
-
+            queryString.Add("format","json");
+            if (timespan != null)
+            {
+                queryString.Add("timespan", timespan);
+            }
             try
             {
-
+                return await httpClient.GetAsync<ChartResponse>("charts/" + chartType, queryString);
             }
             catch (Exception ex)
             {
                 if (ex.Message.Contains("No chart with this name"))
                 {
                     throw new ArgumentOutOfRangeException(nameof(chartType), "This chart name does not exist");
+                }
+                if (ex.Message.Contains("Could not parse timestring"))
+                {
+                    throw new ArgumentOutOfRangeException(nameof(timespan), "Incorrect timespan format");
                 }
                 throw;
             }

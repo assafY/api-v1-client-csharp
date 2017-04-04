@@ -15,5 +15,15 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 				Assert.NotNull(statisticsResponse);
 			}
 		}
+
+        [Fact]
+        public async void GetChart_Valid()
+        {
+            using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
+            {
+                var chartResponse = await apiHelper.statisticsExplorer.GetChartAsync("hash-rate");
+                Assert.NotNull(chartResponse);
+            }
+        }
 	}
 }
