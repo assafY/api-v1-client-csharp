@@ -12,6 +12,31 @@ Task<StatisticsResponse> GetStatsAsync()
 
 Get the network statistics.
 
+### GetChart
+
+```csharp
+Task<ChartResponse> GetChartAsync(string chartType, string timespan = null)
+```
+
+Get a specified chart and a list of its values.
+
+Parameters:
+* `string chartType` - the name of the chart you want to get, e.g. "total-bitcoin"
+
+Optional Parameters:
+* `string timespan` - interval for which to fetch data, can be set to "all" or a period of time, e.g. "2years" or "14d"
+
+### GetPools
+
+```csharp
+Task<Dictionary<string, int>> GetPoolsAsync(int timespan = null)
+```
+
+Get a dictionary of mining pools and the total blocks they mined in the last 4 days.
+
+Optional Parameters:
+* `int timespan` - number of days to get data for (default 4, maximum 10)
+
 ## Response Object Properties
 
 ### Statistics Response Object

@@ -25,5 +25,15 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
                 Assert.NotNull(chartResponse);
             }
         }
+
+        [Fact]
+        public async void GetPools_Valid()
+        {
+            using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
+            {
+                var chartResponse = await apiHelper.statisticsExplorer.GetPoolsAsync();
+                Assert.NotNull(chartResponse);
+            }
+        }
 	}
 }

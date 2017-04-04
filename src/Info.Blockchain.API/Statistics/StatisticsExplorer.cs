@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Info.Blockchain.API.Client;
 using Info.Blockchain.API.Models;
@@ -64,6 +65,20 @@ namespace Info.Blockchain.API.Statistics
                 }
                 throw;
             }
+        }
+
+        public async Task<IDictionary<string,int>> GetPoolsAsync(int timespan = 4)
+        {
+            if (timespan < 1 || timespan > 10)
+            {
+                throw new ArgumentOutOfRangeException(nameof(timespan), "Timespan must be between 1 to 10");
+            }
+
+            var queryString = new QueryString();
+            queryString.Add("format","json");
+            queryString.Add("timespan", timespan + "days");
+
+            return await httpClient.GetAsync<Dictionary<string,int>>("pools", queryString);
         }
 	}
 }
