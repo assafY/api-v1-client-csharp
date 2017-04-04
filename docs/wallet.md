@@ -59,7 +59,7 @@ Wallet wallet = apiHelper.InitializeWallet(identifier, password, secondPassword)
 ## Methods
 
 
-### Send
+###  Send
 
 ```csharp
 Task<PaymentResponse> SendAsync(string toAddress, BitcoinValue amount, string fromAddress = null, BitcoinValue fee = null)

@@ -93,11 +93,14 @@ namespace TestApp
             try
             {
                 explorer = new StatisticsExplorer();
-                var stats = explorer.GetAsync().Result;
+                var stats = explorer.GetStatsAsync().Result;
 
                 Console.WriteLine("The current difficulty is {0}. The next retarget will happen in {1} hours",
                     stats.Difficulty,
                     (int)((stats.NextRetarget - stats.TotalBlocks) * stats.MinutesBetweenBlocks / 60));
+
+                // get the chart containing last week's average block size data
+                var averageBlockSizeChart = explorer.GetChartAsync("avg-block-size", "1w");
             }
             catch (ClientApiException e)
             {

@@ -9,7 +9,7 @@ This library is a migration of the original .NET library to .NET Core. Some mode
 * Receive Payments v2 API functionality has been introduced
 * Additional chart functionality has been added to the `StatisticsExplorer` class
 * All documentation has been brought up to date
-* All models have been moved to `Info.Blockchain.API.Data`
+* All models have been moved to `Info.Blockchain.API.Models`
 * The client, exception and helper classes under the root namespace have been moved to `Info.Blockchain.API.Client`
 * `CreateWallet.cs`, which previously contained the CreateWallet response and request models, was split into two separate models and moved to the `Data` namespace
 * The `Info.Blockchain.API.CreateWallet` namespace was removed, the `WalletCreator.cs` class moved to `Info.Blockchain.API.Wallet`
@@ -35,8 +35,8 @@ PM> Install-Package BlockchainAPI
 The library consists of the following namespaces:
 
 * `Info.Blockchain.API.Client` ([docs](docs/blockchainhttpclient.md))
-* `Info.Blockchain.API.Blockexplorer` ([docs](docs/blockexplorer.md)) ([api/blockchain_api][api1])
-* `Info.Blockchain.API.Exchangerates` ([docs](docs/exchangerates.md)) ([api/exchange\_rates\_api][api3])
+* `Info.Blockchain.API.BlockExplorer` ([docs](docs/blockexplorer.md)) ([api/blockchain_api][api1])
+* `Info.Blockchain.API.ExchangeRates` ([docs](docs/exchangerates.md)) ([api/exchange\_rates\_api][api3])
 * `Info.Blockchain.API.PushTx` ([docs](docs/pushtx.md)) ([pushtx][api6])
 * `Info.Blockchain.API.Statistics` ([docs](docs/statistics.md)) ([api/charts_api][api4])
 * `Info.Blockchain.API.Wallet` ([docs](docs/wallet.md)) ([api/blockchain\_wallet\_api][api5]) and ([api/blockchain/create_wallet][api2])
