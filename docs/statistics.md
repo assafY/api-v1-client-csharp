@@ -62,6 +62,19 @@ Optional Parameters:
 * `TotalBlocks`: *long*
 * `NextRetarget`: *long*
 
+### Chart Response Object
+
+* `ChartName`: *string*
+* `Unit`: *string*
+* `Timespan`: *string*
+* `Description`: *string*
+* `Values`: *IEnumerable(ChartValue)*
+
+### Chart Value Object
+
+* `X`: *double*
+* `Y`: *double*
+
 ## Example usage:
 
 ```csharp
