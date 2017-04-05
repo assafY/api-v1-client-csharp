@@ -20,6 +20,27 @@ Task<double> ToBtcAsync(string currency, double value)
 
    Convert a value in a provided currency to Bitcoin.
 
+Parameters:
+
+* `string currency` - the currency code you are converting from (USD if invalid code)
+* `double value` - the value you are converting
+
+### FromBtc
+
+```csharp
+Task<double> FromBtcAsync(BitcoinValue btc, string currency = "")
+```
+
+   Convert a bitcoin value to a provided currency (default USD)
+
+Parameters:
+
+* `BitcoinValue btc` - a BitcoinValue object ([docs][bitcoinvalue.md])
+
+Optional parameters:
+
+* `string currency` - the currency code you want to convert to (default USD)
+
 ## Response Object Properties
 
 A description of the objects returned by the methods in this class
