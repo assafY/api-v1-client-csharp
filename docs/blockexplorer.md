@@ -51,11 +51,18 @@ Task<Address> GetHash160AddressAsync(string address)
 
    Get data for a single Hash160 address and its transactions.
 
+### GetMultiAddress
+
 ```csharp
-Task<Address> GetXpubAddressAsync(string address)
+Task<MultiAddress> GetMultiAddressAsync(IEnumerable<string> addressList)
 ```
 
-   Get data for a single Xpub address and its transactions.
+   Get data for multiple Base58Check and / or xPub addresses.
+
+Optional parameters:
+
+* `int limit` - the number of transactions to limit the response to (max. 50, default 50)
+* `int offset` - skip the first n transactions (default 0)
 
 ### GetBlocksAtHeight
 
@@ -68,10 +75,15 @@ Task<ReadOnlyCollection<Block>> GetBlocksAtHeightAsync(long height)
 ### GetUnspentOutputs
 
 ```csharp
-Task<ReadOnlyCollection<UnspentOutput>> GetUnspentOutputsAsync(string address)
+Task<ReadOnlyCollection<UnspentOutput>> GetUnspentOutputsAsync(IEnumerable<string> addressList)
 ```
 
-   Get unspent outputs for a single Base58Check address.
+   Get unspent outputs for one or more Base58Check and / or xPub addresses.
+
+Optional parameters:
+
+* `int limit` - the number of transactions to limit the response to (max. 50, default 50)
+* `int confirmations` - minimum number of confirmations to show (default 0)
 
 ### GetLatestBlock
 
@@ -148,7 +160,12 @@ A description of the objects returned by the methods in this class.
 * `TotalSent`: *BitcoinValue*
 * `FinalBalance`: *BitcoinValue*
 * `TransactionCount`: *long*
-* `Transactions`: *ReadOnlyCollection(Transaction)*
+* `Transactions`: *IEnumerable(Transaction)*
+
+### MultiAddress Object
+
+* `Addresses`: *IEnumerable(Address)*
+* `Transactions`: *IEnumerable(Transaction)*
 
 ### Unspent Output Object
 

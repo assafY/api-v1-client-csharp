@@ -138,19 +138,6 @@ namespace Info.Blockchain.API.BlockExplorer
             return await GetAddressAsync(address, limit, offset);
         }
 
-        /// <summary>
-		/// Gets data for a single Xpub address asynchronously.
-		/// </summary>
-		/// <param name="address">Xpub address string</param>
-		/// <param name="limit">Max amount of transactions to retrieve (Max 50)</param>
-        /// <param name="offset">Number of transactions to skip</param>
-		/// <returns>An instance of the Address class</returns>
-		/// <exception cref="ServerApiException">If the server returns an error</exception>
-        public async Task<Address> GetXpubAddressAsync(string address, int limit = MAX_TRANSACTIONS_PER_REQUEST, int offset = 0)
-        {
-            return await GetAddressAsync(address, limit, offset);
-        }
-
 		private async Task<Address> GetAddressAsync(string address, int limit, int offset)
 		{
 			if (string.IsNullOrWhiteSpace(address))
@@ -185,6 +172,14 @@ namespace Info.Blockchain.API.BlockExplorer
             }
 		}
 
+        /// <summary>
+		/// Gets data for multiple Base58Check and / or Xpub address asynchronously.
+		/// </summary>
+		/// <param name="addressList">IEnumerable of Base58Check and / or xPub address strings</param>
+		/// <param name="limit">Max amount of transactions to retrieve (Max 50)</param>
+        /// <param name="offset">Number of transactions to skip</param>
+		/// <returns>An instance of the Address class</returns>
+		/// <exception cref="ServerApiException">If the server returns an error</exception>
         public async Task<MultiAddress> GetMultiAddressAsync(IEnumerable<string> addressList, int limit = MAX_TRANSACTIONS_PER_REQUEST, int offset = 0)
         {
             if (addressList == null || addressList.Count() == 0)
@@ -242,23 +237,35 @@ namespace Info.Blockchain.API.BlockExplorer
 		}
 
 		/// <summary>
-		/// Gets unspent outputs for a single Base58Check address.
+		/// Gets unspent outputs for a one or more Base58Check and / or xPub addresses.
 		/// </summary>
-		/// <param name="address">Base58check address string</param>
+		/// <param name="addressList">IEnumerable of Base58check and / or xPub address strings</param>
+        /// <param name="limit">Max amount of unspent outputs to receive (Max 50)</param>
+        /// <param name="confirmations">Minimum number of confirmations to receive (Default 0)</param>
 		/// <returns>A list of unspent outputs for the specified address </returns>
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
-		public async Task<ReadOnlyCollection<UnspentOutput>> GetUnspentOutputsAsync(string address, int limit = MAX_TRANSACTIONS_PER_REQUEST)
+		public async Task<ReadOnlyCollection<UnspentOutput>> GetUnspentOutputsAsync(IEnumerable<string> addressList, int limit = MAX_TRANSACTIONS_PER_REQUEST, int confirmations = 0)
 		{
-			if (string.IsNullOrWhiteSpace(address))
+			if (addressList == null || addressList.Count() == 0)
 			{
-				throw new ArgumentNullException(nameof(address));
+				throw new ArgumentNullException("No addresses provided");
 			}
             if (limit < 1 || limit > MAX_TRANSACTIONS_PER_REQUEST)
             {
                 throw new ArgumentOutOfRangeException(nameof(limit), "transaction limit must be greater than 0 and smaller than " + MAX_TRANSACTIONS_PER_REQUEST);
             }
+            if (confirmations < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(confirmations), "confirmations must be equal to or greater than 0");
+            }
+
 			var queryString = new QueryString();
-			queryString.Add("active", address);
+			var addressQuery = String.Join("|", addressList);
+
+            queryString.Add("active", addressQuery);
+            queryString.Add("limit", limit.ToString());
+            queryString.Add("offset", confirmations.ToString());
+			queryString.Add("format", "json");
 			try
 			{
 				return await httpClient.GetAsync("unspent", queryString, UnspentOutput.DeserializeMultiple);
@@ -273,7 +280,7 @@ namespace Info.Blockchain.API.BlockExplorer
 				}
                 if (ex.Message.Contains("Invalid Bitcoin Address"))
                 {
-                    throw new ArgumentException(nameof(address), "address provided is invalid");
+                    throw new ArgumentException(nameof(addressQuery), "one or more addresses provided are invalid");
                 }
 				throw;
 			}
@@ -290,7 +297,7 @@ namespace Info.Blockchain.API.BlockExplorer
 		}
 
 		/// <summary>
-		/// Gets a list of currently unconfirmed transactions.
+		/// Gets a list of the last 10 unconfirmed transactions.
 		/// </summary>
 		/// <returns>A list of unconfirmed Transaction objects</returns>
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
