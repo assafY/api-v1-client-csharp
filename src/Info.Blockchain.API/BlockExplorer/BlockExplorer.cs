@@ -247,12 +247,16 @@ namespace Info.Blockchain.API.BlockExplorer
 		/// <param name="address">Base58check address string</param>
 		/// <returns>A list of unspent outputs for the specified address </returns>
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
-		public async Task<ReadOnlyCollection<UnspentOutput>> GetUnspentOutputsAsync(string address)
+		public async Task<ReadOnlyCollection<UnspentOutput>> GetUnspentOutputsAsync(string address, int limit = MAX_TRANSACTIONS_PER_REQUEST)
 		{
 			if (string.IsNullOrWhiteSpace(address))
 			{
 				throw new ArgumentNullException(nameof(address));
 			}
+            if (limit < 1 || limit > MAX_TRANSACTIONS_PER_REQUEST)
+            {
+                throw new ArgumentOutOfRangeException(nameof(limit), "transaction limit must be greater than 0 and smaller than " + MAX_TRANSACTIONS_PER_REQUEST);
+            }
 			var queryString = new QueryString();
 			queryString.Add("active", address);
 			try
@@ -267,6 +271,10 @@ namespace Info.Blockchain.API.BlockExplorer
 				{
 					return new ReadOnlyCollection<UnspentOutput>(new List<UnspentOutput>());
 				}
+                if (ex.Message.Contains("Invalid Bitcoin Address"))
+                {
+                    throw new ArgumentException(nameof(address), "address provided is invalid");
+                }
 				throw;
 			}
 		}
