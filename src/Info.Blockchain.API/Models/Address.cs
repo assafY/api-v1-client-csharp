@@ -19,7 +19,7 @@ namespace Info.Blockchain.API.Models
 		/// <summary>
 		/// Hash160 representation of the address
 		/// </summary>
-		[JsonProperty("hash160", Required = Required.Always)]
+		[JsonProperty("hash160")]
 		public string Hash160 { get; private set; }
 
 		/// <summary>
@@ -58,7 +58,7 @@ namespace Info.Blockchain.API.Models
 		/// <summary>
 		/// List of transactions associated with this address
 		/// </summary>
-		[JsonProperty("txs", Required = Required.Always)]
+		[JsonProperty("txs")]
 		public ReadOnlyCollection<Transaction> Transactions { get; private set; }
 	}
 }

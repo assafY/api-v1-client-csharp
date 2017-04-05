@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Info.Blockchain.API.Client;
 using Info.Blockchain.API.Json;
@@ -162,7 +163,7 @@ namespace Info.Blockchain.API.BlockExplorer
             }
             if (offset < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(offset), "offset must be greater than 0");
+                throw new ArgumentOutOfRangeException(nameof(offset), "offset must be equal to or greater than 0");
             }
 
             var queryString = new QueryString();
@@ -170,8 +171,56 @@ namespace Info.Blockchain.API.BlockExplorer
             queryString.Add("offset", offset.ToString());
 			queryString.Add("format", "json");
 
-            return await httpClient.GetAsync<Address>("address/" + address, queryString);
+            try
+            {
+                return await httpClient.GetAsync<Address>("address/" + address, queryString);
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("does not validate") || ex.Message.Contains("too short"))
+                {
+                    throw new ArgumentException(nameof(address), "address provided is invalid");
+                }
+                throw;
+            }
 		}
+
+        public async Task<MultiAddress> GetMultiAddressAsync(IEnumerable<string> addressList, int limit = MAX_TRANSACTIONS_PER_REQUEST, int offset = 0)
+        {
+            if (addressList == null || addressList.Count() == 0)
+			{
+				throw new ArgumentNullException("No addresses provided");
+			}
+            if (limit < 1 || limit > MAX_TRANSACTIONS_PER_REQUEST)
+            {
+                throw new ArgumentOutOfRangeException(nameof(limit), "transaction limit must be greater than 0 and smaller than " + MAX_TRANSACTIONS_PER_REQUEST);
+            }
+            if (offset < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(offset), "offset must be equal to or greater than 0");
+            }
+
+            var queryString = new QueryString();
+            var addressQuery = String.Join("|", addressList);
+
+            queryString.Add("active", addressQuery);
+            queryString.Add("limit", limit.ToString());
+            queryString.Add("offset", offset.ToString());
+			queryString.Add("format", "json");
+
+            try
+            {
+                return await httpClient.GetAsync<MultiAddress>("multiaddr", queryString);
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("Invalid Bitcoin Address"))
+                {
+                    throw new ArgumentException(nameof(addressQuery), "one or more addresses provided are invalid");
+                }
+                throw;
+            }
+        }
 
 		/// <summary>
 		/// Gets a list of blocks at the specified height. Normally, only one block will be returned,
