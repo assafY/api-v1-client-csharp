@@ -64,7 +64,7 @@ namespace Info.Blockchain.API.ExchangeRates
         /// </summary>
         /// <param name="btc">BitcoinValue representing the value to convert from</param>
         /// <param name="currency">Currency code (default USD)</param>
-        /// <returns></returns>
+        /// <returns>Converted value in currency of choice</returns>
         public async Task<double> FromBtcAsync(BitcoinValue btc, string currency = "")
         {
             if (btc == null)
