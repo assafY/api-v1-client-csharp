@@ -172,6 +172,30 @@ namespace Info.Blockchain.API.BlockExplorer
             }
 		}
 
+        public async Task<Xpub> GetXpub(string xpub, int limit = MAX_TRANSACTIONS_PER_REQUEST, int offset = 0, FilterType ft = FilterType.RemoveUnspendable)
+        {
+            if (string.IsNullOrWhiteSpace(xpub))
+			{
+				throw new ArgumentNullException(xpub);
+			}
+            if (limit < 1 || limit > MAX_TRANSACTIONS_PER_REQUEST)
+            {
+                throw new ArgumentOutOfRangeException(nameof(limit), "transaction limit must be greater than 0 and smaller than " + MAX_TRANSACTIONS_PER_REQUEST);
+            }
+            if (offset < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(offset), "offset must be equal to or greater than 0");
+            }
+
+            var queryString = new QueryString();
+
+            queryString.Add("active", xpub);
+            queryString.Add("limit", limit.ToString());
+            queryString.Add("offset", offset.ToString());
+            queryString.Add("filter", ((int)ft).ToString());
+			queryString.Add("format", "json");
+        }
+
         /// <summary>
 		/// Gets data for multiple Base58Check and / or Xpub address asynchronously.
 		/// </summary>
