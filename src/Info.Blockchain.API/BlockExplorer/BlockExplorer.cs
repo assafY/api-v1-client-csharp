@@ -194,6 +194,19 @@ namespace Info.Blockchain.API.BlockExplorer
             queryString.Add("offset", offset.ToString());
             queryString.Add("filter", ((int)ft).ToString());
 			queryString.Add("format", "json");
+
+            try
+            {
+                return await httpClient.GetAsync<Xpub>("multiaddr", queryString);
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("Invalid Bitcoin Address"))
+                {
+                    throw new ArgumentException(nameof(xpub), "the xpub provided is invalid");
+                }
+                throw;
+            }
         }
 
         /// <summary>

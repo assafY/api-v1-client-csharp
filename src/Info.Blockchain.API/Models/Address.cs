@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Info.Blockchain.API.Json;
 using Newtonsoft.Json;
@@ -14,7 +12,7 @@ namespace Info.Blockchain.API.Models
 
 		[JsonConstructor]
 		// ReSharper disable once UnusedMember.Local
-		private Address() {}
+		public Address() {}
 
 		/// <summary>
 		/// Hash160 representation of the address
