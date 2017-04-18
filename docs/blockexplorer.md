@@ -38,6 +38,7 @@ The implementations of these methods are currently interchangeable, but this is 
 
 * `int limit` - the number of transactions to limit the response to (max. 50, default 50)
 * `int offset` - skip the first n transactions (default 0)
+* `FilterType filter` - type of filter to use for the query (default FilterType.RemoveUnspendable)
 
 ```csharp
 Task<Address> GetBase58AddressAsync(string address)
@@ -51,6 +52,12 @@ Task<Address> GetHash160AddressAsync(string address)
 
    Get data for a single Hash160 address and its transactions.
 
+```csharp
+Task<Xpub> GetXpub(string xpub)
+```
+
+    Get xPub summary for a given xPub, with its overall balance and transactions.
+
 ### GetMultiAddress
 
 ```csharp
@@ -63,6 +70,7 @@ Optional parameters:
 
 * `int limit` - the number of transactions to limit the response to (max. 50, default 50)
 * `int offset` - skip the first n transactions (default 0)
+* `FilterType filter` - type of filter to use for the query (default FilterType.RemoveUnspendable)
 
 ### GetBlocksAtHeight
 

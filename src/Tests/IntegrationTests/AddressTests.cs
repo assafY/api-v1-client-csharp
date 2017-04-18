@@ -46,5 +46,15 @@ namespace Info.Blockchain.API.Tests.IntegrationTests
 				Assert.Equal(address.Transactions.Count, transactionCount);
 			}
 		}
+
+        public async void GetXpub_IsValid()
+        {
+            using (BlockchainApiHelper apiHelper = new BlockchainApiHelper())
+            {
+                const string xpub = "xpub6CmZamQcHw2TPtbGmJNEvRgfhLwitarvzFn3fBYEEkFTqztus7W7CNbf48Kxuj1bRRBmZPzQocB6qar9ay6buVkQk73ftKE1z4tt9cPHWRn";
+                Xpub response = await apiHelper.blockExplorer.GetXpub(xpub);
+                Assert.NotNull(response);
+            }
+        }
 	}
 }

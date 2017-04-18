@@ -29,5 +29,16 @@ namespace Info.Blockchain.API.Tests.UnitTests
 				}
 			});
 		}
+
+        public async void GetXpub_NullXpub_ArgumentNullException()
+        {
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                using (BlockchainApiHelper apiHelper = UnitTestUtil.GetFakeHelper())
+                {
+                    await apiHelper.blockExplorer.GetXpub(null);
+                }
+            });
+        }
 	}
 }
