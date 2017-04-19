@@ -196,6 +196,12 @@ A description of the objects returned by the methods in this class.
 * `Index`: *long*
 * `TransactionIndexes`: *ReadOnlyCollection(long)*
 
+### Filter Type Enum
+
+* `All`: *4*
+* `ConfirmedOnly`: *5*
+* `RemoveUnspendable`: *6*
+
 ### Bitcoin Value Object
 
 ([docs](bitcoinvalue.md))

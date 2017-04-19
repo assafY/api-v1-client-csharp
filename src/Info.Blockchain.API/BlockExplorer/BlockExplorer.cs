@@ -185,7 +185,8 @@ namespace Info.Blockchain.API.BlockExplorer
         /// <param name="offset">Number of transactions to skip</param>
         /// <param name="filter">Filter type to use for query</param>
         /// <returns>Xpub model</returns>
-        public async Task<Xpub> GetXpub(string xpub, int limit = MAX_TRANSACTIONS_PER_REQUEST, int offset = 0, FilterType filter = FilterType.RemoveUnspendable)
+        public async Task<Xpub> GetXpub(string xpub, int limit = MAX_TRANSACTIONS_PER_REQUEST,
+                                        int offset = 0, FilterType filter = FilterType.RemoveUnspendable)
         {
             if (string.IsNullOrWhiteSpace(xpub))
 			{
@@ -228,9 +229,11 @@ namespace Info.Blockchain.API.BlockExplorer
 		/// <param name="addressList">IEnumerable of Base58Check and / or xPub address strings</param>
 		/// <param name="limit">Max amount of transactions to retrieve (Max 50)</param>
         /// <param name="offset">Number of transactions to skip</param>
+        /// <param name="filter">Filter type to use for query</param>
 		/// <returns>An instance of the Address class</returns>
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
-        public async Task<MultiAddress> GetMultiAddressAsync(IEnumerable<string> addressList, int limit = MAX_TRANSACTIONS_PER_REQUEST, int offset = 0)
+        public async Task<MultiAddress> GetMultiAddressAsync(IEnumerable<string> addressList, int limit = MAX_TRANSACTIONS_PER_REQUEST,
+                                                            int offset = 0, FilterType filter = FilterType.RemoveUnspendable)
         {
             if (addressList == null || addressList.Count() == 0)
 			{
@@ -251,6 +254,7 @@ namespace Info.Blockchain.API.BlockExplorer
             queryString.Add("active", addressQuery);
             queryString.Add("limit", limit.ToString());
             queryString.Add("offset", offset.ToString());
+            queryString.Add("filter", ((int)filter).ToString());
 			queryString.Add("format", "json");
 
             try
