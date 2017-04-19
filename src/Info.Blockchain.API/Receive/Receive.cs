@@ -58,7 +58,7 @@ namespace Info.Blockchain.API.Receive
         /// <param name="xpub">The Xpub to check</param>
         /// <param name="key">The blockchain.info receive payments v2 api key</param>
         /// <returns>XpubGap object</returns>
-        public async Task<XpubGap> CheckAddressGap(string xpub, string key)
+        public async Task<XpubGap> CheckAddressGapAsync(string xpub, string key)
         {
             var queryString = new QueryString();
             queryString.Add("xpub", xpub);
@@ -88,7 +88,7 @@ namespace Info.Blockchain.API.Receive
         /// <param name="callback">The callback url to check</param>
         /// <param name="key">The blockchain.info receive payments v2 api key</param>
         /// <returns>Logs related to the callback url supplied</returns>
-        public async Task<IEnumerable<CallbackLog>> GetCallbackLogs(string callback, string key)
+        public async Task<IEnumerable<CallbackLog>> GetCallbackLogsAsync(string callback, string key)
         {
             var queryString = new QueryString();
             queryString.Add("callback", callback);

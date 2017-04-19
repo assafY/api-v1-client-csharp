@@ -6,7 +6,7 @@ You must obtain an Receive Payments V2 API key and an xPub in order to use this 
 
 ## Methods
 
-### GenerateAddress
+### Generate Address
 
 ```csharp
 Task<ReceivePaymentResponse> GenerateAddressAsync(string xpub, string callback, string key)
@@ -20,6 +20,32 @@ Parameters:
 * `string callback` - the url you want to receive payment notifications to
 * `string key` - the API key
 
+### Check Address Gap
+
+```csharp
+Task<XpubGap> CheckAddressGapAsync(string xpub, string key)
+```
+
+Check the index gap between last address paid to and the last address generated.
+
+Paramteters:
+
+* `string xpub`
+* `string key`
+
+### Get Callback Logs
+
+```csharp
+Task<IEnumerable<CallbackLog>> GetCallbackLogsAsync(string callback, string key)
+```
+
+See logs related to callback attempts to your callback url.
+
+Parameters:
+
+* `string callback`
+* `string key`
+
 ## Response Object Properties
 
 ### Receive Payment Response Object
@@ -27,3 +53,15 @@ Parameters:
 * `Address`: *string* (The new unique address for receiving payments)
 * `Index`: *int* (The number of addresses generated from your xPub so far)
 * `Callback`: *string*
+
+### Xpub Gap Object
+
+* `Gap`: *int*
+
+### Callback Log Object
+
+* `CallbackUrl`: *string*
+* `CallDateString`: *string* (The date and time of the call in UTC)
+* `RawResponse`: *string*
+* `ResponseCode`: *int*
+
