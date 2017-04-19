@@ -318,7 +318,7 @@ namespace Info.Blockchain.API.BlockExplorer
 
             queryString.Add("active", addressQuery);
             queryString.Add("limit", limit.ToString());
-            queryString.Add("offset", confirmations.ToString());
+            queryString.Add("confirmations", confirmations.ToString());
 			queryString.Add("format", "json");
 			try
 			{
