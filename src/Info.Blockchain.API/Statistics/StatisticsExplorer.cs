@@ -67,6 +67,12 @@ namespace Info.Blockchain.API.Statistics
             }
         }
 
+        /// <summary>
+        /// Get a dictionary of pool names and the number of blocks
+        /// mined in the last `timespan` days
+        /// </summary>
+        /// <param name="timespan">Number of days to display mined blocks for</param>
+        /// <returns>A dictionary of pool names and number of blocks mined</returns>
         public async Task<IDictionary<string,int>> GetPoolsAsync(int timespan = 4)
         {
             if (timespan < 1 || timespan > 10)
