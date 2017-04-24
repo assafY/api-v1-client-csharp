@@ -39,15 +39,20 @@ namespace Info.Blockchain.API.Statistics
         /// </summary>
         /// <param name="chartType">Chart name</param>
         /// <param name="timespan">Optional timespan to include</param>
+        /// <param name="rollingAverage">Optional duration over which data should be averaged</param>
         /// <returns>Chart response object</returns>
         /// <exception cref="ServerApiException">If the server returns an error</exception>
-        public async Task<ChartResponse> GetChartAsync(string chartType, string timespan = null)
+        public async Task<ChartResponse> GetChartAsync(string chartType, string timespan = null, string rollingAverage = null)
         {
             var queryString = new QueryString();
             queryString.Add("format","json");
             if (timespan != null)
             {
                 queryString.Add("timespan", timespan);
+            }
+            if (rollingAverage != null)
+            {
+                queryString.Add("rollingAverage", rollingAverage);
             }
             try
             {

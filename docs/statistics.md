@@ -15,7 +15,7 @@ Get the network statistics.
 ### GetChart
 
 ```csharp
-Task<ChartResponse> GetChartAsync(string chartType, string timespan = null)
+Task<ChartResponse> GetChartAsync(string chartType, string timespan = null, string rollingAverage = null)
 ```
 
 Get a specified chart and a list of its values.
@@ -25,6 +25,7 @@ Parameters:
 
 Optional Parameters:
 * `string timespan` - interval for which to fetch data, can be set to "all" or a period of time, e.g. "2years" or "14d"
+* `string rollingAverage` - duration over which data should be averaged, e.g. "8hours"
 
 ### GetPools
 
