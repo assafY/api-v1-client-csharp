@@ -18,6 +18,8 @@ namespace Info.Blockchain.API.BlockExplorer
 	{
 		private readonly IHttpClient httpClient;
 		public const int MAX_TRANSACTIONS_PER_REQUEST = 50;
+        public const int MAX_TRANSACTIONS_PER_MULTI_REQUEST = 100;
+        public const int DEFAULT_UNSPENT_TRANSACTIONS_PER_REQUEST = 250;
 
 		public BlockExplorer()
 		{
@@ -185,16 +187,16 @@ namespace Info.Blockchain.API.BlockExplorer
         /// <param name="offset">Number of transactions to skip</param>
         /// <param name="filter">Filter type to use for query</param>
         /// <returns>Xpub model</returns>
-        public async Task<Xpub> GetXpub(string xpub, int limit = MAX_TRANSACTIONS_PER_REQUEST,
+        public async Task<Xpub> GetXpub(string xpub, int limit = MAX_TRANSACTIONS_PER_MULTI_REQUEST,
                                         int offset = 0, FilterType filter = FilterType.RemoveUnspendable)
         {
             if (string.IsNullOrWhiteSpace(xpub))
 			{
 				throw new ArgumentNullException(xpub);
 			}
-            if (limit < 1 || limit > MAX_TRANSACTIONS_PER_REQUEST)
+            if (limit < 1 || limit > MAX_TRANSACTIONS_PER_MULTI_REQUEST)
             {
-                throw new ArgumentOutOfRangeException(nameof(limit), "transaction limit must be greater than 0 and smaller than " + MAX_TRANSACTIONS_PER_REQUEST);
+                throw new ArgumentOutOfRangeException(nameof(limit), "transaction limit must be greater than 0 and smaller than " + MAX_TRANSACTIONS_PER_MULTI_REQUEST);
             }
             if (offset < 0)
             {
@@ -232,16 +234,16 @@ namespace Info.Blockchain.API.BlockExplorer
         /// <param name="filter">Filter type to use for query</param>
 		/// <returns>An instance of the Address class</returns>
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
-        public async Task<MultiAddress> GetMultiAddressAsync(IEnumerable<string> addressList, int limit = MAX_TRANSACTIONS_PER_REQUEST,
+        public async Task<MultiAddress> GetMultiAddressAsync(IEnumerable<string> addressList, int limit = MAX_TRANSACTIONS_PER_MULTI_REQUEST,
                                                             int offset = 0, FilterType filter = FilterType.RemoveUnspendable)
         {
             if (addressList == null || addressList.Count() == 0)
 			{
 				throw new ArgumentNullException("No addresses provided");
 			}
-            if (limit < 1 || limit > MAX_TRANSACTIONS_PER_REQUEST)
+            if (limit < 1 || limit > MAX_TRANSACTIONS_PER_MULTI_REQUEST)
             {
-                throw new ArgumentOutOfRangeException(nameof(limit), "transaction limit must be greater than 0 and smaller than " + MAX_TRANSACTIONS_PER_REQUEST);
+                throw new ArgumentOutOfRangeException(nameof(limit), "transaction limit must be greater than 0 and smaller than " + MAX_TRANSACTIONS_PER_MULTI_REQUEST);
             }
             if (offset < 0)
             {
@@ -298,15 +300,15 @@ namespace Info.Blockchain.API.BlockExplorer
         /// <param name="confirmations">Minimum number of confirmations to receive (Default 0)</param>
 		/// <returns>A list of unspent outputs for the specified address </returns>
 		/// <exception cref="ServerApiException">If the server returns an error</exception>
-		public async Task<ReadOnlyCollection<UnspentOutput>> GetUnspentOutputsAsync(IEnumerable<string> addressList, int limit = MAX_TRANSACTIONS_PER_REQUEST, int confirmations = 0)
+		public async Task<ReadOnlyCollection<UnspentOutput>> GetUnspentOutputsAsync(IEnumerable<string> addressList, int limit = DEFAULT_UNSPENT_TRANSACTIONS_PER_REQUEST, int confirmations = 0)
 		{
 			if (addressList == null || addressList.Count() == 0)
 			{
 				throw new ArgumentNullException("No addresses provided");
 			}
-            if (limit < 1 || limit > MAX_TRANSACTIONS_PER_REQUEST)
+            if (limit < 1 || limit > DEFAULT_UNSPENT_TRANSACTIONS_PER_REQUEST)
             {
-                throw new ArgumentOutOfRangeException(nameof(limit), "transaction limit must be greater than 0 and smaller than " + MAX_TRANSACTIONS_PER_REQUEST);
+                throw new ArgumentOutOfRangeException(nameof(limit), "transaction limit must be greater than 0 and smaller than " + DEFAULT_UNSPENT_TRANSACTIONS_PER_REQUEST);
             }
             if (confirmations < 0)
             {

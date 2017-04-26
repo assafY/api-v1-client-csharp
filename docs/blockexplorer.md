@@ -36,7 +36,7 @@ Task<Block> GetBlockByHashAsync(string hash)
 
 The implementations of these methods are currently interchangeable, but this is liable to change in the future. All methods accept the following optional parameters:
 
-* `int limit` - the number of transactions to limit the response to (max. 50, default 50)
+* `int limit` - the number of transactions to limit the response to (max. 50 (100 for xPub), default 50 (100 for xPub))
 * `int offset` - skip the first n transactions (default 0)
 * `FilterType filter` - type of filter to use for the query (default FilterType.RemoveUnspendable)
 
@@ -68,7 +68,7 @@ Task<MultiAddress> GetMultiAddressAsync(IEnumerable<string> addressList)
 
 Optional parameters:
 
-* `int limit` - the number of transactions to limit the response to (max. 50, default 50)
+* `int limit` - the number of transactions to limit the response to (max. 100, default 100)
 * `int offset` - skip the first n transactions (default 0)
 * `FilterType filter` - type of filter to use for the query (default FilterType.RemoveUnspendable)
 
@@ -90,7 +90,7 @@ Task<ReadOnlyCollection<UnspentOutput>> GetUnspentOutputsAsync(IEnumerable<strin
 
 Optional parameters:
 
-* `int limit` - the number of transactions to limit the response to (max. 50, default 50)
+* `int limit` - the number of transactions to limit the response to (max. 1000, default 250)
 * `int confirmations` - minimum number of confirmations to show (default 0)
 
 ### GetLatestBlock
