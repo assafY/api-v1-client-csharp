@@ -21,7 +21,7 @@ Task<ChartResponse> GetChartAsync(string chartType, string timespan = null, stri
 Get a specified chart and a list of its values.
 
 Parameters:
-* `string chartType` - the name of the chart you want to get, e.g. "total-bitcoin"
+* `string chartType` - the name of the chart you want to get, e.g. "transactions-per-second"
 
 Optional Parameters:
 * `string timespan` - interval for which to fetch data, can be set to "all" or a period of time, e.g. "2years" or "14d"
