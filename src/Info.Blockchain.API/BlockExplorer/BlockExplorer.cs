@@ -213,7 +213,7 @@ namespace Info.Blockchain.API.BlockExplorer
 
             try
             {
-                return await httpClient.GetAsync<Xpub>("multiaddr", queryString);
+                return await httpClient.GetAsync<Xpub>("multiaddr", queryString, Xpub.Deserialize);
             }
             catch (Exception ex)
             {

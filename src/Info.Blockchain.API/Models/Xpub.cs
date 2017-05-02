@@ -1,4 +1,6 @@
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Linq;
 
 namespace Info.Blockchain.API.Models
 {
@@ -12,5 +14,13 @@ namespace Info.Blockchain.API.Models
 
         [JsonProperty("gap_limit")]
         public int GapLimit { get; private set; }
+
+        public static Xpub Deserialize(string xpubJson)
+		{
+			JObject xpubJObject = JObject.Parse(xpubJson);
+            JToken xpubOutput = xpubJObject["addresses"].AsJEnumerable().FirstOrDefault();
+            xpubOutput["txs"] = xpubJObject["txs"];
+			return xpubOutput.ToObject<Xpub>();
+		}
     }
 }
